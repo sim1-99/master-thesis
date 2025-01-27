@@ -1,10 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{mimosis}[2017/08/01 Minimal modern thesis class]
 
-\PassOptionsToPackage{
-  DIV  = 10,    % TODO: Make configurable
-  BCOR = 10mm,  % TODO: Make configurable
-}{typearea}
+% >>> Use this to set the page layout, or the package geometry (line 203)
+%\PassOptionsToPackage{
+%  DIV  = 10,    % TODO: Make configurable
+%  BCOR = 10mm,  % TODO: Make configurable
+%}{typearea}
+% <<<
 
 \LoadClass[
   a4paper,
@@ -61,7 +63,7 @@
 
 \RequirePackage{graphicx}
 \graphicspath{%
-  {Figures/}
+  {figures/}
   {./}
 }
 
@@ -138,7 +140,7 @@
 
 \RequirePackage[%
   olditem,  % Do not modify itemize environments by default
-  oldenum   % Do not modify enumerate environments by default
+  oldenum,  % Do not modify enumerate environments by default
 ]{paralist}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,13 +201,40 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage{scrlayer-scrpage}
+% >>> Use this to set the page layout, or the package typearea (line 5)
+%\comment{
+\RequirePackage[
+%headsep=1cm,   % Increase the space between the header and the text
+%footskip=3cm,  % Increase the space between the footer and the text
+top=0.94in,     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outer=1.25in,   % Proportions are taken from https://www.ntg.nl/maps/30/13.pdf
+bottom=1.92in,  % and converted to inches.
+inner=1.05in,   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+]{geometry}
+%}
+% <<<
+
 \pagestyle{scrheadings}
+%\KOMAoptions{
+  %headwidth=\textwidth+1cm:0pt,  % Make the header extend into the margin
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fancy colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{RaspberryRed}{RGB}{197, 29, 52}
+\definecolor{VenetianRed}{RGB}{200, 8, 21}
+\definecolor{MexicanRed}{RGB}{169, 30, 59}
+\definecolor{Burgundy}{RGB}{136, 0, 0}
+\definecolor{BiscayBayBlue}{RGB}{37, 122, 136}
+\definecolor{PetrolBlue}{RGB}{33, 100, 119}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Typefaces for parts, chapters, and sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\partformat}{\huge\partname~\thepart\autodot}
+\renewcommand{\partformat}{\huge\color{VenetianRed}\partname~\thepart\autodot}
 \renewcommand{\raggedpart}{\flushleft}
 
 \setkomafont{part}{\normalfont\huge\scshape}
@@ -218,9 +247,12 @@
 
 % Large number for chapter
 \renewcommand*{\chapterformat}{%
-  \fontsize{50}{55}\selectfont\thechapter\autodot\enskip
+  \fontsize{50}{55}\selectfont\color{VenetianRed}\thechapter\autodot\enskip
 }
 
+\makeatletter
+\renewcommand\@seccntformat[1]{\color{VenetianRed} {\csname the#1\endcsname}\hspace{0.5em}}
+\makeatother
+
 % Packages and options added by me
-\usepackage{pdfpages}
-\graphicspath{{images/}}
+\RequirePackage{pdfpages}

@@ -18,14 +18,45 @@
 % Hyperlinks & bookmarks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[%
+\usepackage{hyperref}
+
+\hypersetup{
+  hidelinks,
+  linktoc    = page,
   colorlinks = true,
   citecolor  = RoyalBlue,
   linkcolor  = RoyalBlue,
   urlcolor   = RoyalBlue,
-  unicode,
-]{hyperref}
+  unicode = true, % for non-Latin characters in Acrobat’s bookmarks
+  %bookmarks=true,  % show bookmarks bar?
+  pdftoolbar=false,  % show Acrobat’s toolbar?
+  pdfmenubar=true,  % show Acrobat’s menu?
+  pdffitwindow=true,  % window fit to page when opened
+  pdfstartview={FitH},  % fits the width of the page to the window
+  pdfpagelayout={SinglePage},  % set visualization on single page
+  pdftitle={Segmentation and Biometry Estimation of 3D T2w Fetal Brain Images},  % title
+  pdfauthor={Simone Chiarella},  % author
+  pdfsubject={Fetal Brain MRI Segmentation},  % subject of the document
+  pdfcreator={Simone Chiarella},  % creator of the document
+  pdfproducer={Latekmk},  % producer of the document
+  %pdfkeywords={keyword1, key2, key3}, % list of keywords
+  pdfnewwindow=false,  % links in new PDF window
+}
 
+% >>> Make the page number in the table of contents a hyperlink
+\usepackage{lipsum}
+\makeatletter
+\def\numberline#1{%
+  \ifx\Hy@tocdestname\ltx@empty
+    \hb@xt@\@tempdima{#1\hfill}%
+  \else
+  \hb@xt@\@tempdima{
+    \hyper@linkstart{link}{\Hy@tocdestname}#1\hyper@linkend\hfill
+  }%
+ \fi
+}
+\makeatother
+% <<<
 \usepackage{bookmark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -74,7 +105,12 @@
   ]
   \setmonofont[Scale=MatchLowercase]{Source Code Pro}
 \else
-  \usepackage[lf]{ebgaramond}
+  % >>> charter
+  %\usepackage[bitstream-charter]{mathdesign}
+  %\usepackage[scaled=0.92]{helvet}
+  %\usepackage{courier}
+  % <<<
+  \usepackage[lf]{libertinus-type1}  % ebgaramond
   \usepackage[oldstyle,scale=0.7]{sourcecodepro}
   \singlespacing
 \fi
@@ -123,6 +159,16 @@
 \begin{document}
 
 \includepdf{sources/TitlePage.pdf}
+
+\begin{comment}
+\makeatletter
+\if@twoside % commands below work only for twoside option of \documentclass
+  \setlength{\textblockoffset}{12mm}
+  \addtolength{\hoffset}{\textblockoffset}
+  \addtolength{\evensidemargin}{-2.0\textblockoffset}
+\fi
+\makeatother
+\end{comment}
 
 \frontmatter
 
