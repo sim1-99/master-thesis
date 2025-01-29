@@ -256,3 +256,10 @@ inner=1.05in,   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Packages and options added by me
 \RequirePackage{pdfpages}
+\RequirePackage{upgreek}
+
+\DeclareMathOperator{\sen}{sen}
+
+\newenvironment{system}% 
+{\left\lbrace\begin{array}{@{}l@{}}}% 
+{\end{array}\right.}
