@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{mimosis}[2017/08/01 Minimal modern thesis class]
 
-% >>> Use this to set the page layout, or the package geometry (line 203)
+% >>> Either use this to set the page layout, or the package geometry (line 203)
 %\PassOptionsToPackage{
 %  DIV  = 10,    % TODO: Make configurable
 %  BCOR = 10mm,  % TODO: Make configurable
@@ -88,6 +88,7 @@
 
 \RequirePackage[%
   acronym,
+  automake,
   nogroupskip,
   nopostdot,
   nonumberlist,
@@ -201,15 +202,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage{scrlayer-scrpage}
-% >>> Use this to set the page layout, or the package typearea (line 5)
+% >>> Either use this to set the page layout, or the package typearea (line 5)
 %\comment{
 \RequirePackage[
 %headsep=1cm,   % Increase the space between the header and the text
 %footskip=3cm,  % Increase the space between the footer and the text
-top=0.94in,     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outer=1.25in,   % Proportions are taken from https://www.ntg.nl/maps/30/13.pdf
-bottom=1.92in,  % and converted to inches.
-inner=1.05in,   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+top=24mm,       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outer=32mm,     % The page layout is freely inspirated by:
+bottom=48mm,    % https://www.ntg.nl/maps/30/13.pdf
+inner=16mm,     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+bindingoffset=10mm,
 ]{geometry}
 %}
 % <<<
