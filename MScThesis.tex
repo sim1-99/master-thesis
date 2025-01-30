@@ -110,17 +110,25 @@
   %\usepackage[bitstream-charter]{mathdesign}
   %\usepackage[scaled=0.92]{helvet}
   %\usepackage{courier}
+  %\usepackage[T1]{fontenc}
   % <<<
-  \usepackage[lf]{libertinus-type1}  % ebgaramond
+  \usepackage[lf]{libertinus-type1}  % ebgaramond  % bch
   \usepackage[oldstyle,scale=0.7]{sourcecodepro}
   \singlespacing
 \fi
 
-\comment{
-  \newacronym[description={Principal component analysis}]{PCA}{PCA}{principal component analysis}
-  \newacronym                                            {SNF}{SNF}{Smith normal form}
-  \newacronym[description={Topological data analysis}]   {TDA}{TDA}{topological data analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Glossaries and acronyms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newacronym[description={Dice similarity coefficient}]{DSC}{DSC}{Dice similarity coefficient}
+\newacronym[description={Fetal Tissue Annotation Challenge}]{FeTA}{FeTA}{fetal tissue annotation challenge}
+\newacronym[description={Hausdorff 95 distance}]{HD95}{HD95}{Hausdorff 95 distance}
+\newacronym[description={Gestational age}]{GA}{GA}{gestational age}
+\newacronym[description={Super resolution}]{SR}{SR}{super resolution}
+\newacronym[description={Volume similarity}]{VS}{VS}{volume similarity}
+
+\comment{
   \newglossaryentry{LaTeX}{%
     name        = {\LaTeX},
     description = {A document preparation system},
@@ -256,9 +264,7 @@
 
   %\include{sources/Biometry Estimation Performance}
 
-  \part*{%
-    Conclusions\\
-  }
+  \part*{Conclusions}
   \addcontentsline{toc}{part}{Conclusions}
 
   \include{sources/Conclusions}

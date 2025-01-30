@@ -7,13 +7,29 @@ The Fetal Tissue Annotation Challenge (\textsc{FeTA}) \cite{FeTA2024} was born i
 
 \textsc{FeTA} 2024 is divided into two sub-challenges.
 \begin{description}
-\item[Generalizable Fetal Brain Segmentation] The fist task is about multi-class segmentation, where participants are asked to segment the fetal brain into seven different tissues: cerebrospinal fluid (CSF), cortical gray matter (GM), white matter (WM), lateral ventricles (LV), deep gray matter (DGM), brainstem (BS), and cerebellum (CB). The performance is evaluated using different metrics, such as the Dice similarity coefficient between the predicted and ground truth segmentations.
-\item[Fetal Brain Biometry] The second task deals with the estimation of five different biometric measurements of fetal brain anatomical structures: length of the corpus callosum (LCC), height of the vermis (HV), brain biparietal diameter (bBIP\_ax), skull biparietal diameter (sBIP\_ax), and maximum transverse cerebellar diameter (TCD\_cor). In this case, the results are evaluated using the relative error between the predicted and ground truth measurements. \cite{FeTA2024_paper}
+\item[Generalizable Fetal Brain Segmentation] The fist task is about multi-class segmentation, where participants are asked to segment the fetal brain into seven different tissues: external cerebrospinal fluid, gray matter, white matter, ventricles, cerebellum, deep gray matter, and brainstem. The performance is evaluated using different metrics, such as the Dice similarity coefficient between the predicted and ground truth segmentations.
+\item[Fetal Brain Biometry] The second task deals with the estimation of five different biometric measurements of fetal brain anatomical structures: length of the corpus callosum, height of the vermis, brain biparietal diameter, skull biparietal diameter, and maximum transverse cerebellar diameter. In this case, the results are evaluated using the relative error between the predicted and ground truth measurements. \cite{FeTA2024_paper}
 \end{description}
 
 \section{Previous Editions}
-The first edition of the \textsc{FeTA} challenge was organized in 2020. It was mainly focused 
+
+\subsection{FeTA 2020}
+
+The first edition of the \textsc{FeTA} challenge was organized in 2020, by Payette et al.\ \cite{FeTA2020_review}. The challenge consisted in segmenting fetal brain MRI T2w images. The initial \textsc{FeTA} dataset comprised 40 super-resolution (SR) reconstructions with manual segmentations for training and 10 SR reconstructions without manual segmentation for validation, encompassing both pathological and non-pathological cases. The gestational age (GA) range spanned from 20 to 33 weeks. This dataset established a standard in fetal brain tissue parcellation---according to a seven-tissues protocol previously introduced in \cite{Payette2020}---that would be used in all the following \textsc{FeTA} editions. The seven tissue types are: white matter (WM), grey matter (GM), external cerebrospinal fluid (eCSF), ventricles, cerebellum, deep GM, and brainstem.
+
+Four research groups participated, submitting a total of ten algorithms. Nine out of ten used deep learning methods (eight of which were based on 2D and 3D U-Nets), and one used a multi-atlas segmentation method. The assessment of the results was carried out using the Dice similarity coefficient (DSC), the volume similarity (VS), and the Hausdorff 95 distance (HD95). All the algortihms had more or less the same issues in segmenting the eCSF---especially for the pathological cases, because of not clear tissue boundaries---and the GM, because of its rapidly changing structure. The best performing method was a 3D U-Net made up by the combination of three 2D U-Nets, one per directions (sagittal, coronal, and axial). It is worth noting that the multi-atlas segmentation method performed better than the deep learning methods when
+the quality of the SR was poor. This is because such method can leverage its prior knowledge even if the structure is not clear in the image.
+
+The dataset used in the first \textsc{FeTA} edition had important limitations:
+\begin{itemize}
+    \item Manual segmentations were based on a single segmentation due to time and resource limitations, without consensus delineation.
+    \item The data were from a single center, the University Children's Hospital Zurich, thus limiting the generalizability of the results.
+    \item The images had varying quality grades, with younger GAs and pathological cases often having lower quality.
+\end{itemize}
 
 \section{Fetal Brain Segmentation}
 
 \section{Fetal Brain Biometry}
+length of the corpus callosum (LCC), height of the vermis (HV), brain biparietal diameter (bBIP\_ax), skull biparietal diameter (sBIP\_ax), and maximum transverse cerebellar diameter (TCD\_cor)
+
+
