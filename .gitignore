@@ -1,6 +1,7 @@
 # Added by me
 *.ist
 *.ps
+.vscode/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

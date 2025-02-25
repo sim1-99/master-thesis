@@ -1,5 +1,26 @@
 % Encoding: UTF-8
 
+@Article{Aviles2023,
+  author = {Aviles Verdera, Jordina and Story, Lisa and Hall, Megan and others},
+  title = {Reliability and Feasibility of Low-Field-Strength Fetal MRI at 0.55\,T during Pregnancy},
+  journaltitle = {Radiology},
+  volume = {309},
+  number = {1},
+  year = {2023},
+  doi = {10.1148/radiol.223050},
+  url = {https://doi.org/10.1148/radiol.223050},
+}
+
+@article{Billot2023,
+	title = {SynthSeg: Segmentation of brain MRI scans of any contrast and resolution without retraining},
+	author = {Billot, Benjamin and Greve, Douglas N. and Puonti, Oula and Thielscher, Axel and Van Leemput, Koen and Fischl, Bruce and Dalca, Adrian V. and Iglesias, Juan Eugenio},
+	journaltitle = {Medical Image Analysis},
+	year = {2023},
+  volume = {86},
+  doi = {10.1016/j.media.2023.102789},
+  url = {https://www.sciencedirect.com/science/article/pii/S1361841523000506},
+}
+
 @Article{FeTA2020_review,
   author = {Payette, Kelly and de Dumast, Priscille and Kebiri, Hamza and others},
   title = {An automatic multi-tissue human fetal brain segmentation benchmark using the Fetal Tissue Annotation Dataset},
@@ -10,6 +31,58 @@
   issue = {1},
   doi = {10.1038/s41597-021-00946-3},
   url = {https://doi.org/10.1038/s41597-021-00946-3},
+}
+
+@Article{FeTA2021_review,
+  author = {Payette, Kelly and Hongwei, Bran Li and de Dumast, Priscille and others},
+  title = {Fetal brain tissue annotation and segmentation challenge results},
+  journaltitle = {Medical Image Analysis},
+  year = {2023},
+  volume = {88},
+  doi = {https://doi.org/10.1016/j.media.2023.102833},
+  url = {https://www.sciencedirect.com/science/article/pii/S1361841523000932},
+}
+
+@Article{FeTA2022_review,
+  author = {Payette, Kelly and Steger, Céline and Licandro, Roxane and others},
+  title = {Multi-Center Fetal Brain Tissue Annotation (FeTA) Challenge 2022 Results},
+  journaltitle = {\textsc{ieee} Transactions on Medical Imaging},
+  year = {2024},
+  doi = {10.1109/tmi.2024.3485554},
+  url = {http://dx.doi.org/10.1109/TMI.2024.3485554},
+}
+
+@Article{Kuklisova2012,
+  author = {Kuklisova-Murgasova, Maria and Quaghebeur, Géraldine and Rutherford, Mary A. and others},
+  title = {Reconstruction of fetal brain MRI with intensity matching and complete outlier removal},
+  journaltitle = {Medical Image Analysis},
+  year = {2012},
+  volume = {16},
+  pages = {1550--1564},
+  doi = {10.1016/j.media.2012.07.004},
+  url = {https://doi.org/10.1016/j.media.2012.07.004},
+}
+
+@Article{Ponrartana2023,
+  author = {Ponrartana, Skorn and Nguyen, HaiThuy N. and Cui, Sophia X. and others},
+  title = {Low-field 0.55\,T MRI evaluation of the fetus},
+  journaltitle = {Pediatric Radiology},
+  volume = {53},
+  pages = {1469--1475},
+  year = {2023},
+  doi = {10.1007/s00247-023-05604-x},
+  url = {https://doi.org/10.1007/s00247-023-05604-x},
+}
+
+@Article{Tourbier2015,
+  author = {Tourbier, Sébastien and Bressonc, Xavier and Hagmann, Patric and others},
+  title = {An efficient total variation algorithm for super-resolution in fetal brain MRI with adaptive regularization},
+  journaltitle = {NeuroImage},
+  year = {2015},
+  volume = {118},
+  pages = {584--597},
+  doi = {10.1016/j.neuroimage.2015.06.018},
+  url = {https://doi.org/10.1016/j.neuroimage.2015.06.018},
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,16 +124,48 @@ description of the challenge design},
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+@Online{FeTA2021,
+  title = {FeTA 2021 Challenge},
+  url = {https://feta.grand-challenge.org/feta-2021/},
+  urldate = {2025-02-21},
+}
+
+@Online{FeTA2022,
+  title = {FeTA 2022 Challenge},
+  url = {https://feta.grand-challenge.org/feta-2022/},
+  urldate = {2025-02-21},
+}
+
 @Online{FeTA2024,
-  title = {\textsc{FeTA} 2024 Challenge},
+  title = {FeTA 2024 Challenge},
   url = {https://fetachallenge.github.io/},
   urldate = {2025-01-29},
-  }
+}
 
 @Online{MICCAI,
-  title = {MICCAI: Medical Image Computing and Computer-Assisted Intervention},
+  title = {\textsc{miccai}: Medical Image Computing and Computer-Assisted Intervention},
   url = {https://miccai.org/},
   urldate = {2025-01-29},
-  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@Software{MIALSRTK,
+  author = {Deman, Pierre and Tourbier, Sebastien and Meuli, Reto and Bach Cuadra, Meritxell},
+  title = {meribach/mevislabFetalMRI: \textsc{mevislab mial} Super-Resolution Reconstruction of Fetal Brain MRI v1.0},
+  year = {2020},
+  publisher = {Zenodo},
+  version = {v1.0},
+  doi = {10.5281/zenodo.3878564},
+  url = {https://doi.org/10.5281/zenodo.3878564},
+}
+
+@Software{irtk-simple,
+  author = {Kuklisova-Murgasova, Maria},
+  title = {\textsc{simple irtk}},
+  year = {2019},
+  publisher = {GitLab},
+  url = {https://gitlab.com/mariadeprez/irtk-simple},
+}
 
 @Comment{jabref-meta: databaseType:bibtex;}
