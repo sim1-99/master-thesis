@@ -34,7 +34,7 @@
   pdffitwindow=true,  % window fit to page when opened
   pdfstartview={FitH},  % fits the width of the page to the window
   pdfpagelayout={SinglePage},  % set visualization on single page
-  pdftitle={Segmentation and Biometry Estimation of 3D T2w Fetal Brain Images},  % title
+  pdftitle={3D U-Net Domain Generalization in Fetal Brain MRI Segmentation},  % title
   pdfauthor={Simone Chiarella},  % author
   pdfsubject={Fetal Brain MRI Segmentation},  % subject of the document
   pdfcreator={Simone Chiarella},  % creator of the document
@@ -124,6 +124,10 @@
 \newacronym[description={Brainstem}]{BS}{BS}{brainstem}
 \newacronym[description={Centre Hospitalier Universitaire Vaudois (Lausanne University Hospital)}]{CHUV}{CHUV}{centre hospitalier universitaire vaudois}
 \newacronym[description={Cerebrospinal fluid}]{CSF}{CSF}{cerebrospinal fluid}
+\newacronym[description={Contrast-to-noise ratio}]{CNR}{CNR}{contrast-to-noise ratio}
+\newacronym[description={Cortical gray matter}]{cGM}{cGM}{cortical gray matter}
+\newacronym[description={Domain generalization}]{DG}{DG}{domain generalization}
+\newacronym[description={Deep gray matter}]{dGM}{dGM}{deep gray matter}
 \newacronym[description={Dice similarity coefficient}]{DSC}{DSC}{Dice similarity coefficient}
 \newacronym[description={Fetal Tissue Annotation Challenge}]{FeTA}{FeTA}{fetal tissue annotation challenge}
 \newacronym[description={Hausdorff 95 distance}]{HD95}{HD95}{Hausdorff 95 distance}
@@ -132,7 +136,8 @@
 \newacronym[description={King's College London (St.\ Thomas Hospital)}]{KCL}{KCL}{King's College London}
 \newacronym[description={Universitäts-Kinderspital Zürich (Zurich University Children's Hospital)}]{Kispi}{Kispi}{Universitäts-Kinderspital Zürich}
 \newacronym[description={Out-of-domain}]{OOD}{OOD}{out-of-domain}
-\newacronym[description={Super resolution}]{SR}{SR}{super resolution}
+\newacronym[description={Signal-to-noise ratio}]{SNR}{SNR}{signal-to-noise ratio}
+\newacronym[description={Super-resolution}]{SR}{SR}{super-resolution}
 \newacronym[description={University of California, San Francisco (Benioff Children's Hospital)}]{UCSF}{UCSF}{UC San Francisco}
 \newacronym[description={Volume similarity}]{VS}{VS}{volume similarity}
 \newacronym[description={White matter}]{WM}{WM}{white matter}
@@ -219,7 +224,7 @@
 
   \include{sources/MagneticResonanceImaging}
 
-  %\include{sources/FetalBrainMRI}
+  \include{sources/FetalBrainMRI}
 
   \include{sources/MethodsForFetalBrainSegmentation}
 
