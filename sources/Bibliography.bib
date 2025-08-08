@@ -41,6 +41,17 @@
   url = {https://www.sciencedirect.com/science/article/pii/S1053811924000983},
 }
 
+@article{Dockes2021,
+  author = {Dockès, Jérôme and Varoquaux, Gaël and Poline, Jean Baptiste},
+  title = {Preventing dataset shift from breaking machine-learning biomarkers},
+  journaltitle = {GigaScience},
+  volume = {10},
+  number = {9},
+  year = {2021},
+  doi = {10.1093/gigascience/giab055},
+  url = {https://doi.org/10.1093/gigascience/giab055},
+}
+
 @article{Ebner2020,
   author = {Ebner, Michael and Wang, Guotai and Li, Wenqi and others},
   title = {An automated framework for localization, segmentation and super-resolution reconstruction of fetal brain MRI},
@@ -82,6 +93,29 @@
   url = {http://dx.doi.org/10.1109/TMI.2024.3485554},
 }
 
+@article{FeTA2024_review,
+  title = {Advances in Automated Fetal Brain MRI Segmentation and Biometry: Insights from the FeTA 2024 Challenge}, 
+  author = {Zalevskyi, Vladyslav and Sanchez, Thomas and Kaandorp, Misha and others},
+  year = {2025},
+  eprint = {2505.02784},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CV},
+  doi = {10.48550/arXiv.2505.02784},
+  url = {https://arxiv.org/abs/2505.02784},
+}
+
+@article{Isensee2021,
+  author = {Isensee, Fabian and Jaeger, Paul F. and Kohl, Simon A. and others},
+  title = {nnU-Net: a self-configuring  method for deep learning-based biomedical image segmentation},
+  journaltitle = {Nature Methods},
+  number = {2},
+  volume = {18},
+  pages = {203--211},
+  year = {2021},
+  doi = {10.1038/s41592-020-01008-z},
+  url = {https://www.nature.com/articles/s41592-020-01008-z},
+}
+
 @article{Kuklisova2012,
   author = {Kuklisova-Murgasova, Maria and Quaghebeur, Géraldine and Rutherford, Mary A. and others},
   title = {Reconstruction of fetal brain MRI with intensity matching and complete outlier removal},
@@ -116,6 +150,15 @@
   url = {https://doi.org/10.1007/s00247-023-05604-x},
 }
 
+@article {Sanchez2024,
+	author = {Sánchez, Thomas and Mihailov, Angeline and Martí Juan, Gerard and others},
+	title = {Assessing data quality on fetal brain MRI reconstruction: a multi-site and multi-rater study},
+	publisher = {bioRxiv},
+	year = {2024},
+	doi = {10.1101/2024.06.28.601169},
+	url = {https://www.biorxiv.org/content/early/2024/07/02/2024.06.28.601169},
+}
+
 @article{Tourbier2015,
   author = {Tourbier, Sébastien and Bressonc, Xavier and Hagmann, Patric and others},
   title = {An efficient total variation algorithm for super-resolution in fetal brain MRI with adaptive regularization},
@@ -125,6 +168,16 @@
   pages = {584--597},
   doi = {10.1016/j.neuroimage.2015.06.018},
   url = {https://doi.org/10.1016/j.neuroimage.2015.06.018},
+}
+
+@article{Uus2022,
+  author = {Uus, Alena U. and Grigorescu, Irina and {van Poppel}, Milou P.M. and others},
+  title = {Automated 3D reconstruction of the fetal thorax in the standard atlas space from motion-corrupted MRI stacks for 21-36 weeks GA range},
+  journaltitle = {Medical Image Analysis},
+  volume = {80},
+  year = {2022},
+  doi = {https://doi.org/10.1016/j.media.2022.102484},
+  url = {https://www.sciencedirect.com/science/article/pii/S1361841522001311},
 }
 
 @article{Wang2023,
@@ -138,17 +191,6 @@
   doi = {10.1109/TKDE.2022.3178128},
   url = {https://ieeexplore.ieee.org/document/9782500},
 }
-
-@article{Uus2022,
-  author = {Uus, Alena U. and Grigorescu, Irina and {van Poppel}, Milou P.M. and others},
-  title = {Automated 3D reconstruction of the fetal thorax in the standard atlas space from motion-corrupted MRI stacks for 21-36 weeks GA range},
-  journaltitle = {Medical Image Analysis},
-  volume = {80},
-  year = {2022},
-  doi = {https://doi.org/10.1016/j.media.2022.102484},
-  url = {https://www.sciencedirect.com/science/article/pii/S1361841522001311},
-}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -186,16 +228,6 @@
   url = {https://doi.org/10.5281/zenodo.10986046},
 }
 
-@misc{FeTA2024_review,
-  title = {Advances in Automated Fetal Brain MRI Segmentation and Biometry: Insights from the FeTA 2024 Challenge}, 
-  author = {Zalevskyi, Vladyslav and Sanchez, Thomas and Kaandorp, Misha and others},
-  year = {2025},
-  eprint = {2505.02784},
-  archivePrefix = {arXiv},
-  primaryClass = {cs.CV},
-  doi = {10.48550/arXiv.2505.02784},
-  url = {https://arxiv.org/abs/2505.02784},
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @online{FeTA2021,
@@ -224,8 +256,16 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+@Software{irtk-simple,
+  author = {Kuklisova-Murgasova, Maria},
+  title = {\textsc{simple irtk}},
+  year = {2019},
+  publisher = {GitLab},
+  url = {https://gitlab.com/mariadeprez/irtk-simple},
+}
+
 @Software{MIALSRTK,
-  author = {Deman, Pierre and Tourbier, Sebastien and Meuli, Reto and Bach Cuadra, Meritxell},
+  author = {Deman, Pierre and Tourbier, Sébastien and Meuli, Reto and Bach Cuadra, Meritxell},
   title = {meribach/mevislabFetalMRI: \textsc{mevislab mial} Super-Resolution Reconstruction of Fetal Brain MRI v1.0},
   year = {2020},
   publisher = {Zenodo},
@@ -234,12 +274,13 @@
   url = {https://doi.org/10.5281/zenodo.3878564},
 }
 
-@Software{irtk-simple,
-  author = {Kuklisova-Murgasova, Maria},
-  title = {\textsc{simple irtk}},
-  year = {2019},
-  publisher = {GitLab},
-  url = {https://gitlab.com/mariadeprez/irtk-simple},
+@Software{nnUNet,
+  author = {{Helmholtz Imaging Applied Computer Vision Lab}},
+  title = {nnU-Net},
+  year = {2020},
+  publisher = {GitHub},
+  version = {v2.4.1},
+  url = {https://github.com/MIC-DKFZ/nnUNet},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
