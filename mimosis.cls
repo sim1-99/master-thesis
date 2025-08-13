@@ -259,6 +259,7 @@ bindingoffset=10mm,
 % Packages and options added by me
 \RequirePackage{pdfpages}
 \RequirePackage{upgreek}
+\RequirePackage{makecell}
 
 \DeclareMathOperator{\sen}{sen}
 
