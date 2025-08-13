@@ -6,11 +6,11 @@
 % Type here an introduction to the chapter
 
 \section{Kispi}
-The Kispi dataset\,\cite{FeTA_MICCAI} originates from the University Children's Hospital Zurich, Switzerland, in the context of the FeTA challenge. All data were acquired with institutional ethics committee approval from the Canton of Zurich, with research consent provided by the mothers for the use of their data. The dataset is open-source and fully anonymized\,\cite{FeTA2024_paper}.
+The Kispi dataset\,\cite{Payette2021, FeTA_MICCAI} originates from the University Children's Hospital of Zurich, Switzerland, in the context of the FeTA challenge. All data were acquired with institutional ethics committee approval from the Canton of Zurich, with research consent provided by the mothers for the use of their data. The dataset is open-source and fully anonymized.
 
 The Kispi cohort comprises fetal brain MRI scans from subjects with both normal and pathological neurodevelopment. The pathological cases include a variety of congenital disorders, such as spina bifida and ventriculomegaly, reflecting a clinically relevant population\,\cite{FeTA2024_paper, Ciceri2024}. The dataset spans a gestational age (GA) range of approximately 20 to 35 weeks. For the FeTA 2024 challenge, the Kispi data was partitioned into a training set of 80 volumes and a test set of 40 volumes, but only the training set is publicly available. The training partition consists of 31 neurotypical and 49 pathological cases\,\cite{FeTA2024_review}.
 
-All imaging was performed on 1.5\,T and 3\,T GE Signa Discovery (MR450 and MR750) whole-body scanners. The acquisitions were conducted without the use of maternal or fetal sedation. Depending on the specific case, either an 8-channel cardiac coil or a standard body coil was employed\,\cite{FeTA2024_paper}.
+All imaging was performed on 1.5\,T and 3\,T GE Signa Discovery (MR450 and MR750) whole-body scanners. The acquisitions were conducted without the use of maternal or fetal sedation. Depending on the specific case, either an 8-channel cardiac coil or a standard body coil was employed\,\cite{FeTA2024_paper}. Acquisition details for the single volumes are not available.
 
 The acquisition protocol consisted of T2-weighted single-shot fast spin echo (\textsc{ssfse}) sequences acquired in the axial, coronal, and sagittal planes relative to the fetal brain. Key sequence parameters were maintained as follows\,\cite{FeTA2024_paper}:
 \begin{itemize}
@@ -21,33 +21,54 @@ The acquisition protocol consisted of T2-weighted single-shot fast spin echo (\t
     \item \textbf{Field of View (FOV) and Matrix Size:} The FOV (200--240\,mm) and image matrix (1.5\,T: $256 \times 224$; 3\,T: $320 \times 224$) were adjusted according to the GA and size of the fetus.
 \end{itemize}
 
-Prior to reconstruction, all acquired images for a given subject underwent a manual quality review to compile a stack of suitable scans, with at least one brain scan in each orientation. Each image stack was then reoriented to a standard anatomical plane, and a semi-automated method was used to generate the masks of the single labels in the fetal brain. Segmentations were then inspected and refined. Following these pre-processing steps, the data were processed using one of two distinct SR reconstruction pipelines, resulting in two sub-cohorts within the Kispi dataset. The parcellation used distinguishes 7 labels: external cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles (including cavum), cerebellum, deep gray matter (dGM), and brainstem (BS)\,\cite{FeTA2024_paper}.
+Prior to reconstruction, all acquired images for a given subject underwent a manual quality review to compile a stack of suitable scans, with at least one brain scan in each orientation. Each image stack was then reoriented to a standard anatomical plane, and a semi-automated method was used to generate the masks of the single labels in the fetal brain. Segmentations were then inspected and refined. Following these pre-processing steps, the data were processed using one of two distinct SR reconstruction pipelines, resulting in two sub-cohorts within the Kispi dataset. The parcellation distinguishes 7 labels: external cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles (including cavum), cerebellum, deep gray matter (dGM), and brainstem (BS)\,\cite{FeTA2024_paper}.
 
-40 image stacks, that is, half of the available Kispi stacks, was processed using the \textsc{mial} Super-Resolution Toolkit (\textsc{mialsrtk}) pipeline\,\cite{Tourbier2015, MIALSRTK}. The resulting 3D volumes for this sub-cohort have an isotropic resolution of $0.5 \times 0.5 \times 0.5$\,mm. The remaining 40 stacks were reconstructed using a pipeline based on the Image Registration Toolkit (\textsc{irtk})\,\cite{Kuklisova2012, irtk-simple}. The reconstructions from this pipeline yielded 3D volumes with an isotropic resolution of $1.0 \times 1.0 \times 1.0$\,mm\,\cite{FeTA2024_review}. However, scans from both SRR methods were standardised to $256 \times 256 \times 256$ voxels. More information about the SR reconstruction algorithms is provided in Section \ref{sec:SuperResolutionReconstruction}. Data aforementioned are collected in Tab.\,\ref{tab:datasets}.
+40 image stacks, that is, half of the available Kispi stacks, was processed using the \textsc{mial} Super-Resolution Toolkit (\textsc{mialsrtk}) pipeline\,\cite{Tourbier2015, MIALSRTK}. An example of this group of volumes---from now on referred to as the \enquote{Kispi-mial} sub-cohort---is shown in Fig.\,\ref{fig:kispi-mial_images}. The remaining 40 stacks were reconstructed using a pipeline based on the Image Registration Toolkit (\textsc{irtk})\,\cite{Kuklisova2012, irtk-simple}. For this sub-cohort---from now on referred to as the \enquote{Kispi-irtk}---an example is shown in Fig.\,\ref{fig:kispi-irtk_images}.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.35\textwidth]{figures/mial_1.png} \quad
-    \includegraphics[width=0.35\textwidth]{figures/mial_2.png} \\
-    \vspace{10pt}
-    \includegraphics[width=0.35\textwidth]{figures/irtk_1.png} \quad
-    \includegraphics[width=0.35\textwidth]{figures/irtk_2.png}
-    \caption{}
-    \label{fig:kispi_images}
-\end{figure}
+For both SRR methods the resulting 3D volumes have an isotropic resolution of $0.5 \times 0.5 \times 0.5$\,mm; scans were standardised to $256 \times 256 \times 256$ voxels\,\cite{FeTA2021_review}. The distributions of GA, pathology and image quality of both sub-cohorts are shown in Fig.\,\ref{fig:kispi_plots}. However, the image quality score for each volume is not provided in the open-access data, as it is only available as a plot in \cite{FeTA2024_review}. More information about the SR reconstruction algorithms is provided in Section \ref{sec:SuperResolutionReconstruction}. Data aforementioned are collected in Tab.\,\ref{tab:datasets}.
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.45\textwidth]{figures/k-mial_GA.png} \quad
     \includegraphics[width=0.45\textwidth]{figures/k-irtk_GA.png}\\
     \vspace{10pt}
     \includegraphics[width=0.35\textwidth]{figures/kispi_quality.png}
-    \caption{}
+    \caption{Top: Kispi cases gestational age distribution, stratified by health condition. Bottom: Quality assessment of Kispi cases, from \cite{FeTA2024_review}.}
     \label{fig:kispi_plots}
+\end{figure}
+
+\begin{figure}[hbtp]
+    \vspace{-10pt}
+    \centering
+    \includegraphics[width=0.33\textwidth]{figures/mial_ax_dseg.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_ax.png} \\
+    \vspace{10pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_sag.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_cor.png}
+    \caption{Example of Kispi-mial scan: axial segmentation, axial view, sagittal view, coronal view. Material from: \cite{Payette2021, FeTA_MICCAI}.}
+    \label{fig:kispi-mial_images}
+\end{figure}
+\begin{figure}[hbtp]
+    \vspace{-10pt}
+    \centering
+    \includegraphics[width=0.33\textwidth]{figures/irtk_ax_dseg.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/irtk_ax.png} \\
+    \vspace{10pt}
+    \includegraphics[width=0.33\textwidth]{figures/irtk_sag.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/irtk_cor.png}
+    \caption{Example of Kispi-irtk scan: axial segmentation, axial view, sagittal view, coronal view. Material from: \cite{Payette2021, FeTA_MICCAI}.}
+    \label{fig:kispi-irtk_images}
+    \vspace{-10pt}
 \end{figure}
 
 \section{dHCP}
 
-\begin{table}[htbp]
+
+\begin{table}[hbtp]
     \centering
     \begin{tabular}{c|c|c|c|c|c|c}
         \toprule
