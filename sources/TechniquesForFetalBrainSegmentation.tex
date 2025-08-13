@@ -47,29 +47,32 @@ The dataset used in the first FeTA edition had important limitations:
 
 The 2021 edition of the FeTA challenge\,\cite{FeTA2021_review, FeTA2021} was the first to join the \textsc{miccai} conference. The dataset---hereinafter referred to as Kispi dataset---was expanded to 120 scans from the same institution, with GAs ranging from 20 to 35 weeks. The acquisition was carried out at 1.5\,T for a subset of cases, and at 3\,T for another subset of cases. 60 scans were reconstructed with the \textsc{mialsrtk} method\,\cite{Tourbier2015, MIALSRTK}, while the other 60 cases with the \textsc{simple irtk} method\,\cite{Kuklisova2012, irtk-simple}. For each reconstruction method, 40 cases were included in the training dataset available to the challenge participants (for a total of 80 cases), and 20 cases were included in testing dataset not available to the participants (for a total of 40 cases). 21 algorithms were submitted, of which 19 were U-Nets, with no major differences in the architecture. Overall, the most challenging labels to segment were cortical and deep GM---due to limited image resolution and annotation uncertainty---and brainstem---especially in the pathological cases. The results of the image quality and SR reconstruction methods are related to each other, as the majority of the low quality images were done with the \textsc{mialsrtk} method, and the excellent quality brain volumes included were reconstructed with the \textsc{simple irtk} method.
 
-FeTA 2022\,\cite{FeTA2022_review, FeTA2022} introduced a multi-center dataset to address the generalizability of algorithms, which was one of the main limitations of the previous editions. In addition to Kispi, data from Medical University of Vienna was incorporated into both the training and testing datasets. Data from two further centers were included in the testing dataset---University Hospital Lausanne (\textsc{chuv}), and Benioff Children's Hospital (UC San Francisco, \textsc{ucsf})---for a total of four centers (Tab\,\ref{tab:FeTA2022_dataset}).
+FeTA 2022\,\cite{FeTA2022_review, FeTA2022} introduced a multi-center dataset to address the generalizability of algorithms, which was one of the main limitations of the previous editions. In addition to Kispi, data from Medical University of Vienna was incorporated into both the training and testing datasets. Data from two further centers were included in the testing dataset---University Hospital Lausanne (\textsc{chuv}), and Benioff Children's Hospital (UC San Francisco, \textsc{ucsf})---for a total of four centers.
+\comment{
+(Tab\,\ref{tab:FeTA2022_dataset}).
 
 \begin{table}[htbp]
     \centering
     \begin{tabular}{c|c|c|c|c}
-    \toprule
-    \textbf{Inst.} & \begin{tabular}{@{}c@{}} \textbf{Scanner} \\ \textbf{(field strength in Tesla)} \end{tabular} & \textbf{SRR method} & \begin{tabular}{@{}c@{}} \textbf{TR/TE} \\ \textbf{(ms)} \end{tabular} & \begin{tabular}{@{}c@{}} \textbf{GA range} \\ \textbf{(weeks)} \end{tabular} \\ \midrule
-    \multicolumn{5}{c}{\textbf{Training}} \\
-    \midrule
-    Kispi & \begin{tabular}{@{}c@{}} GE Signa Discovery \\ MR450/MR750 (1.5/3)* \end{tabular} & \begin{tabular}{@{}c@{}} \textsc{mialsrtk} (40) \\ \textsc{simple irtk} (40) \end{tabular} & \begin{tabular}{@{}c@{}} 2000-3500 \\ 120** \end{tabular} & 20.0-34.8 \\ \hline
-    Vienna & \begin{tabular}{@{}c@{}} Philips Ingenia/Intera (1.5) \\ Philips Achieva (3) \end{tabular} & \textsc{NiftyMIC} (40) & \begin{tabular}{@{}c@{}} 6000-22000 \\ 80-140 \end{tabular} & 19.3-34.4 \\
-    \midrule
-    \multicolumn{5}{c}{\textbf{Testing}} \\
-    \midrule
-    Kispi & \begin{tabular}{@{}c@{}} GE Signa Discovery \\ MR450/MR750 (1.5/3)* \end{tabular} & \begin{tabular}{@{}c@{}} \textsc{mialsrtk} (20) \\ \textsc{simple irtk} (20) \end{tabular} & \begin{tabular}{@{}c@{}} 2000-3500 \\ 120** \end{tabular} & 21.3-34.6 \\ \hline 
-    Vienna & \begin{tabular}{@{}c@{}} Philips Ingenia/Intera (1.5) \\ Philips Achieva (3) \end{tabular} & \textsc{NiftyMIC} (40) & \begin{tabular}{@{}c@{}} 6000-22000 \\ 80-140 \end{tabular} & 18.1-35.0 \\ \hline
-    \textsc{chuv} & \begin{tabular}{@{}c@{}} Siemens \textsc{magnetom} \\ Aera (1.5) \end{tabular} & \textsc{mialsrtk} (40) & \begin{tabular}{@{}c@{}} 1200 \\ 90 \end{tabular} & 21.0-35.0 \\ \hline
-    \textsc{ucsf} & \begin{tabular}{@{}c@{}} GE Discovery \\ MR750/MR750W (3) \end{tabular} & \textsc{NiftyMIC} (40) & \begin{tabular}{@{}c@{}} 2000-3500 \\ 100** \end{tabular} & 20.0-35.1 \\
-    \bottomrule
+        \toprule
+        \textbf{Inst.} & \begin{tabular}{@{}c@{}} \textbf{Scanner} \\ \textbf{(field strength in Tesla)} \end{tabular} & \textbf{SRR method} & \begin{tabular}{@{}c@{}} \textbf{TR/TE} \\ \textbf{(ms)} \end{tabular} & \begin{tabular}{@{}c@{}} \textbf{GA range} \\ \textbf{(weeks)} \end{tabular} \\ \midrule
+        \multicolumn{5}{c}{\textbf{Training}} \\
+        \midrule
+        Kispi & \begin{tabular}{@{}c@{}} GE Signa Discovery \\ MR450/MR750 (1.5/3)* \end{tabular} & \begin{tabular}{@{}c@{}} \textsc{mialsrtk} (40) \\ \textsc{simple irtk} (40) \end{tabular} & \begin{tabular}{@{}c@{}} 2000-3500 \\ 120** \end{tabular} & 20.0-34.8 \\ \hline
+        Vienna & \begin{tabular}{@{}c@{}} Philips Ingenia/Intera (1.5) \\ Philips Achieva (3) \end{tabular} & \textsc{NiftyMIC} (40) & \begin{tabular}{@{}c@{}} 6000-22000 \\ 80-140 \end{tabular} & 19.3-34.4 \\
+        \midrule
+        \multicolumn{5}{c}{\textbf{Testing}} \\
+        \midrule
+        Kispi & \begin{tabular}{@{}c@{}} GE Signa Discovery \\ MR450/MR750 (1.5/3)* \end{tabular} & \begin{tabular}{@{}c@{}} \textsc{mialsrtk} (20) \\ \textsc{simple irtk} (20) \end{tabular} & \begin{tabular}{@{}c@{}} 2000-3500 \\ 120** \end{tabular} & 21.3-34.6 \\ \hline 
+        Vienna & \begin{tabular}{@{}c@{}} Philips Ingenia/Intera (1.5) \\ Philips Achieva (3) \end{tabular} & \textsc{NiftyMIC} (40) & \begin{tabular}{@{}c@{}} 6000-22000 \\ 80-140 \end{tabular} & 18.1-35.0 \\ \hline
+        \textsc{chuv} & \begin{tabular}{@{}c@{}} Siemens \textsc{magnetom} \\ Aera (1.5) \end{tabular} & \textsc{mialsrtk} (40) & \begin{tabular}{@{}c@{}} 1200 \\ 90 \end{tabular} & 21.0-35.0 \\ \hline
+        \textsc{ucsf} & \begin{tabular}{@{}c@{}} GE Discovery \\ MR750/MR750W (3) \end{tabular} & \textsc{NiftyMIC} (40) & \begin{tabular}{@{}c@{}} 2000-3500 \\ 100** \end{tabular} & 20.0-35.1 \\
+        \bottomrule
     \end{tabular}
     \caption{Training and testing dataset properties in FeTA 2022. In parenthesis, next to each SRR method, is reported the correspondent number of images. *The field strengths respectively refers to the scanners. **TE values represent the minimum durations.}
     \label{tab:FeTA2022_dataset}
     \end{table}
+}
 
 17 algorithms were submitted, among which nnU-Net was the most used and effective tool. Overall, the median performance metrics in the OOD setting remained equivalent to the in-domain, but for some labels---ventricles, GM and  WM---an important drop in performance was observed. The most challenging labels to segment remained cortical and deep GM, and BS. Notably, some algorithms performed better in the OOD setting than in the in-domain setting. This can be explained with the better quality of the images from the \textsc{chuv} and \textsc{ucsf} centers, which were included only in the test set. Style and photometric augmentations (contrast, blur, sharpness, etc.) turned out to be effective in improving the generalization of the models. However, \enquote{the optimum choice of augmentation techniques remains unclear}\,\cite{FeTA2022_review}, standing as a critical factor in achieving domain generalization. The paper traces a path for future research, highlighting that it should focus on enhancing the generalizability of the methods and that \enquote{conducting a more comprehensive evaluation of the impact of data augmentation and possible biases due to super-resolution reconstruction methods would be very valuable}\,\cite{FeTA2022_review}.
 
