@@ -260,6 +260,7 @@ bindingoffset=10mm,
 \RequirePackage{makecell}
 \RequirePackage{multirow}
 \RequirePackage{pdfpages}
+\RequirePackage{siunitx}
 \RequirePackage{upgreek}
 
 \DeclareMathOperator{\sen}{sen}
