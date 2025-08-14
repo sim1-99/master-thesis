@@ -3,36 +3,50 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
 
-% Type here an introduction to the chapter
+In this study data from two datasets were employed: Kispi and dHCP. While details are provided in the respective sections, an overview is presented in Tab.\,\ref{tab:datasets}.
+\begin{table}[hbtp]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \toprule
+        \textbf{Name} & $\textbf{N}_\textbf{n}$\textbf{/}$\textbf{N}_\textbf{p}$ & \makecell{\textbf{GA range} \\ \textbf{(weeks)}} & \makecell{\textbf{Field} \\ \textbf{strength}} & \textbf{Scanner} & \textbf{SRR} & \textbf{Parcel.} \\
+        \midrule
+        Kispi-mial & 15/25 & 20.0--32.8 & 1.5/3\,T* & \makecell{GE Signa \\ Discovery \\ MR450/750*} & \makecell{\textsc{mialsrtk} \\ \cite{Tourbier2015}} & 7 labels \\ \hline
+        Kispi-irtk & 16/24 & 20.01--34.8 & 1.5/3\,T* & \makecell{GE Signa \\ Discovery \\ MR450/750*} & \makecell{\textsc{irtk} \\ \cite{Kuklisova2012}} & 7 labels \\ \hline
+        dHCP & 267/0 & 20.9--38.3 & 3\,T & \makecell{Philips \\ Achieva} & \makecell{Cordero- \\ Grande\,\cite{CorderoGrande2018}} & 17 labels \\
+        \bottomrule
+    \end{tabular}
+    \caption{Dataset properties. $\text{N}_\text{n}$ and $\text{N}_\text{p}$ respectively indicates the number of normal and pathological cases. *The field strengths respectively refers to the scanners.}
+    \label{tab:datasets}
+\end{table}
 
 \section{Kispi}
-The Kispi dataset\,\cite{Payette2021, FeTA_MICCAI} originates from the University Children's Hospital of Zurich, Switzerland, in the context of the FeTA challenge. All data were acquired with institutional ethics committee approval from the Canton of Zurich, with research consent provided by the mothers for the use of their data. The dataset is open-source and fully anonymized.
+The Kispi dataset\,\cite{Payette2021, FeTA_MICCAI} originates from the University Children's Hospital of Zurich, Switzerland, in the context of the FeTA challenge. All data were acquired with ethics committee approval from the Canton of Zurich, with research consent provided by the mothers for the use of their data. The dataset is open-access and fully anonymized.
 
 The Kispi cohort comprises fetal brain MRI scans from subjects with both normal and pathological neurodevelopment. The pathological cases include a variety of congenital disorders, such as spina bifida and ventriculomegaly, reflecting a clinically relevant population\,\cite{FeTA2024_paper, Ciceri2024}. The dataset spans a gestational age (GA) range of approximately 20 to 35 weeks. For the FeTA 2024 challenge, the Kispi data was partitioned into a training set of 80 volumes and a test set of 40 volumes, but only the training set is publicly available. The training partition consists of 31 neurotypical and 49 pathological cases\,\cite{FeTA2024_review}.
 
 All imaging was performed on 1.5\,T and 3\,T GE Signa Discovery (MR450 and MR750) whole-body scanners. The acquisitions were conducted without the use of maternal or fetal sedation. Depending on the specific case, either an 8-channel cardiac coil or a standard body coil was employed\,\cite{FeTA2024_paper}. Acquisition details for the single volumes are not available.
 
-The acquisition protocol consisted of T2-weighted single-shot fast spin echo (\textsc{ssfse}) sequences acquired in the axial, coronal, and sagittal planes relative to the fetal brain. Key sequence parameters were maintained as follows\,\cite{FeTA2024_paper}:
+The acquisition protocol consisted of T2-weighted single-shot fast spin-echo (\textsc{ssfse}) sequences acquired in the axial, coronal, and sagittal planes relative to the fetal brain. Key sequence parameters were maintained as follows\,\cite{FeTA2024_paper}:
 \begin{itemize}
     \item \textbf{Repetition Time (TR):} 2000--3500\,ms.
     \item \textbf{Echo Time (TE):} 120\,ms (minimum).
     \item \textbf{Flip Angle:} 90 degrees.
     \item \textbf{Acquisition Resolution:} An in-plane resolution of $0.5 \times 0.5$\,mm with a slice thickness ranging from 3 to 5\,mm was employed.
-    \item \textbf{Field of View (FOV) and Matrix Size:} The FOV (200--240\,mm) and image matrix (1.5\,T: $256 \times 224$; 3\,T: $320 \times 224$) were adjusted according to the GA and size of the fetus.
+    \item \textbf{Field of View and Matrix Size:} The FOV (200--240\,mm) and image matrix (1.5\,T: $256 \times 224$; 3\,T: $320 \times 224$) were adjusted according to the GA and size of the fetus.
 \end{itemize}
 
 Prior to reconstruction, all acquired images for a given subject underwent a manual quality review to compile a stack of suitable scans, with at least one brain scan in each orientation. Each image stack was then reoriented to a standard anatomical plane, and a semi-automated method was used to generate the masks of the single labels in the fetal brain. Segmentations were then inspected and refined. Following these pre-processing steps, the data were processed using one of two distinct SR reconstruction pipelines, resulting in two sub-cohorts within the Kispi dataset. The parcellation distinguishes 7 labels: external cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles (including cavum), cerebellum, deep gray matter (dGM), and brainstem (BS)\,\cite{FeTA2024_paper}.
 
 40 image stacks, that is, half of the available Kispi stacks, was processed using the \textsc{mial} Super-Resolution Toolkit (\textsc{mialsrtk}) pipeline\,\cite{Tourbier2015, MIALSRTK}. An example of this group of volumes---from now on referred to as the \enquote{Kispi-mial} sub-cohort---is shown in Fig.\,\ref{fig:kispi-mial_images}. The remaining 40 stacks were reconstructed using a pipeline based on the Image Registration Toolkit (\textsc{irtk})\,\cite{Kuklisova2012, irtk-simple}. For this sub-cohort---from now on referred to as the \enquote{Kispi-irtk}---an example is shown in Fig.\,\ref{fig:kispi-irtk_images}.
 
-For both SRR methods the resulting 3D volumes have an isotropic resolution of $0.5 \times 0.5 \times 0.5$\,mm; scans were standardised to $256 \times 256 \times 256$ voxels\,\cite{FeTA2021_review}. The distributions of GA, pathology and image quality of both sub-cohorts are shown in Fig.\,\ref{fig:kispi_plots}. However, the image quality score for each volume is not provided in the open-access data, as it is only available as a plot in \cite{FeTA2024_review}. More information about the SR reconstruction algorithms is provided in Section \ref{sec:SuperResolutionReconstruction}. Data aforementioned are collected in Tab.\,\ref{tab:datasets}.
+For both SRR methods the resulting 3D volumes have an isotropic resolution of $0.5 \times 0.5 \times 0.5$\,mm; scans were standardised to $256 \times 256 \times 256$ voxels\,\cite{FeTA2021_review}. The distributions of GA, pathology and image quality of both sub-cohorts are shown in Fig.\,\ref{fig:kispi_plots}. However, the image quality score for each volume is not provided in the open-access data, as it is only available as a plot in \cite{FeTA2024_review}. More details about the SR algorithms are given in Section \ref{sec:SuperResolutionReconstruction}.
 
-\begin{figure}[htbp]
+\begin{figure}[hbt]
     \centering
     \includegraphics[width=0.45\textwidth]{figures/k-mial_GA.png} \quad
     \includegraphics[width=0.45\textwidth]{figures/k-irtk_GA.png}\\
     \vspace{10pt}
-    \includegraphics[width=0.35\textwidth]{figures/kispi_quality.png}
+    \includegraphics[width=0.32\textwidth]{figures/kispi_quality.png}
     \caption{Top: Kispi cases gestational age distribution, stratified by health condition. Bottom: Quality assessment of Kispi cases, from \cite{FeTA2024_review}.}
     \label{fig:kispi_plots}
 \end{figure}
@@ -66,20 +80,61 @@ For both SRR methods the resulting 3D volumes have an isotropic resolution of $0
 \end{figure}
 
 \section{dHCP}
+The Developing Human Connectome Project\,\cite{dHCP} (dHCP) provides an open-access spatio-temporal MRI atlas of normal fetal brain development. The dHCP fetal cohort consists of 296 scans from 272 individuals from St.\ Thomas' Hospital, London, with inclusion based on healthy pregnancies or those without major brain malformations detectable on screening ultrasound. All participants were reported by a neuroradiologist as showing age-appropriate brain anatomy on T2w anatomical scans, with no clinically significant malformations or lesions. The dataset spans a GA range from 20.86 to 38.29 weeks. All imaging was performed on a Philips Achieva 3\,T using a 32-channel cardiac coil. The distributions of GA and image size are shown in Fig.\,\ref{fig:dhcp_plots}. No sedation was used\,\cite{Karolis2025}.
 
+The dHCP fetal atlas is multi-modal. For each subject, a T2-weighted anatomical scan was acquired during the same session as the functional and diffusion scans. While specific parameters for the structural sequences are not detailed---the most complete description of the fetal structural atlas is reported in an article that actually focuses on funtional MRI\,\cite{Karolis2025}---the final atlas includes T2w and T1w structural channels.
+
+The final structural atlas was constructed from multiple 2D scans combined into high-resolution 3D volumes. Raw 2D slice data were reconstructed into isotropic 3D volumes using slice-to-volume registration (SVR), following the method illustrated in \cite{CorderoGrande2018}. The resulting volumes have a high isotropic resolution of $0.5 \times 0.5 \times 0.5$\,mm.
+
+The atlas features three parcellations of 9, 17 and 91 regions of interest. Here, the 17-label parcellation is considered, because it is possible to merge the labels to match exactly the 7-label parcellation used in the Kispi dataset (see Tab.\,\ref{tab:label_merge}). The segmentation is based on the dHCP structural pipeline\,\cite{Makropoulos2018, dHCP_pipeline}---an example is reported in Fig.\,\ref{fig:dhcp_images}. Some ground-truth segmentations are missing, which reduces the final number of volumes to 267.
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/dHCP_GA.png} \quad
+    \includegraphics[width=0.44\textwidth]{figures/dHCP_image_shape.png}
+    \caption{Distributions of the gestational age and image shape of dHCP cases.}
+    \label{fig:dhcp_plots}
+\end{figure}
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.33\textwidth]{figures/dhcp_ax_dseg.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/dhcp_ax.png} \\
+    \vspace{10pt}
+    \includegraphics[width=0.33\textwidth]{figures/dhcp_sag.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/dhcp_cor.png}
+    \caption{Example of dHCP scan: axial segmentation, axial view, sagittal view, coronal view. Material from: \cite{dHCP}.}
+    \label{fig:dhcp_images}
+\end{figure}
 
 \begin{table}[hbtp]
     \centering
-    \begin{tabular}{c|c|c|c|c|c|c}
+    \begin{tabular}{c|c}
         \toprule
-        \textbf{Name} & $\textbf{N}_\textbf{n}$\textbf{/}$\textbf{N}_\textbf{p}$ & \makecell{\textbf{GA range} \\ \textbf{(weeks)}} & \makecell{\textbf{Field} \\ \textbf{strength}} & \textbf{Scanner} & \textbf{SRR} & \textbf{Parcel.} \\ \midrule
-        Kispi-mial & 15/25 & 20.0--32.8 & 1.5/3\,T* & \makecell{GE Signa \\ Discovery \\ MR450/750*} & \textsc{mialsrtk} & 7 labels \\ \hline
-        Kispi-irtk & 16/24 & 20.01--34.8 & 1.5/3\,T* & \makecell{GE Signa \\ Discovery \\ MR450/750*} & \textsc{irtk} & 7 labels \\ \hline
-        dHCP & 248/0 & 20.9--38.3 & 3\,T & \makecell{Philips \\ Achieva} & Cordero & 17 labels \\
+        \textbf{Kispi labels} & \textbf{dHCP labels} \\
+        \midrule
+        1. CSF & 1. Cerebrospinal fluid \\ \hline
+        2. cGM & 2. Cortical gray matter \\ \hline
+        \multirow{2}{*}{3. WM} & 3. White matter \\
+         & 17. Corpus callosum \\ \hline
+        \multirow{5}{*}{4. Ventricles} & 4. Left ventricle \\
+         & 5. Right ventricle \\
+         & 6. Cavum septum \\
+         & 15. Third ventricle \\
+         & 16. Fourth ventricle \\ \hline
+        \multirow{3}{*}{5. Cerebellum} & 8. Left cerebellum \\
+         & 9. Right cerebellum \\
+         & 10. Vermis \\ \hline
+        \multirow{4}{*}{6. dGM} & 11. Left nucleus caudatus and putamen \\
+         & 12. Right nucleus caudatus and putamen \\
+         & 13. Left thalamus \\
+         & 14. Right thalamus \\ \hline
+        7. BS & 7. Brainstem \\
         \bottomrule
     \end{tabular}
-    \caption{Dataset properties. $\text{N}_\text{n}$ and $\text{N}_\text{p}$ respectively indicates the number of normal and pathological cases. *The field strengths respectively refers to the scanners.}
-    \label{tab:datasets}
+    \caption{Conversion table between Kispi and dHCP labels.}
+    \label{tab:label_merge}
 \end{table}
 
 \section{Data Specifications}

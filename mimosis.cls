@@ -257,9 +257,10 @@ bindingoffset=10mm,
 \makeatother
 
 % Packages and options added by me
+\RequirePackage{makecell}
+\RequirePackage{multirow}
 \RequirePackage{pdfpages}
 \RequirePackage{upgreek}
-\RequirePackage{makecell}
 
 \DeclareMathOperator{\sen}{sen}
 
