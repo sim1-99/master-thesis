@@ -6,6 +6,34 @@
 % Type here an introduction to the chapter
 
 \section{Model Architecture}
+The model architecture is based on \texttt{nnU-Net v2.4.1}, equipped with the residual encoder preset \texttt{ResEncM}\,\cite{Isensee2024}. The configuration chosen is \texttt{3d-fullres}. The architecture involves \num{6} resolution stages for the encoder and the decoder, with a number of computational blocks of [\numlist[list-final-separator = {, }]{1;3;4;6;6;6}] per stage, respectively. Three layers are present in each computational block:
+\begin{itemize}
+    \item One convolution layer (\texttt{torch.nn.modules.conv.Conv3d}) with a kernel size of [\numlist[list-final-separator = {, }]{3;3;3}] and a stride of [\numlist[list-final-separator = {, }]{1;1;1}].
+    \item One normalization layer (\texttt{torch.nn.InstanceNorm3d}).
+    \item One non-linear activation function (\texttt{torch.nn.LeakyReLU}).
+\end{itemize}
+Between each encoder stage there is a downsampling layer, and between each decoder stage there is an upsampling layer. One convolution is performed between the output of each decoder stage and the skip connection from the corresponding stage in the encoder.
+
+Further implementation details are:
+\begin{itemize}
+    \item \textbf{Initialization:} Kaiming uniform distribution (\texttt{torch.nn.init.kaiming\_unifo\\
+    rm}).
+    \item \textbf{Optimizer:} Stochastic gradient descent (\texttt{torch.optim.SGD}).
+    \item \textbf{Learning Rate:} Initial learning rate set to \num{0.01}, following a polynomial schedule (\texttt{torch.optim.lr\_scheduler.PolynomialLR}).
+    \item \textbf{Epochs:} Total of \num{1000} epochs, with \num{250} training iterations per epoch.
+    \item \textbf{Loss Function:} \texttt{nnunetv2.training.loss.compound\_losses.DC\_and\_CE\_\\
+    loss}, a weighted sum of Dice loss and \texttt{torch.nn.CrossEntropyLoss}. Dice loss optimizes the evaluation metric directly, but due to the patch based training, in practice merely approximates it. Combining the Dice loss with a cross-entropy loss improves training stability and segmentation accuracy\,\cite{Isensee2021}.
+\end{itemize}
+
+Moreover, the following rule-based parameters were established by nnU-Net:
+\begin{itemize}
+    \item \textbf{Batch Size:} \num{2}
+    \item \textbf{Patch Size:} [\numlist[list-final-separator = {, }]{128;128;128}]
+    \item \textbf{Features per Stage:} [\numlist[list-final-separator = {, }]{32;64;128;256;320;320}]
+\end{itemize}
+The dimensionality of both the input and output volumes is \num{3}. The default nnU-Net preprocessing was applied (non-zero cropping, \textit{z}-normalization).
+
+In addition to the default nnU-Net data augmentation (see Section \ref{sec:nnUNet}), \textsc{gin-ipa} was integrated into the training pipeline, in order to assess its contribution to robustness against domain shifts. Although the experiment described in \cite{Ouyang2023} is carried out with a 3D implementation, the method available online only supports 2D images. Therefore, starting from the 2D implementation, the code was adapted to work with 3D images, and integrated into the nnU-Net training pipeline. The version is publicly available at the GitHub repository \texttt{sim1-99/nnUNet-ginipa}\,\cite{nnUNet-ginipa}.
 
 \section{Training Strategy}
 
