@@ -7,11 +7,11 @@
 
 \section{nnU-Net} \label{sec:nnUNet}
 nnU-Net\,\cite{Isensee2021, nnUNet} is an automated pipeline for the tissue segmentation in a task-agnostic configuration, that is, nnU-Net is designed to be applicable to a wide variety of target structures and image properties. Its self-configuring nature allows it to be applied to arbitrary new datasets without manual intervention. Actually, nnU-Net does not introduce new elements in the network architecture, but by systematizing the complex process of manual tuning it manages to achieve an automated and efficient setting of parameters in U-Net architecture. This generalized choice of pipeline parameters is carried out based on a \enquote{dataset fingerprint}, that is \enquote{a standardized dataset representation comprising key properties}\,\cite{Isensee2021} of the images. The parameter setting strategy is based on distinguishing between three classes of parameters that can be optimized:
-\begin{itemize}
-    \item Fixed parameters: a robust and consistent choice of hyperparameters and design implementation that is suitable for any task and dataset---they can still be manually changed though. Examples are learning rate, loss function, optimizer, training and testing procedure.
-    \item Rule-based parameters: they are set based on the information taken from the dataset fingerprint, which is acquired during the preprocessing step. This information is fed into rules to automatically make several choices, such as patch and batch size, network topology, intensity normalization, and resampling strategy.
-    \item Empirical parameters: limited to the choice of the U-Net configuration (2D, 3D-fullres, 3D-cascade) and post-processing.
-\end{itemize}
+\begin{description}
+    \item[Fixed parameters] A robust and consistent choice of hyperparameters and design implementation that is suitable for any task and dataset---they can still be manually changed though. Examples are learning rate, loss function, optimizer, training and testing procedure.
+    \item[Rule-based parameters] They are set based on the information taken from the dataset fingerprint, which is acquired during the preprocessing step. This information is fed into rules to automatically make several choices, such as patch and batch size, network topology, intensity normalization, and resampling strategy.
+    \item[Empirical parameters] Limited to the choice of the U-Net configuration (2D, 3D-fullres, 3D-cascade) and post-processing.
+\end{description}
 The rules established generate the same set of parameters and architecture when the image size and the pixel spacing are the same or similar. Default preprocessing consists in cropping the image around non-zero voxels and performing \textit{z}-normalization.
 
 Data augmentation in nnU-Net consists of a set of standard transformations, that are: flip, rotation, scaling, Gaussian noise and blur, resolution reduction, brightness and contrast adjustments, and gamma transformation\,\cite{nnUNet}. Each transformation is applied randomly with a predetermined, empirically chosen probability\,\cite{Isensee2021}.
@@ -34,14 +34,14 @@ The global intensity non-linear augmentation (GIN) module synthesizes a family o
 \end{equation}
 where $g^{\mathrm{Net}}_{\theta}(\cdot)$ denotes the pure network output for random weights $\theta$, $\alpha\sim\mathcal{U}(0,1)$ is an interpolation coefficient and $\lVert\cdot\rVert_\mathrm{F}$ is the Frobenius norm. The normalization constrains the global energy of the augmented image, preventing global brightness or contrast changes from dominating the image. In other words, it ensures that anatomical shapes remain discernible while still allowing local texture and intensity variations to be introduced.
 
-Key design choices include small receptive fields in the random convolutions (to avoid oversmoothing), linear interpolation with the original image (to retain semantics), and shallow depth (for computational efficiency and to avoid irrealistic results).
-
-\begin{figure}[htbp]
+\begin{figure}[hbtp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/gin_schema.png}
     \caption{Architecture of the GIN module. © 2022 IEEE, from \cite{Ouyang2023}.}
     \label{fig:gin_schema}
 \end{figure}
+
+Key design choices include small receptive fields in the random convolutions (to avoid oversmoothing), linear interpolation with the original image (to retain semantics), and shallow depth (for computational efficiency and to avoid irrealistic results).
 
 Then, the interventional pseudo-correlation augmentation (IPA) addresses the shifted-correlation effect, whereby background unlabeled structures $X_\mathrm{b}$ become spuriously correlated with objects of interest $X_\mathrm{f}$ due to the acquisition process. IPA approximates the causal intervention $\mathrm{do}(X_\mathrm{f}=x_\mathrm{f})$---i.e., it removes the effects of the acquisition factor $A$ on $X_\mathrm{f}$---by resampling background appearances independently of the foreground through spatially-varying assignments of appearance transforms.
 
@@ -53,7 +53,7 @@ where $\odot$ denotes the Hadamard product, that is, element-wise multiplication
 
 By applying IPA to the entire image---both background and foreground---the pipeline avoids label-induced shortcuts and approximates sampling from independent background appearance distributions. This operation can be interpreted as assigning different photometric transformations to different spatial regions so that background and foreground appearances are de-correlated across training iterations.
 
-\begin{figure}[htbp]
+\begin{figure}[hbtp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/ipa_schema.png}
     \caption{Architecture of the IPA augmentation scheme (A), and construction principles of pseudo-correlation maps (B). © 2022 IEEE, from \cite{Ouyang2023}.}
@@ -64,21 +64,28 @@ In \cite{Ouyang2023} the training loop samples two GIN transforms and one pseudo
 \begin{itemize}
     \item GIN
     \begin{itemize}
-        \item number of layers of the shallow network (4)
-        \item number of intermediate channels of the shallow network (2)
-        \item interpolation coefficient $\alpha$ (uniform distribution)
+        \item Number of layers of the shallow network: \num{4}.
+        \item Number of intermediate channels of the shallow network: \num{2}.
+        \item Interpolation coefficient $\alpha$: sampled from a uniform distribution.
     \end{itemize}
     \item IPA
     \begin{itemize}
-        \item control point spacing in kernel matrix: it must be small enough in order to construct low-frequency pseudo-correlation maps $\bigl(\frac{1}{4}\textrm{ of the image length}\bigr)$
-        \item interpolation order in kernel matrix: it serves as smoothing factor between the control points in the pseudo-correlation maps (2)
-        \item control point value sampling (Gaussian distribution)
-        \item downscale of the image: to reduce computational load (2)
+        \item Control point spacing in kernel matrix: $\frac{1}{4}\textrm{ of the image length}$; it must be small enough in order to construct low-frequency pseudo-correlation maps.
+        \item Interpolation order in kernel matrix: \num{2}, it serves as smoothing factor between the control points in the pseudo-correlation map.
+        \item Control point values: sampled from a Gaussian distribution.
+        \item Downscale of the image: \num{2}, reduce the computational load.
     \end{itemize}
 \end{itemize}
 Default values were set by the authors of the paper by the combination of hyperparameter tuning, heuristic choices and hardware limitations.
 
 Actually, practical optimizations include controlling the depth and width of the GIN networks. In \cite{Ouyang2023}, Ouyang and colleagues conducted hyperparameter tuning on the number of layers and channels in the GIN architecture, and on the sampling distribution of the interpolation coefficient $\alpha$. An ablation study on the contribution of the IPA step to the global performance was also conducted, showing improvements in all tested scenarios with respect to GIN-only training.
+
+The proposed approach consistently yields superior performance gains compared with other methods---MixStyle\,\cite{Zhou2021}, AdvBias\,\cite{Chen2020}, RandConv\,\cite{Xu2021} and others---when tested on unseen domains across three cross-domain segmentation scenarios:
+\begin{itemize}
+    \item Cross-modality abdominal image segmentation (CT-MRI).
+    \item Cross-sequence cardiac MRI segmentation (\textsc{bSSFP}-LGE).
+    \item Cross-site prostate MRI segmentation.
+\end{itemize}
 
 Finally, Ouyang and colleagues also participated in the FeTA 2022 challenge\,\cite{FeTA2022_review}. Their approach was based on training different nnU-Net models with varying data augmentation methods. \textsc{gin-ipa} was employed in the augmentation pipeline for one of these models\,\cite{FeTA2022_top}. The models were subsequently ensembled, and the resulting segmentation method achieved the highest performance in the challenge, ranking first. GIN augmentation and \textsc{gin-ipa} were also used in three models in the FeTA 2024 challenge\,\cite{FeTA2024_review}.
 
