@@ -3,10 +3,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
 
-% Type here an introduction to the chapter
+Automated segmentation of the fetal brain is a central task in the analysis of prenatal MRI, furnishing an anatomical framework for studying brain development and enabling quantitative measurements. Manual annotation, while considered the reference standard, is time-consuming, requires expert knowledge, and suffers from inter-observer variability. Consequently, a wide range of computational approaches have been developed to achieve accurate, reproducible, and efficient segmentation of fetal brain structures.
+
+Over the years, segmentation methods have evolved from traditional atlas-based strategies to modern deep learning approaches. Atlas-based techniques leverage anatomical priors by registering subject images to predefined templates, but often struggle with variability in fetal brain size, orientation, and image quality. More recently, convolutional neural networks have emerged as the dominant paradigm, outperforming classical approaches while remaining sensitive to differences in acquisition protocols, scanners, and populations. Domain generalization addresses the challenge of adapting models to these variations, ensuring robust performance across diverse imaging conditions.
+
+This chapter reviews the main methods for fetal brain segmentation, introducing the concept of domain generalization and presenting the state of the art. Ultimately, it outlines the most recent results of the FeTA Challenge, which provides a benchmark for evaluating segmentation methods in a standardized setting.
 
 \section{Domain Generalization} \label{sec:DomainGeneralization}
-In medical image segmentation, a \emph{domain} encapsulates both the feature space and the underlying marginal distribution of imaging data. Domain shifts arise when models trained on one domain are tested on data from another dataset. In medical imaging, the most prevalent sources of domain shift arise from variations in image acquisition processes, encompassing differences in imaging modalities, scanning protocols, and device manufacturers---a more exhaustive description of the potential sources can be found in Section \ref{sec:Challenges}. This is frequently referred to as acquisition shift. Unlike data generalization, where test samples share the same distribution as training data, domain generalization addresses the scenario where test data arise from a distinct, unseen domain\,\cite{Ouyang2023}.
+In medical image segmentation, a \emph{domain} encapsulates both the feature space and the underlying marginal distribution of imaging data. Domain shifts arise when models trained on one domain are tested on data from another dataset. In medical imaging, the most prevalent sources of domain shift arise from variations in image acquisition processes, encompassing differences in imaging modalities, scanning protocols, and device manufacturers---a more exhaustive description of the potential sources can be found in Section \ref{sec:Challenges}. This is frequently referred to as \enquote{acquisition shift}. Unlike data generalization, where test samples share the same distribution as training data, domain generalization addresses the scenario where test data arise from a distinct, unseen domain\,\cite{Ouyang2023}.
 
 Domain generalization (DG) methods can be categorized into three main groups, which are often complementary and can be combined to achieve higher performance\,\cite{Wang2023}:
 \begin{description}
@@ -31,6 +35,8 @@ The goal of \textsc{ssdg} is to mitigate these effects by steering the network t
 \section{Atlas-based Methods}
 
 \section{Convolutional Neural Networks}
+% U-Net
+% State of the art
 
 \section{The FeTA Challenge}
 The Fetal Tissue Annotation Challenge (FeTA)\,\cite{FeTA2024} was born in 2020, and joined the International Conference on Medical Image Computing and Computer-Assisted Intervention (\textsc{miccai})\,\cite{MICCAI} in 2021. Up to now, four editions have been organized (in 2020, 2021, 2022, and 2024), with increasing participation and interest from the medical imaging community. The main contributions of the FeTA challenge are the creation of a benchmark dataset for fetal brain MRI segmentation and biometry, and the promotion of the development of algorithms for the automatic segmentation of fetal brain tissues.

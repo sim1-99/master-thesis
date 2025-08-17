@@ -263,6 +263,7 @@ bindingoffset=10mm,
 \RequirePackage{pdfpages}
 \RequirePackage{siunitx}
 \RequirePackage{upgreek}
+\RequirePackage[table]{xcolor}
 
 \DeclareMathOperator{\sen}{sen}
 

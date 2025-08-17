@@ -3,7 +3,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
 
-% Type here an introduction to the chapter
+Magnetic resonance imaging is an indispensable tool for the study of the developing human brain, thanks to its non-invasive nature. In the prenatal context, MRI enables the assessment of brain structures that are critical for monitoring neurodevelopment and detecting abnormalities, making fetal brain MRI a cornerstone in both clinical and research settings.
+
+The developing brain presents features that evolve rapidly throughout gestation, requiring imaging protocols tailored to capture fine structural details while minimizing motion-related artifacts. Standardized acquisition protocols, combined with advanced post-processing techniques such as super-resolution reconstruction, are essential to obtaining images of sufficient quality for clinical diagnosis and quantitative analysis. Additionally, adequate parcellation of fetal brain structures is fundamental for studying developmental trajectories and for training automated segmentation models.
+
+Despite these advances, fetal brain MRI remains technically challenging. Factors such as spontaneous fetal motion, maternal respiration, and variability in scanner hardware or acquisition settings introduce significant heterogeneity in the acquired data. This variability has implications not only for clinical interpretation but also for the development of automated tools, which must generalize across diverse imaging conditions.
+
+The present chapter provides an overview of the aforementioned key aspects, presenting the main brain structures of interest during fetal development, alongside typical acquisition and parcellation protocols. Then, the most popular and effective super-resolution reconstruction algorithms are discussed. Finally, it summarizes the current challenges in the field of automated fetal brain segmentation.
 
 \section{Fetal Brain Structures}
 
@@ -23,7 +29,7 @@ On the biological aspect, the fetal brain is very challenging \textit{per se}, s
     \item[Pathological Heterogeneity] Congenital disorders introduce further significant morphological variations. Training segmentation algorithms exclusively on neurotypical samples can reduce their robustness when encountering altered morphologies typical of pathological cases (e.g., spina bifida, ventriculomegaly, corpus callosum malformations). The rarity and wide variability of fetal pathologies contribute to the challenge of obtaining sufficient data for exhaustive datasets\,\cite{FeTA2024_paper, FeTA2024_review}.
 \end{description}
 
-On the technical side, the nature of in-utero MRI acquisition introduces further limitations\,\cite{Ciceri2023}:
+On the technical side, the nature of \textit{in-utero} MRI introduces further limitations\,\cite{Ciceri2023}:
 \begin{description}
     \item[Motion Artifacts] Spontaneous fetal movement and maternal breathing during MRI acquisition lead to various artifacts, such as in-plane image blur, slice crosstalk and incongruence in slice location, significantly degrading the quality of individual slices and the reconstructed volume. While ultrafast 2D sequences (e.g., \textsc{ssfse}, \textsc{haste}) are commonly employed to minimize these effects by acquiring each slice rapidly, they cannot entirely eliminate motion-related issues.
     \item[Low Contrast-to-Noise Ratio] The small size of the fetal brain and the need for shorter scanning periods to minimize motion contribute to a low CNR. This, coupled with acquisition limits such as thick slices---to achieve good SNR---, makes it difficult to distinguish fine anatomical details.
@@ -31,7 +37,7 @@ On the technical side, the nature of in-utero MRI acquisition introduces further
     \item[Partial Volume Effects] Due to thick slices, a single voxel may contain signals from multiple tissue types. This \enquote{mixing} of signals leads to ambiguous boundaries and can result in mislabeled segmentations, especially at tissue interfaces. For instance, the mixing of the CSF and cortical GM boundary leads to intensities similar to the intensity profile of the WM.
 \end{description}
 
-Last but not least, the limited availability of large, standardized, and annotated datasets further jeopardizes the development of robust segmentation algorithms. This is due to\,\cite{FeTA2024_paper,FeTA2021_review, Ciceri2023}:
+Ultimately, the scarcity of large, standardized, and annotated datasets further jeopardizes the development of robust segmentation algorithms. This is due to\,\cite{FeTA2024_paper,FeTA2021_review, Ciceri2023}:
 \begin{description}
     \item[Small and Heterogeneous Cohorts] Fetal MRI studies often require collaboration from specialized clinical centers due to the small and vulnerable patient populations. This leads to small datasets at individual institutions, making it difficult to create uniform in-house single-center datasets.
     \item[Variability in Acquisition Protocols and Hardware] Data from different clinical centers tend to exhibit considerable variability in image acquisition parameters, MRI scanner hardware, and manufacturer specifications. The most important differences use to be in magnetic field strengths (e.g., \qtylist{0.55;1.5;3}{\tesla} and specific sequence parameters (e.g., TR/TE values, flip angles, FOV, slice thickness). The associated acquisition shift cause deep learning models trained on one domain to perform poorly on data from another.

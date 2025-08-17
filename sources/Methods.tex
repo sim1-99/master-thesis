@@ -3,7 +3,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
 
-% Type here an introduction to the chapter
+This chapter describes the methods employed in the present work for fetal brain MRI segmentation and evaluation. The focus is on the domain generalization of deep learning models.
+
+It starts with an overview of nnU-Net, a self-configuring U-Net-based framework that has become a widely adopted baseline in medical image segmentation. Building on this baseline, the method \textsc{gin-ipa} is introduced as an augmentation strategy to enhance domain generalization. Finally, to objectively assess model performance a set of evaluation metrics is presented, based on segmentation accuracy. These include overlap-based measures such as the Dice coefficient, as well as surface-distance-based metrics that capture geometric fidelity.
 
 \section{nnU-Net} \label{sec:nnUNet}
 nnU-Net\,\cite{Isensee2021, nnUNet} is an automated pipeline for the tissue segmentation in a task-agnostic configuration, that is, nnU-Net is designed to be applicable to a wide variety of target structures and image properties. Its self-configuring nature allows it to be applied to arbitrary new datasets without manual intervention. Actually, nnU-Net does not introduce new elements in the network architecture, but by systematizing the complex process of manual tuning it manages to achieve an automated and efficient setting of parameters in U-Net architecture. This generalized choice of pipeline parameters is carried out based on a \enquote{dataset fingerprint}, that is \enquote{a standardized dataset representation comprising key properties}\,\cite{Isensee2021} of the images. The parameter setting strategy is based on distinguishing between three classes of parameters that can be optimized:
@@ -34,14 +36,14 @@ The global intensity non-linear augmentation (GIN) module synthesizes a family o
 \end{equation}
 where $g^{\mathrm{Net}}_{\theta}(\cdot)$ denotes the pure network output for random weights $\theta$, $\alpha\sim\mathcal{U}(0,1)$ is an interpolation coefficient and $\lVert\cdot\rVert_\mathrm{F}$ is the Frobenius norm. The normalization constrains the global energy of the augmented image, preventing global brightness or contrast changes from dominating the image. In other words, it ensures that anatomical shapes remain discernible while still allowing local texture and intensity variations to be introduced.
 
-\begin{figure}[hbtp]
+Key design choices include small receptive fields in the random convolutions (to avoid oversmoothing), linear interpolation with the original image (to retain semantics), and shallow depth (for computational efficiency and to avoid irrealistic results).
+
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/gin_schema.png}
     \caption{Architecture of the GIN module. © 2022 IEEE, from \cite{Ouyang2023}.}
     \label{fig:gin_schema}
 \end{figure}
-
-Key design choices include small receptive fields in the random convolutions (to avoid oversmoothing), linear interpolation with the original image (to retain semantics), and shallow depth (for computational efficiency and to avoid irrealistic results).
 
 Then, the interventional pseudo-correlation augmentation (IPA) addresses the shifted-correlation effect, whereby background unlabeled structures $X_\mathrm{b}$ become spuriously correlated with objects of interest $X_\mathrm{f}$ due to the acquisition process. IPA approximates the causal intervention $\mathrm{do}(X_\mathrm{f}=x_\mathrm{f})$---i.e., it removes the effects of the acquisition factor $A$ on $X_\mathrm{f}$---by resampling background appearances independently of the foreground through spatially-varying assignments of appearance transforms.
 
@@ -53,7 +55,7 @@ where $\odot$ denotes the Hadamard product, that is, element-wise multiplication
 
 By applying IPA to the entire image---both background and foreground---the pipeline avoids label-induced shortcuts and approximates sampling from independent background appearance distributions. This operation can be interpreted as assigning different photometric transformations to different spatial regions so that background and foreground appearances are de-correlated across training iterations.
 
-\begin{figure}[hbtp]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/ipa_schema.png}
     \caption{Architecture of the IPA augmentation scheme (A), and construction principles of pseudo-correlation maps (B). © 2022 IEEE, from \cite{Ouyang2023}.}
@@ -89,4 +91,4 @@ The proposed approach consistently yields superior performance gains compared wi
 
 Finally, Ouyang and colleagues also participated in the FeTA 2022 challenge\,\cite{FeTA2022_review}. Their approach was based on training different nnU-Net models with varying data augmentation methods. \textsc{gin-ipa} was employed in the augmentation pipeline for one of these models\,\cite{FeTA2022_top}. The models were subsequently ensembled, and the resulting segmentation method achieved the highest performance in the challenge, ranking first. GIN augmentation and \textsc{gin-ipa} were also used in three models in the FeTA 2024 challenge\,\cite{FeTA2024_review}.
 
-\section{Performance Metrics}
+\section{Evaluation Metrics}
