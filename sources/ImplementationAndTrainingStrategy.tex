@@ -5,7 +5,7 @@
 
 % Type here an introduction to the chapter
 
-\section{Model Architecture}
+\section{Model Architecture} \label{sec:ModelArchitecture}
 The model architecture is based on \texttt{nnU-Net v2.4.1}, equipped with the residual encoder preset \texttt{ResEncM}\,\cite{Isensee2024}. The configuration chosen is \texttt{3d-fullres}. The architecture involves \num{6} resolution stages for the encoder and the decoder, with a number of computational blocks of [\numlist[list-final-separator = {, }]{1;3;4;6;6;6}] per stage, respectively. Three layers are present in each computational block:
 \begin{itemize}
     \item One convolution layer (\texttt{torch.nn.modules.conv.Conv3d}) with a kernel size of [\numlist[list-final-separator = {, }]{3;3;3}] and a stride of [\numlist[list-final-separator = {, }]{1;1;1}].
@@ -82,7 +82,7 @@ Since the purpose of this work is to validate the effectiveness of \textsc{gin-i
 
 \end{enumerate}
 
-\section{Training and Validation Strategy}
+\section{Training and Validation Strategy} \label{sec:TrainingAndValidationStrategy}
 Each of the three datasets---Kispi-mial, Kispi-irtk and dHCP---was split into training and test sets, with a ratio of \num{80}:\num{20}. In-training validation was not performed for two reasons:
 \begin{itemize}
     \item \textbf{Limited data availability:} Kispi datasets were already small, and further splitting them would have resulted in insufficient data for training.
@@ -92,3 +92,51 @@ Each of the three datasets---Kispi-mial, Kispi-irtk and dHCP---was split into tr
 For each of the three aforementioned models, three independent trainings were carried out for each of the datasets, for a total of nine models. Then, for each trained model, independent segmentation predictions were made on the the three datasets: on test split of the \textit{in-domain} set, and on the other two \textit{out-of-domain}, unseen datasets. This experimental configuration allows to \enquote{isolate} the contribution of each DA method to the global model performance, and to assess the robustness of the model against domain shifts.
 
 \section{Hyperparameter Tuning} \label{sec:HyperparameterTuning}
+In \cite{Ouyang2023}, Ouyang and colleagues performed a hyperparameter tuning to determine the optimal configuration of the shallow network used in the GIN step. They conducted several trainings, varying either the number of layers (\numlist[list-final-separator={ or }]{2;4;8;16}) or the number of intermediate channels (\numlist[list-final-separator={ or }]{2;4;8;16}). In this study, their segmentation model was trained on abdominal CT images and tested on abdominal MRI images. The evaluation metric was limited to the Dice score, and the IPA step was not included. Their results indicated that the best configuration was achieved with \num{4} layers and \num{2} intermediate channels. The difference in Dice score between the best and worst configurations amounted to \num{7} when varying the number of layers, and \num{4} when varying the number of channels.
+
+In the present analysis, adopting the configuration proposed by Ouyang and colleagues would have been bold. Although GIN-IPA is designed to be independent of the acquisition conditions, our focus is on testing it within the MRI domain, while explicitly including the IPA step, since it is a fundamental part of the method. Moreover, our evaluation is not limited to the Dice score, but also considers the volume similarity and the Hausdorff distance.
+
+Hence, a new hyperparameter tuning on the GIN shallow network was conducted, using a grid search approach. The investigated configurations were:
+\begin{itemize}
+    \item \textbf{Number of layers:} \numlist[list-final-separator = {, }]{2;4;8}.
+    \item \textbf{Number of intermediate channels:} \numlist[list-final-separator = {, }]{2;4;8}.
+\end{itemize}
+Configurations with 16 layers or 16 channels were not explored, in order to limit training time and because both led to the worst performance in \cite{Ouyang2023}.
+
+In summary, the following tables report the average values per metric for nnU-Net---with \textsc{gin-ipa} as DA technique, see Model 2.\ in Section \ref{sec:ModelArchitecture}---trained and tested as described in Section\,\ref{sec:TrainingAndValidationStrategy}. The best performance is highlighted in green, while the second-best is shown in light blue. Overall, the combination of \num{2} layers and \num{4} intermediate channels yielded the best results. This configuration was selected for the final model training, whose performance are analyzed in Chapter \ref{chap:Results}.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        \textbf{Average DC} & \num{2} channels & \num{4} channels & \num{8} channels \\
+        \midrule
+        \num{2} layers & \num{0.752} & \cellcolor{green!20}\num{0.753} & \num{0.748} \\
+        \num{4} layers & \cellcolor{cyan!20}\num{0.753} & \num{0.751} & \num{0.746} \\
+        \num{8} layers & \num{0.746} & \num{0.746} & \num{0.738} \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{10pt}
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        \textbf{Average VS} & \num{2} channels & \num{4} channels & \num{8} channels \\
+        \midrule
+        \num{2} layers & \num{-0.114} & \cellcolor{cyan!20}\num{-0.103} & \cellcolor{green!20}\num{-0.098} \\
+        \num{4} layers & \num{-0.134} & \num{-0.125} & \num{-0.106} \\
+        \num{8} layers & \num{-0.154} & \num{-0.128} & \num{-0.104} \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{10pt}
+    \begin{tabular}{c|c|c|c}
+        \toprule
+        \textbf{Average HD95} & \num{2} channels & \num{4} channels & \num{8} channels \\
+        \midrule
+        \num{2} layers & \num{8.34} & \cellcolor{green!20}\num{8.33} & \cellcolor{cyan!20}\num{8.56} \\
+        \num{4} layers & \num{9.10} & \num{9.00} & \num{8.71} \\
+        \num{8} layers & \num{10.08} & \num{9.15} & \num{8.87} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Average evaluation metrics across configurations. The best result is colored in green, the second-best in light blue.}
+\end{table}
