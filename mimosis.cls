@@ -257,6 +257,7 @@ bindingoffset=10mm,
 \makeatother
 
 % Packages and options added by me
+\RequirePackage[export]{adjustbox}
 \RequirePackage{enumitem}
 \RequirePackage{makecell}
 \RequirePackage{multirow}
