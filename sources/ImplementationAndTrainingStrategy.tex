@@ -85,7 +85,7 @@ Since the purpose of this work is to validate the effectiveness of \textsc{gin-i
 \end{enumerate}
 
 \section{Training and Validation Strategy} \label{sec:TrainingAndValidationStrategy}
-Each of the three datasets---Kispi-mial, Kispi-irtk and dHCP---was split into training and test sets, with a ratio of \num{80}:\num{20}. In-training validation was not performed for two reasons:
+Each of the three datasets---Kispi-mial, Kispi-irtk and dHCP---was split into training and test sets, with a ratio of \num{80}:\num{20}. The split was stratified both by age and pathology, to ensure that all classes were represented in both sets. In-training validation was not performed for two reasons:
 \begin{itemize}
     \item \textbf{Limited data availability:} Kispi datasets were already small, and further splitting them would have resulted in insufficient data for training.
     \item \textbf{Focus on generalization:} The primary goal is not to achieve the best performing model on unseen data---albeit it is desirable---but rather to evaluate the model's performance on unseen data, which is better achieved by using a dedicated test set.
@@ -103,7 +103,7 @@ Hence, a new hyperparameter tuning on the GIN shallow network was conducted, usi
     \item \textbf{Number of layers:} \numlist[list-final-separator = {, }]{2;4;8}.
     \item \textbf{Number of intermediate channels:} \numlist[list-final-separator = {, }]{2;4;8}.
 \end{itemize}
-Configurations with 16 layers or 16 channels were not explored, in order to limit training time and because both led to the worst performance in \cite{Ouyang2023}.
+Configurations with \num{16} layers or \num{16} channels were not explored, in order to limit training time and because both led to the worst performance in \cite{Ouyang2023}.
 
 In summary, the following tables report the average values per metric for nnU-Net---with \textsc{gin-ipa} as DA technique, see Model 2.\ in Section \ref{sec:ModelArchitecture}---trained and tested as described in Section\,\ref{sec:TrainingAndValidationStrategy}. The best performance is highlighted in green, while the second-best is shown in light blue. Overall, the combination of \num{2} layers and \num{4} intermediate channels yielded the best results. This configuration was selected for the final model training, whose performance are analyzed in Chapter \ref{chap:Results}.
 
