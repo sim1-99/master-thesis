@@ -296,11 +296,13 @@
     \let\clearpage\relax
     \glsaddall
     \printglossary[type=\acronymtype]
-    \newpage
-    \printglossary
   \endgroup
 
   \printindex
   \printbibliography
+
+  \appendix
+  %\addtocontents{toc}{\protect\setcounter{tocdepth}{A}}
+  \include{sources/AppendixA}
 
 \end{document}

@@ -217,6 +217,7 @@ bindingoffset=10mm,
 % <<<
 
 \pagestyle{scrheadings}
+\automark[chapter]{part}
 %\KOMAoptions{
   %headwidth=\textwidth+1cm:0pt,  % Make the header extend into the margin
 %}
@@ -257,16 +258,41 @@ bindingoffset=10mm,
 \makeatother
 
 % Packages and options added by me
+\RequirePackage[toc, title, titletoc]{appendix}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{enumitem}
+\RequirePackage{hyperref}
+\RequirePackage{lmodern}
 \RequirePackage{makecell}
 \RequirePackage{multirow}
+\RequirePackage{nextpage}
 \RequirePackage{pdfpages}
 \RequirePackage{siunitx}
 \RequirePackage{upgreek}
 \RequirePackage[table]{xcolor}
 
-\DeclareMathOperator{\sen}{sen}
+\newcommand{\AppendixChapter}[2]{%
+  % No header in empty page after bibliography
+  \cleartooddpage[\thispagestyle{empty}]
+  %\phantomsection % correct hyperlink anchor (hyperref)
+  % TOC entry and running header
+  \addcontentsline{toc}{chapter}{\appendixname~#1.\ \ #2}%
+  \chaptermark{\appendixname~#1.\autodot\enskip #2}%
+  \thispagestyle{empty}% mimic chapter page style
+
+  % Reset section counters and define appendix-style numbering
+  \setcounter{section}{0}\setcounter{subsection}{0}\setcounter{subsubsection}{0}%
+  \renewcommand{\thesection}{#1.\arabic{section}}%
+  \renewcommand{\thesubsection}{#1.\arabic{section}.\arabic{subsection}}%
+  \renewcommand{\thesubsubsection}{#1.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}%
+
+  % --- Typeset the heading: big red letter + black title on same line ---
+  {\parindent 2pt
+   \vspace*{2\baselineskip}%
+   {\fontsize{50}{55}\selectfont\textcolor{VenetianRed}{#1\autodot}\enskip}%
+   {\fontsize{25}{30}\selectfont\textsc{#2}\par}%
+  }%
+}
 
 \newenvironment{system}% 
 {\left\lbrace\begin{array}{@{}l@{}}}% 
