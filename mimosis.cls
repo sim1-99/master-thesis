@@ -182,6 +182,7 @@
 \DeclareMathOperator*{\argmin}          {arg\,min}
 \DeclareMathOperator {\dist}            {dist}
 \DeclareMathOperator {\im}              {im}
+\DeclareMathOperator{\sen}{sen}
 
 \newcommand{\domain}{\ensuremath{\mathds{D}}}
 \newcommand{\real}  {\ensuremath{\mathds{R}}}
@@ -294,6 +295,18 @@ bindingoffset=10mm,
   }%
 }
 
-\newenvironment{system}% 
-{\left\lbrace\begin{array}{@{}l@{}}}% 
+\newenvironment{system}%
+{\left\lbrace\begin{array}{@{}l@{}}}%
 {\end{array}\right.}
+
+\renewenvironment{dedication}%
+{
+  \thispagestyle{empty}  % no header and footer
+  \vspace*{\stretch{1}}  % some space at the top
+  \itshape               % the text is in italics
+  \raggedleft            % flush to the right margin
+}{
+  \par                   % end the paragraph
+  \vspace{\stretch{3}} 
+  \clearpage             % finish off the page
+}
