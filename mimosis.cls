@@ -268,6 +268,7 @@ bindingoffset=10mm,
 \RequirePackage[toc, title, titletoc]{appendix}
 \RequirePackage[export]{adjustbox}
 \RequirePackage{enumitem}
+\RequirePackage{hhline}
 \RequirePackage{hyperref}
 \RequirePackage{lmodern}
 \RequirePackage{makecell}
