@@ -5,7 +5,7 @@
 
 The present chapter addresses the practical aspects of implementing the methods introduced earlier, focusing on model design choices, training procedures, and hyperparameter selection.
 
-It begins with technical details of the nnU-Net architecture. The discussion then moves to the data augmentation strategies, which are the main distinguishing factor among the three models compared. Next, the training and validation strategy is described, followed by the hyperparameter tuning process, which identifies the optimal configuration for the shallow network used in \textsc{gin-ipa}.
+It begins with technical details of the nnU-Net architecture. The discussion then moves to the data augmentation strategies, which are the main distinguishing factor among the three models compared. Next, the training and validation strategy is described, followed by the hyperparameter tuning process, which identifies the optimal configuration for the shallow network used in GIN-IPA.
 
 \section{Model Architecture} \label{sec:ModelArchitecture}
 The model architecture is based on \texttt{nnU-Net v2.4.1}, equipped with the residual encoder preset \texttt{ResEncM}\,\cite{Isensee2024}. The configuration chosen is \texttt{3d-fullres}. The architecture involves \num{6} resolution stages for the encoder and the decoder, with a number of computational blocks of [\numlist[list-final-separator = {, }]{1;3;4;6;6;6}] per stage, respectively. Three layers are present in each computational block:
@@ -35,9 +35,9 @@ Moreover, the following rule-based parameters were established by nnU-Net:
 \end{itemize}
 The dimensionality of both the input and output volumes is \num{3}. The default nnU-Net preprocessing was applied (non-zero cropping, \textit{z}-normalization).
 
-In addition to the default nnU-Net data augmentation (see Section \ref{sec:nnUNet}), \textsc{gin-ipa} was integrated into the training pipeline, in order to assess its contribution to robustness against domain shifts. Although the experiment described in \cite{Ouyang2023} is carried out with a 3D implementation, the method available online only supports 2D images. Therefore, starting from the 2D implementation, the code was adapted to work with 3D images, and integrated into the nnU-Net training pipeline. The version is publicly available at the GitHub repository \texttt{sim1-99/nnUNet-ginipa}\,\cite{nnUNet-ginipa}. However, because of hardware limitations, it was not possible to apply the IPA step in its 3D version---the background generation of the cubic B-splines required too much RAM memory. As a compromise, GIN transformation was applied to the whole volumes, while IPA was implemented through the product between a 2D pseudo-correlation map and each of the slices of one volume, along a randomly chosen axis.
+In addition to the default nnU-Net data augmentation (see Section \ref{sec:nnUNet}), GIN-IPA was integrated into the training pipeline, in order to assess its contribution to robustness against domain shifts. Although the experiment described in \cite{Ouyang2023} is carried out with a 3D implementation, the method available online only supports 2D images. Therefore, starting from the 2D implementation, the code was adapted to work with 3D images, and integrated into the nnU-Net training pipeline. The version is publicly available at the GitHub repository \texttt{sim1-99/nnUNet-ginipa}\,\cite{nnUNet-ginipa}. However, because of hardware limitations, it was not possible to apply the IPA step in its 3D version---the background generation of the cubic B-splines required too much RAM memory. As a compromise, GIN transformation was applied to the whole volumes, while IPA was implemented through the product between a 2D pseudo-correlation map and each of the slices of one volume, along a randomly chosen axis.
 
-Since the purpose of this work is to validate the effectiveness of \textsc{gin-ipa} as a DA tool to improve model robustness against domain shifts in fetal MRI segmentation, the following three models were trained, in order to test their performance. \textit{p} represents the probability of application of a transformation to a volume; all of them were left to the default values defined in the nnU-Net framework.
+Since the purpose of this work is to validate the effectiveness of GIN-IPA as an augmentation tool to improve model robustness against domain shifts in fetal MRI segmentation, the following three models were trained, in order to test their performance. \textit{p} represents the probability of application of a transformation to a volume; all of them were left to the default values defined in the nnU-Net framework.
 \begin{enumerate}
 
     \item \textbf{Default nnU-Net DA}
@@ -53,7 +53,7 @@ Since the purpose of this work is to validate the effectiveness of \textsc{gin-i
         \item \textbf{Gamma transform:} $\gamma \sim \mathcal{U}(0.7, 1.5)$, preserving global intensity mean and standard deviation, $p=0.3$.
     \end{itemize}
 
-    \item \textbf{GIN-IPA DA}
+    \item \textbf{GIN-IPA}
     \begin{itemize}
         \item \textbf{Flip:} independently for each axis, $p=0.5$.
         \item \textbf{Rotation:} from \qtyrange{-30}{30}{\degree} independently for each axis, $p=0.2$.
@@ -76,7 +76,7 @@ Since the purpose of this work is to validate the effectiveness of \textsc{gin-i
         \end{itemize}
     \end{itemize}
 
-    \item \textbf{Default nnU-Net DA + GIN-IPA DA}
+    \item \textbf{Default nnU-Net DA + GIN-IPA}
     \begin{itemize}
         \item Both methods applied with the same probabilities.
         \item Flip, rotation, and scaling applied once as first steps.
@@ -105,7 +105,7 @@ Hence, a new hyperparameter tuning on the GIN shallow network was conducted, usi
 \end{itemize}
 Configurations with \num{16} layers or \num{16} channels were not explored, in order to limit training time and because both led to the worst performance in \cite{Ouyang2023}.
 
-In summary, the following tables report the average values per metric for nnU-Net---with \textsc{gin-ipa} as DA technique, see Model 2.\ in Section \ref{sec:ModelArchitecture}---trained and tested as described in Section\,\ref{sec:TrainingAndValidationStrategy}. The best performance is highlighted in green, while the second-best is shown in light blue. Overall, the combination of \num{2} layers and \num{4} intermediate channels yielded the best results. This configuration was selected for the final model training, whose performance are analyzed in Chapter \ref{chap:Results}.
+In summary, the following tables report the average values per metric for nnU-Net---with GIN-IPA as DA technique, see Model 2.\ in Section \ref{sec:ModelArchitecture}---trained and tested as described in Section\,\ref{sec:TrainingAndValidationStrategy}. The best performance is highlighted in green, while the second-best is shown in light blue. Overall, the combination of \num{2} layers and \num{4} intermediate channels yielded the best results. This configuration was selected for the final model training, whose performance are analyzed in Chapter \ref{chap:Results}.
 
 \begin{table}[htbp]
     \centering
