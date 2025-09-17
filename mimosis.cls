@@ -271,10 +271,8 @@ bindingoffset=10mm,
 \RequirePackage{hyperref}
 \RequirePackage{lmodern}
 \RequirePackage{makecell}
-\RequirePackage{multirow}
-\RequirePackage{nextpage}
+\RequirePackage{mathtools}
 \RequirePackage{pdfpages}
-\RequirePackage{siunitx}
 \RequirePackage{upgreek}
 \RequirePackage[table]{xcolor}
 
@@ -305,6 +303,10 @@ bindingoffset=10mm,
    {\fontsize{25}{30}\selectfont\textsc{#2}\par}%
   }%
 }
+\newcommand{\stats}[2]{\unskip\ (\textit{p}=\,#1;\ $d$=\,#2)}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
 \newenvironment{system}%
 {\left\lbrace\begin{array}{@{}l@{}}}%
