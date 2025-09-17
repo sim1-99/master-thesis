@@ -219,9 +219,15 @@ bindingoffset=10mm,
 
 \pagestyle{scrheadings}
 \automark[chapter]{part}
-%\KOMAoptions{
+\KOMAoptions{
+  headsepline=true,
+  %headinclude=true,   % Include header in the typearea calculation
+  %footinclude=true,   % Include footer in the typearea calculation
+  %headheight=14pt,   % Default is 12pt, but we use a larger font
+  %footheight=14pt,   % Default is 12pt, but we use a larger font
+  %headwidth=text,    % Default is \textwidth
   %headwidth=\textwidth+1cm:0pt,  % Make the header extend into the margin
-%}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Fancy colors
@@ -274,12 +280,17 @@ bindingoffset=10mm,
 
 \newcommand{\AppendixChapter}[2]{%
   % No header in empty page after bibliography
-  \cleartooddpage[\thispagestyle{empty}]
+  \cleardoubleoddemptypage
   %\phantomsection % correct hyperlink anchor (hyperref)
   % TOC entry and running header
   \addcontentsline{toc}{chapter}{\appendixname~#1.\ \ #2}%
   \chaptermark{\appendixname~#1.\autodot\enskip #2}%
-  \thispagestyle{empty}% mimic chapter page style
+  \newpairofpagestyles{AppendixChapterStyle}{%
+    \clearpairofpagestyles
+    \ofoot{\pagemark}%
+    \KOMAoptions{headsepline=0pt}%
+  }
+  \thispagestyle{AppendixChapterStyle}% mimic chapter page style
 
   % Reset section counters and define appendix-style numbering
   \setcounter{section}{0}\setcounter{subsection}{0}\setcounter{subsubsection}{0}%
