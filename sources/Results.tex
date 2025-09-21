@@ -5,12 +5,12 @@
 
 In this chapter are exposed the main results obtained from the experiments described in Chapter \ref{chap:Methods}. The analysis focuses on comparing the performance of the three investigated models, which differ in their data augmentation (DA) strategies: the nnU-Net default DA (baseline), the GIN-IPA augmentation, and a combination of both.
 
-First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). [...]
+First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a detailed pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. [...]
 
 \section{General Performance} \label{sec:GeneralPerformance}
 In the plots below is shown the Dice score (DSC) across datasets and labels for the three models. The model predictions are realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD).
 
-To avoid occupying the pages below with too many figures and considering that the general performance of the tested model is well captured with the DSC, here only the plots relative to this metric are shown. Plots regarding volume similarity (VS) and Hausdorff distance 95\th percentile (HD95) are in Appendix \hyperref[app:SupplementaryPlots]{A}.
+To avoid occupying the pages below with too many figures, and considering that the general performance of the tested model is well captured with the DSC, here only the plots relative to this metric are shown. The plots regarding the volume similarity (VS) and the Hausdorff distance 95\th percentile (HD95) are in Appendix \hyperref[app:SupplementaryPlots]{A}.
 
 For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance between in-domain and OOD is clear in every case, except in the DSC of some labels (CSF, cGM, WM and cerebellum) for the model trained on Kispi-mial. The drop is especially evident for the models trained on the Kispi datasets when applied to dHCP. Ventricles are the most affected, but also dGM and WM. The change of domain does not have the same effect on the network trained on Kispi-mial as it has on the other two. This is partially due to the quality of the images in Kispi-mial, which is worse than the others\,\cite{FeTA2022_review}. It is expected that any model evaluated OOD on Kispi-mial will perform worse compared to the other datasets.
 
@@ -51,148 +51,115 @@ Finally, the model that combines the nnU-Net default DA and GIN-IPA is substanti
     \label{fig:both_DC}
 \end{figure}
 
-\section{Method Comparison} \label{sec:MethodComparison}
-In order to assess the relative contribution of the proposed augmentation strategies, a pairwise comparison between models was conducted. Specifically, two sets of comparisons were designed:
+\section{Comparison of Model Performances} \label{sec:ComparisonOfModelPerformances}
+In order to assess the relative contribution of the proposed augmentation strategies, two sets of comparisons between the models were designed:
 \begin{itemize}
-    \item the nnU-Net baseline with default data augmentation versus the GIN-IPA DA model
-    \item the GIN-IPA DA model versus the combined strategy including both default and GIN-IPA augmentations
+  \item the nnU-Net baseline with default data augmentation versus the GIN-IPA DA model
+  \item the GIN-IPA DA model versus the combined strategy including both default and GIN-IPA augmentations
 \end{itemize}
-For each of the three evaluation metrics---DSC, VS, and HD95---the distributions of performance values were analyzed. Comparisons were carried out both at the level of individual anatomical structures and for the total average across labels.
+The distributions of each of the three evaluation metrics---DSC, VS, and HD95---were analyzed, at the level of individual tissues, and globally, involving all the labels.
 
-Kernel density estimation (KDE) plots were generated for each metric and label, separately for the two model pairs under comparison. Beyond visual inspection, statistical analyses were employed to quantify the significance and magnitude of the observed differences. The Wilcoxon signed-rank test was used to test the null hypothesis of equal paired performance between models. Corresponding \textit{p}-values were computed to assess whether the proposed augmentation strategy led to statistically significant improvements. Besides, Cohen's \textit{d} was computed to quantify the magnitude of the improvement. Following conventional thresholds, \numlist{0.2; 0.5; 0.8} correspond to small, medium, and large effects, respectively. See Section \ref{sec:StatisticalPerformanceAssessment} for more details about the aforementioned tools.
+Kernel density estimation (KDE) plots were generated for each metric and label, separately for the two model pairs under comparison. Beyond visual inspection, statistical analyses were employed to quantify the significance and magnitude of the observed differences. The Wilcoxon signed-rank test was used to test the null hypothesis of equal paired performance between models. Corresponding \textit{p}-values were computed to assess whether the proposed augmentation strategy led to statistically significant improvements. Besides, Cohen's \textit{d} was computed to quantify the magnitude of the improvement. Following conventional thresholds, \numlist{0.2; 0.5; 0.8} correspond to small, medium, and large effects, respectively. See Section \ref{sec:StatisticalPerformanceAssessment} for more details about the aforementioned tools. Tables with the complete statistical results are reported in Appendix \hyperref[app:SupplementaryTables]{B}.
 
 \paragraph{Baseline vs.\ GIN-IPA}
 \begin{itemize}
-    \item \textbf{Train on Kispi-mial}
-    \begin{itemize}
-        \item \textbf{Inference on Kispi-mial:} no measurable difference across metrics and labels; KDE curves largely overlap.
-        \item \textbf{Inference on Kispi-irtk:} CSF improves in DSC, VS, and HD95; ventricles improve in DSC and HD95. The pattern reflects heavy failures of the baseline on a subset of difficult volumes. \stats{\,}{\,} (CSF); \stats{\,}{\,} (Ventricles).
-        \item \textbf{Inference on dHCP:} significant, strong improvements for cGM, dGM, and ventricles in DSC and VS; the overall average shows a significant small gain. \stats{\,}{\,} (cGM); \stats{\,}{\,} (dGM); \stats{\,}{\,} (Ventricles); overall \stats{\,}{\,}.
-    \end{itemize}
-    \item \textbf{Train on Kispi-irtk}
-    \begin{itemize}
-        \item \textbf{Inference on Kispi-mial:} significant, moderate improvements for dGM and ventricles across DSC, VS, and HD95; small improvement on the overall average. \stats{\,}{\,} (dGM); \stats{\,}{\,} (Ventricles); overall \stats{\,}{\,}.
-        \item \textbf{Inference on Kispi-irtk:} no difference.
-        \item \textbf{Inference on dHCP:} significant, strong improvements across all three metrics and tissues; the mean DSC increases from $0.36$ to $0.54$. Overall \stats{\,}{\,}.
-    \end{itemize}
-    \item \textbf{Train on dHCP}
-    No differences observed on any inference dataset, metric, or label.
+  \item \textbf{Train on Kispi-mial}
+  \begin{itemize}
+    \item \textbf{Inference on Kispi-mial:} no difference in performance.
+    \item \textbf{Inference on Kispi-irtk:} CSF improves in DSC (\numrange[range-open-phrase=from\ ]{0.77}{0.81}, $\abs{d}=0.2$), VS (\numrange[range-open-phrase=from\ ]{-0.17}{-0.2}, $\abs{d}=0.6$), and HD95 (\numrange[range-open-phrase=from\ ]{3.4}{2.6}, $\abs{d}=0.2$); ventricles slightly improve in DSC (\numrange[range-open-phrase=from\ ]{0.74}{0.77}, $\abs{d}=0.3$) and HD95 (\numrange[range-open-phrase=from\ ]{3.5}{1.5}, $\abs{d}=0.4$). These improvements are due to a performance improvement of the GIN-IPA model on volumes that were poorly-segmented by the baseline model (see Fig.\,\ref{fig:1_mial_irtk_ventr}) The same pattern is observed for other tissues (WM, cerebellum).
+    \item \textbf{Inference on dHCP:} significant, strong improvements in DSC and VS for cGM (DSC: \numrange[range-open-phrase=from\ ]{0.36}{0.44}, VS: \numrange[range-open-phrase=from\ ]{-0.8}{-0.5}) and dGM (DSC: \numrange[range-open-phrase=from\ ]{0.20}{0.35}, VS: \numrange[range-open-phrase=from\ ]{-1.6}{-1.3}). The corresponding KDE plots are in Fig.\,\ref{fig:1_mial_dhcp_gm}. Overall, a small gain is observed (DSC: \numrange[range-open-phrase=from\ ]{0.40}{0.44}).
+  \end{itemize}
+  \item \textbf{Train on Kispi-irtk}
+  \begin{itemize}
+    \item \textbf{Inference on Kispi-mial:} significant, moderate improvements across DSC, VS, and HD95 for dGM (DSC: \numrange[range-open-phrase=from\ ]{0.71}{0.78}, VS: \numrange[range-open-phrase=from\ ]{0.9}{0.7}) and ventricles (DSC: \numrange[range-open-phrase=from\ ]{0.36}{0.44}, VS: \numrange[range-open-phrase=from\ ]{-0.5}{-0.2}). Small improvement overall (DSC: \numrange[range-open-phrase=from\ ]{0.63}{0.68}).
+    \item \textbf{Inference on Kispi-irtk:} no difference in performance.
+    \item \textbf{Inference on dHCP:} significant, strong improvements across all metrics and tissues. The mean DSC increases \numrange[range-open-phrase=from\ ]{0.34}{0.54} (see Tab.\,\ref{tab:1_irtk_dhcp_stats}). The KDE plots of DSC are in Fig.\,\ref{fig:1_irtk_dhcp_DC}, while the ones regarding VS and HD95 are reported in Appendix \hyperref[app:SupplementaryPlots]{A} (Figs.\,\ref{fig:1_irtk_dhcp_VS}, \ref{fig:1_irtk_dhcp_HD}).
+  \end{itemize}
+  \item \textbf{Train on dHCP}
+  No differences observed on any inference dataset, metric, or label.
 \end{itemize}
 
-\paragraph{GIN-IPA vs.\ Combined Augmentation}
-\begin{itemize}
-    \item \textbf{Train on Kispi-mial}
-    \begin{itemize}
-        \item \textbf{Inference on Kispi-mial:} no difference.
-        \item \textbf{Inference on Kispi-irtk:} no difference.
-        \item \textbf{Inference on dHCP:} small, significant improvements for ventricles and dGM across DSC, VS, and HD95. \stats{\,}{\,} (Ventricles); \stats{\,}{\,} (dGM).
-    \end{itemize}
-    \item \textbf{Train on Kispi-irtk}
-    \begin{itemize}
-        \item \textbf{Inference on Kispi-mial:} moderate, significant improvements for cGM, WM, and cerebellum in DSC and HD95; small improvement on the overall average. \stats{\,}{\,} (cGM); \stats{\,}{\,} (WM); \stats{\,}{\,} (Cerebellum); overall \stats{\,}{\,}.
-        \item \textbf{Inference on Kispi-irtk:} no difference.
-        \item \textbf{Inference on dHCP:} combined augmentation performs significantly worse than GIN-IPA alone, especially for CSF, cerebellum, and dGM across metrics. \stats{\,}{\,} (CSF); \stats{\,}{\,} (Cerebellum); \stats{\,}{\,} (dGM).
-    \end{itemize}
-    \item \textbf{Train on dHCP}
-    No differences observed on any inference dataset, metric, or label.
-\end{itemize}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/1_mial-irtk_DC_Ventr.png}\quad
+  \includegraphics[width=0.45\textwidth]{figures/1_mial-irtk_HD_Ventr.png}
+  \caption{Baseline vs.\ GIN-IPA: KDE plots of DSC (left) and HD95 (right) in ventricles, from models trained on Kispi-mial inferring on Kispi-irtk.}
+  \label{fig:1_mial_irtk_ventr}
+\end{figure}
 
-\begin{table}[htbp]
-    \centering
-    \begin{tabular}{c|c|l|c|c|c}
-        \toprule
-        \textbf{Train DS} & \makecell{\textbf{Inference DS} \\ \textbf{(n.\ of samples)}} & \multicolumn{1}{c|}{\textbf{Metric}} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \makecell{\textbf{\textit{p}-value} \\ $\mathbf{(\times 10^{-1})}$} & \textbf{Cohen's \textit{d}} \\
-        \midrule
-        \multirow{9}{*}{Kispi-mial}
-            & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=8)$}} & DSC $(\times 10^{-1})$ & $8.3 \rightarrow 8.3$ & --- & --- \\
-            &  & VS $(\times 10^{-2})$ & $3.6 \rightarrow 3.6$ & --- & --- \\
-            &  & HD95 & $1.6 \rightarrow 1.6$ & --- & --- \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $7.5 \rightarrow 7.6$ & $9.4$ & $< 0.1$ \\
-            &  & VS $(\times 10^{-2})$ & $0.5 \rightarrow 2.7$ & --- & --- \\
-            &  & HD95 & $3.4 \rightarrow 2.6$ & $5.3$ & $0.2$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-1})$ & $4.0 \rightarrow 4.4$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-            &  & VS $(\times 10^{-2})$ & $9.7 \rightarrow 8.7$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-            &  & HD95 & $46 \rightarrow 45$ & $2.5$ & $< 0.1$ \\
-        \hline
-        \multirow{9}{*}{Kispi-irtk}
-            & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $6.3 \rightarrow 6.8$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-            &  & VS $(\times 10^{-2})$ & $5.1 \rightarrow 3.1$ & $\ll 0.1^\ddagger$ & $0.1$ \\
-            &  & HD95 & $5.0 \rightarrow 4.4$ & $1.6$ & $0.1$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=8)$}} & DSC $(\times 10^{-1})$ & $8.9 \rightarrow 8.9$ & --- & --- \\
-            &  & VS $(\times 10^{-2})$ & $0.3 \rightarrow 0.1$ & $6.9$ & $< 0.1$ \\
-            &  & HD95 & $1.0 \rightarrow 1.0$ & --- & --- \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-1})$ & $3.4 \rightarrow 5.4$ & $\ll 0.1^\ddagger$ & $1.1^{***}$ \\
-            &  & VS $(\times 10^{-2})$ & $112 \rightarrow 71$ & $\ll 0.1^\ddagger$ & $0.8^{***}$ \\
-            &  & HD95 & $49 \rightarrow 38$ & $\ll 0.1^\ddagger$ & $0.6^{**}$ \\
-        \hline
-        \multirow{9}{*}{dHCP}
-            & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $6.7 \rightarrow 6.9$ & $\ll 0.1^\ddagger$ & $< 0.1$ \\
-            &  & VS $(\times 10^{-2})$ & $13 \rightarrow 6$ & $7.2$ & $0.1$ \\
-            & & HD95 & $3.6 \rightarrow 3.2$ & $0.01^\ddagger$ & $< 0.1$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $7.6 \rightarrow 7.7$ & $\ll 0.1^\ddagger$ & $0.1$ \\
-            &  & VS $(\times 10^{-2})$ & $7.7 \rightarrow 6.7$ & $\ll 0.1^\ddagger$ & $< 0.1$ \\
-            &  & HD95 & $2.7 \rightarrow 2.5$ & $< 0.1^\ddagger$ & $< 0.1$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{dHCP \\ $(n=53)$}} & DSC $(\times 10^{-1})$ & $9.5 \rightarrow 9.5$ & --- & --- \\
-            &  & VS $(\times 10^{-2})$ & $0.2 \rightarrow 0.1$ & $0.2^\dagger$ & $< 0.1$ \\
-            &  & HD95 & $7.1 \rightarrow 7.0$ & $0.05^\ddagger$ & $< 0.1$ \\
-        \bottomrule
-    \end{tabular}
-    \caption{Baseline vs.\ GIN-IPA: mean performance variation, Wilcoxon \textit{p}-values and Cohen's \textit{d} across training/inference datasets and metrics. For the sake of clearness, the absolute value of VS is shown. Where \text{p}-values and Cohen's \textit{d} are missing,  it is because the mean performance is either worse in the proposed method, or the performance variation is negligible. ${ }^{\dagger}$: \textit{p}-value $< 0.05$; ${ }^{\ddagger}$: \textit{p}-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
-    \label{tab:baseline-vs-ginipa-stats}
-\end{table}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/1_mial-dhcp_DC_cGM.png}\quad
+  \includegraphics[width=0.46\textwidth]{figures/1_mial-dhcp_DC_dGM.png}
+  \vspace{10pt}
+  \includegraphics[width=0.45\textwidth]{figures/1_mial-dhcp_VS_cGM.png}\quad
+  \includegraphics[width=0.46\textwidth]{figures/1_mial-dhcp_VS_dGM.png}
+   \caption{Baseline vs.\ GIN-IPA: KDE plots of DSC (top) and VS (bottom) in cortical gray matter and deep gray matter, from models trained on Kispi-mial inferring on dHCP.}
+  \label{fig:1_mial_dhcp_gm}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{figures/1_irtk-dhcp_DC.png}
+  \caption{Baseline vs.\ GIN-IPA: KDE plots of DSC across each label and globally, from models trained on Kispi-irtk inferring on dHCP.}
+  \label{fig:1_irtk_dhcp_DC}
+\end{figure}
 
 \begin{table}[htbp]
   \centering
-  \begin{tabular}{c|c|l|c|c|c}
+  \begin{tabular}{c|c|c|c}
     \toprule
-    \textbf{Train DS} & \makecell{\textbf{Inference DS} \\ \textbf{(n.\ of samples)}} & \multicolumn{1}{c|}{\textbf{Metric}} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \makecell{\textbf{\textit{p}-value} \\ $\mathbf{(\times 10^{-1})}$} & \textbf{Cohen's \textit{d}} \\
+    \textbf{Metric} & \textbf{Label} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \textbf{Cohen's \textit{d}} \\
     \midrule
-    \multirow{9}{*}{Kispi-mial}
-      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=8)$}} & DSC $(\times 10^{-1})$ & $8.3 \rightarrow 8.3$ & $1.0$ & $<0.1$ \\
-      &  & VS $(\times 10^{-2})$ & $3.6 \rightarrow 4.1$ & $9.4$ & $< 0.1$ \\
-      &  & HD95 & $1.6 \rightarrow 1.6$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $7.6 \rightarrow 7.6$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $2.7 \rightarrow 2.6$ & $9.8$ & $< 0.1$ \\
-      &  & HD95 & $2.6 \rightarrow 2.7$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-1})$ & $4.4 \rightarrow 4.4$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $87 \rightarrow 87$ & --- & --- \\
-      &  & HD95 & $45 \rightarrow 44$ & $0.09^\ddagger$ & $< 0.1$ \\
+    \multirow{8}{*}{\makecell{DSC \\ $(\times 10^{-2})$}}
+      & CSF & $45 \rightarrow 56$ & $1.0$ \\
+      & cGM & $31 \rightarrow 48$ & $1.6$ \\
+      & WM & $24 \rightarrow 30$ & $0.5$ \\
+      & Ventr. & $11 \rightarrow 42$ & $2.2$ \\
+      & Cereb. & $63 \rightarrow 76$ & $1.1$ \\
+      & dGM & $18 \rightarrow 59$ & $3.4$ \\
+      & BS & $43 \rightarrow 70$ & $2.3$ \\
+      & \textbf{Total} & $34 \rightarrow 54$ & $1.1$ \\
     \hline
-    \multirow{9}{*}{Kispi-irtk}
-      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $6.8 \rightarrow 7.2$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-      &  & VS $(\times 10^{-2})$ & $3.1 \rightarrow 6.9$ & --- & --- \\
-      &  & HD95 & $4.4 \rightarrow 3.3$ & $\ll 0.1^\ddagger$ & $0.2^*$ \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=8)$}} & DSC $(\times 10^{-1})$ & $8.9 \rightarrow 8.9$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $0.1 \rightarrow 0.1$ & --- & --- \\
-      &  & HD95 & $1.0 \rightarrow 1.0$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-1})$ & $5.4 \rightarrow 5.1$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $71 \rightarrow 80$ & --- & --- \\
-      &  & HD95 & $38 \rightarrow 42$ & --- & --- \\
+    \multirow{8}{*}{VS}
+      & CSF & $1.0 \rightarrow 0.7$ & $1.5$ \\
+      & cGM & $1.1 \rightarrow 0.7$ & $1.6$ \\
+      & WM & $1.4 \rightarrow 1.3$ & $0.4$ \\
+      & Ventr. & $1.8 \rightarrow 1.1$ & $2.2$ \\
+      & Cereb. & $0.3 \rightarrow 0.1$ & $0.5$ \\
+      & dGM & $1.4 \rightarrow 0.6$ & $2.0$ \\
+      & BS & $0.8 \rightarrow 0.4$ & $1.4$ \\
+      & \textbf{Total} & $1.1 \rightarrow 0.7$ & $0.8$ \\
     \hline
-    \multirow{9}{*}{dHCP}
-      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $6.9 \rightarrow 6.8$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $5.8 \rightarrow 7.1$ & --- & --- \\
-      &  & HD95 & $3.2 \rightarrow 3.3$ & $7.2$ & $< 0.1$ \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $7.7 \rightarrow 7.7$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $6.7 \rightarrow 5.7$ & $\ll 0.1^\ddagger$ & $< 0.1$ \\
-      &  & HD95 & $2.4 \rightarrow 2.4$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{dHCP \\ $(n=53)$}} & DSC $(\times 10^{-1})$ & $9.4 \rightarrow 9.4$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $0.1 \rightarrow 0.1$ & --- & --- \\
-      &  & HD95 & $0.7 \rightarrow 0.7$ & --- & --- \\
+    \multirow{8}{*}{HD95}
+      & CSF & $35 \rightarrow 32$ & $0.3$ \\
+      & cGM & $40 \rightarrow 37$ & $0.3$ \\
+      & WM\textsuperscript{*} & $42 \rightarrow 42$ & $0.1$ \\
+      & Ventr. & $48 \rightarrow 44$ & $0.3$ \\
+      & Cereb. & $55 \rightarrow 44$ & $0.6$ \\
+      & dGM & $57 \rightarrow 37$ & $1.1$ \\
+      & BS & $64 \rightarrow 30$ & $1.4$ \\
+      & \textbf{Total} & $49 \rightarrow 38$ & $0.6$ \\
     \bottomrule
   \end{tabular}
-  \caption{GIN-IPA vs.\ combined augmentation: mean performance variation, Wilcoxon \textit{p}-values and Cohen's \textit{d} across training/inference datasets and metrics. For the sake of clearness, the absolute value of VS is shown. Where \textit{p}-values and Cohen's \textit{d} are missing, it is because the mean performance is either worse in the proposed method, or the performance variation is negligible. ${ }^{\dagger}$: \textit{p}-value $< 0.05$; ${ }^{\ddagger}$: \textit{p}-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
-  \label{tab:ginipa-vs-combined-stats}
+  \caption{GIN-IPA vs.\ combined augmentation: mean performance variation and Cohen's \textit{d} across metrics and labels, from models trained on Kispi-irtk inferring on dHCP. For the sake of clearness, the absolute value of VS is shown. The variation of HD95 in WM---marked by the asterisk---is the only one that is not statistically significant (\textit{p}-value $< 0.01$).}
+  \label{tab:1_irtk_dhcp_stats}
 \end{table}
+
+\paragraph{GIN-IPA vs.\ Combined Augmentation}
+\begin{itemize}
+  \item \textbf{Train on Kispi-mial}
+  \begin{itemize}
+    \item \textbf{Inference on Kispi-mial:} no difference.
+    \item \textbf{Inference on Kispi-irtk:} no difference.
+    \item \textbf{Inference on dHCP:} small, significant improvements for ventricles and dGM across DSC, VS, and HD95.
+  \end{itemize}
+  \item \textbf{Train on Kispi-irtk}
+  \begin{itemize}
+    \item \textbf{Inference on Kispi-mial:} moderate, significant improvements for cGM, WM, and cerebellum in DSC and HD95; small improvement on the overall average.
+    \item \textbf{Inference on Kispi-irtk:} no difference.
+    \item \textbf{Inference on dHCP:} combined augmentation performs significantly worse than GIN-IPA alone, especially for CSF, cerebellum, and dGM across metrics.
+  \end{itemize}
+  \item \textbf{Train on dHCP}
+  No differences observed on any inference dataset, metric, or label.
+\end{itemize}

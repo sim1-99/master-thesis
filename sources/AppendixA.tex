@@ -11,8 +11,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
 
-\section{General performance}
-In the plots below are shown the volume similarity (Figs.\,\ref{fig:default_VS}, \ref{fig:ginipa_VS}, \ref{fig:both_VS}) and Hausdorff distance 95\th percentile (Figs.\,\ref{fig:default_HD}, \ref{fig:ginipa_HD}, \ref{fig:both_HD}) across datasets and labels for the three models. The model predictions are realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD). The plots regarding the Dice score (DSC) are in Section \ref{sec:GeneralPerformance}.
+\section{General Performance}
+In the plots below are shown the volume similarity (Figs.\,\ref{fig:default_VS}, \ref{fig:ginipa_VS}, \ref{fig:both_VS}) and Hausdorff distance 95\th percentile (Figs.\,\ref{fig:default_HD}, \ref{fig:ginipa_HD}, \ref{fig:both_HD}) across datasets and labels for the three models. The model predictions are realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD). The plots regarding the Dice score are in Section \ref{sec:GeneralPerformance}.
 
 \begin{figure}[htbp]
     \centering
@@ -78,4 +78,21 @@ In the plots below are shown the volume similarity (Figs.\,\ref{fig:default_VS},
     \includegraphics[width=0.8\textwidth]{figures/dHCP_both_HD.png}
     \caption{Hausdorff distance 95\th percentile across datasets and labels for the combined DA (default\,+\,GIN-IPA) model. From top to bottom: training on Kispi-mial, on Kispi-irtk, and on dHCP.}
     \label{fig:both_HD}
+\end{figure}
+
+\section{Comparison of Model Performances}
+In the plots below are shown the KDE plots related to the comparison between the nnU-Net default DA (baseline model) and the GIN-IPA augmentation model. The plots represent the volume similarity (Fig.\,\ref{fig:1_irtk_dhcp_VS}) and the Hausdorff distance 95\th percentile (Fig.\,\ref{fig:1_irtk_dhcp_HD}) across each label and globally, from models trained on Kispi-irtk inferring on dHCP. The plots regarding the Dice score are in Section \ref{sec:ComparisonOfModelPerformances}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/1_irtk-dhcp_VS.png}
+    \caption{Baseline vs.\ GIN-IPA: KDE plots of the volume similarity across each label and globally, from models trained on Kispi-irtk inferring on dHCP.}
+    \label{fig:1_irtk_dhcp_VS}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/1_irtk-dhcp_HD.png}
+    \caption{Baseline vs.\ GIN-IPA: KDE plots of the Hausdorff distance 95\th percentile across each label and globally, from models trained on Kispi-irtk inferring on dHCP.}
+    \label{fig:1_irtk_dhcp_HD}
 \end{figure}
