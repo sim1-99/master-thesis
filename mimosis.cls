@@ -277,6 +277,13 @@ bindingoffset=10mm,
 \RequirePackage{upgreek}
 \RequirePackage[table]{xcolor}
 
+% Appendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpairofpagestyles{AppendixChapterStyle}{%
+  \clearpairofpagestyles
+  \ofoot{\pagemark}%
+  \KOMAoptions{headsepline=0pt}%
+}
+
 \newcommand{\AppendixChapter}[2]{%
   % No header in empty page after bibliography
   \cleardoubleoddemptypage
@@ -284,11 +291,6 @@ bindingoffset=10mm,
   % TOC entry and running header
   \addcontentsline{toc}{chapter}{\appendixname~#1.\ \ #2}%
   \chaptermark{\appendixname~#1.\autodot\enskip #2}%
-  \newpairofpagestyles{AppendixChapterStyle}{%
-    \clearpairofpagestyles
-    \ofoot{\pagemark}%
-    \KOMAoptions{headsepline=0pt}%
-  }
   \thispagestyle{AppendixChapterStyle}% mimic chapter page style
 
   % Reset section counters and define appendix-style numbering
@@ -304,7 +306,7 @@ bindingoffset=10mm,
    {\fontsize{25}{30}\selectfont\textsc{#2}\par}%
   }%
 }
-\newcommand{\stats}[2]{\unskip\ (\textit{p}=\,#1;\ $d$=\,#2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
