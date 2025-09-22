@@ -164,7 +164,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   No differences observed on any inference dataset, metric, or label.
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[p]
   \centering
   \includegraphics[width=0.445\textwidth]{figures/2_mial-dhcp_DC_Ventr.png}\quad
   \includegraphics[width=0.45\textwidth]{figures/2_mial-dhcp_DC_dGM.png}
@@ -172,7 +172,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   \label{fig:2_mial_dhcp_DC}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[p]
   \centering
   \includegraphics[width=0.45\textwidth]{figures/2_irtk-mial_DC_cGM.png}\quad
   \includegraphics[width=0.45\textwidth]{figures/2_irtk-mial_DC_Cereb.png} \\
@@ -182,3 +182,8 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   \caption{GIN-IPA vs.\ combined DA: KDE plots of DSC (top) and HD (bottom) in cortical gray matter and cerebellum, from models trained on Kispi-irtk and inferring on Kispi-mial.}
   \label{fig:2_irtk_mial}
 \end{figure}
+
+\section{Performance by Pathology}
+Since dHCP only includes healthy scans, it can be interesting to investigate how the data augmentation methods behave when stratification on subject health is taken into account. Hence, the performance of the models was analyzed separately for healthy and pathological cases, in order to isolate the effect of brain abnormalities on segmentation accuracy.
+
+The plots below (Fig.\,\ref{fig:pathology_summary}) are relative to models trained on dHCP and separately tested on healthy and pathological cases in Kispi-mial and Kispi-irtk. Metrics relative to the test set of dHCP are shown as a reference. The difference between neurotypical and pathological cases is evident but not dramatic for all metrics---volume similarity shows a delta which is especially small. Neither GIN-IPA nor the combined DA help at increasing any metric in neurotypical subjects. For the pathological cases, GIN-IPA produces a small improvement in all metrics with respect to the baseline model, while performs equivalent to the combined DA model. It is also interesting to notice that, despite the difference in image quality claimed in \cite{FeTA2021_review}, the performance of the model trained on dHCP is equivalent when inferring on healthy Kispi-mial and Kispi-irtk, suggesting that the low-quality images are mainly among the pathological cases.
