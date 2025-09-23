@@ -38,8 +38,10 @@
     \label{tab:label_merge}
 \end{table}
 
+\newpage
 \section{Comparison of Model Performances}
-\begin{table}[htbp]
+\vspace{10pt}
+\begin{table}[h!]
     \centering
     \begin{tabular}{c|c|l|c|c|c}
         \toprule
@@ -85,7 +87,7 @@
             &  & HD95 & $7.1 \rightarrow 7.0$ & $0.05^\ddagger$ & $< 0.1$ \\
         \bottomrule
     \end{tabular}
-    \caption{Baseline vs.\ GIN-IPA: mean performance variation, Wilcoxon \textit{p}-values and Cohen's \textit{d} across training/inference datasets and metrics. For the sake of clearness, the absolute value of VS is shown. Where \text{p}-values and Cohen's \textit{d} are missing,  it is because the mean performance is either worse in the proposed method, or the performance variation is negligible. ${ }^{\dagger}$: \textit{p}-value $< 0.05$; ${ }^{\ddagger}$: \textit{p}-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
+    \caption{Baseline vs.\ GIN-IPA: mean performance variation, Wilcoxon \textit{p}-value and Cohen's |\textit{d}| across training/inference datasets and metrics. To improve comprehensibility, the absolute value of VS is shown. Where the \textit{p}-value and the Cohen's |\textit{d}| are missing, it is because the performance variation is either negative or negligible. ${ }^{\dagger}$: \textit{p}-value $< 0.05$; ${ }^{\ddagger}$: \textit{p}-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
     \label{tab:baseline_vs_ginipa_stats}
 \end{table}
 
@@ -135,6 +137,6 @@
       &  & HD95 & $0.7 \rightarrow 0.7$ & --- & --- \\
     \bottomrule
   \end{tabular}
-  \caption{GIN-IPA vs.\ combined methods augmentation: mean performance variation, Wilcoxon \textit{p}-values and Cohen's \textit{d} across training/inference datasets and metrics. For the sake of clearness, the absolute value of VS is shown. Where \textit{p}-values and Cohen's \textit{d} are missing, it is because the mean performance is either worse in the proposed method, or the performance variation is negligible. ${ }^{\dagger}$: \textit{p}-value $< 0.05$; ${ }^{\ddagger}$: \textit{p}-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
+  \caption{GIN-IPA vs.\ combined methods augmentation: mean performance variation, Wilcoxon \textit{p}-value and Cohen's |\textit{d}| across training/inference datasets and metrics. To improve comprehensibility, the absolute value of VS is shown. Where the \textit{p}-value and the Cohen's |\textit{d}| are missing, it is because the performance variation is either negative or negligible. ${ }^{\dagger}$: \textit{p}-value $< 0.05$; ${ }^{\ddagger}$: \textit{p}-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
   \label{tab:ginipa_vs_combined_stats}
 \end{table}
