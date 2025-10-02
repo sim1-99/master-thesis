@@ -5,14 +5,12 @@
 
 In this chapter are exposed the main results obtained from the experiments described in Chapter \ref{chap:Methods}. The analysis focuses on comparing the performance of the three investigated models, which differ in their data augmentation (DA) strategies: the nnU-Net default DA (baseline), the GIN-IPA augmentation, and a combination of both.
 
-First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a detailed pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. [...]
+First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a detailed pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. Finally, the robustness of the models is evaluated in a stratified analysis based on the presence of pathologies in the Kispi datasets.
 
 \section{General Performance} \label{sec:GeneralPerformance}
-In the plots below is shown the Dice score (DSC) across datasets and labels for the three models. The model predictions are realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD).
+In the plots below is shown the Dice score (DSC) across datasets and labels for the three models. Each model inference is realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD). Given that the general performance of the models is well captured with the DSC, here only the plots related to this metric are shown. The plots of the volume similarity (VS) and the Hausdorff distance 95\th percentile (HD95) are in Appendix \hyperref[app:SupplementaryPlots]{A}.
 
-To avoid occupying the pages below with too many figures, and considering that the general performance of the tested model is well captured with the DSC, here only the plots relative to this metric are shown. The plots regarding the volume similarity (VS) and the Hausdorff distance 95\th percentile (HD95) are in Appendix \hyperref[app:SupplementaryPlots]{A}.
-
-For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance between in-domain and OOD is clear in every case, except in the DSC of some labels (CSF, cGM, WM and cerebellum) for the model trained on Kispi-mial. The drop is especially evident for the models trained on the Kispi datasets when applied to dHCP. Ventricles are the most affected, but also dGM and WM. The change of domain does not have the same effect on the network trained on Kispi-mial as it has on the other two. This is partially due to the quality of the images in Kispi-mial, which is worse than the others\,\cite{FeTA2022_review}. It is expected that any model evaluated OOD on Kispi-mial will perform worse compared to the other datasets.
+For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance between in-domain and OOD is clear in every case, except in the DSC of some labels (CSF, cGM, WM and cerebellum) for the model trained on Kispi-mial. The drop is especially evident for the models trained on the Kispi datasets when applied to dHCP. Ventricles are the most affected, but also dGM and WM. The change of domain does not have the same effect on the network trained on Kispi-mial as it has on the other two. This is partially due to the quality of the images in Kispi-mial, which is worse than the others\,\cite{FeTA2021_review}. It is expected that any model evaluated OOD on Kispi-mial will perform worse compared to the other datasets.
 
 \begin{figure}[htbp]
   \centering
@@ -25,7 +23,7 @@ For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance
   \label{fig:default_DC}
 \end{figure}
 
-Although GIN-IPA (see Fig.\,\ref{fig:ginipa_DC}) does not cause an increment in DSC in the models trained on Kispi-mial and dHCP, it produces a significant improvement in the model trained on Kispi-irtk when predicting on dHCP. The raise is mainly located in dGM, ventricles and BS. The average Dice passes from \numrange{0.33}{0.55} (\qty{+66}{\percent}).
+Although GIN-IPA (see Fig.\,\ref{fig:ginipa_DC}) does not cause an increment in DSC in the models trained on Kispi-mial and dHCP, it produces a significant improvement in the model trained on Kispi-irtk when predicting on dHCP. The raise is mainly located in dGM, ventricles and BS. The average Dice passes from \numrange[range-open-phrase=from\ ]{0.34}{0.54} (\qty{+58}{\percent}).
 
 \begin{figure}[htbp]
   \centering
@@ -59,7 +57,7 @@ In order to assess the relative contribution of the proposed augmentation strate
 \end{itemize}
 The distributions of each of the three evaluation metrics---DSC, VS, and HD95---were analyzed, at the level of individual tissues, and globally, involving all the labels.
 
-Kernel density estimation (KDE) plots were generated for each metric and label, separately for the two model pairs under comparison. Beyond visual inspection, statistical analyses were employed to quantify the significance and magnitude of the observed differences. The Wilcoxon signed-rank test was used to test the null hypothesis of equal paired performance between models. Corresponding \textit{p}-values were computed to assess whether the proposed augmentation strategy led to statistically significant improvements. Besides, Cohen's \textit{d} was computed to quantify the magnitude of the improvement. Following conventional thresholds, \numlist{0.2; 0.5; 0.8} correspond to small, medium, and large effects, respectively. See Section \ref{sec:StatisticalPerformanceAssessment} for more details about the aforementioned tools. Tables with the complete statistical results are reported in Appendix \hyperref[app:SupplementaryTables]{B}.
+Kernel density estimation (KDE) plots were generated for each metric and label, separately for the two model pairs under comparison. Beyond visual inspection, statistical analyses were employed to quantify the significance and magnitude of the observed differences. The Wilcoxon signed-rank test was used to test the null hypothesis of equal paired performance between models. Corresponding \textit{p}-values were computed to assess whether the proposed augmentation strategy led to statistically significant improvements. Besides, Cohen's \textit{d} was computed to quantify the magnitude of the improvement. Following conventional thresholds, \numlist{0.2; 0.5; 0.8} correspond to small, medium, and large effects, respectively. See Section \ref{sec:StatisticalPerformanceAssessment} for more details about the aforementioned tools. Tables with the complete statistical results are reported in Appendix \hyperref[app:SupplementaryTables]{B} (Tabs.\,\ref{tab:baseline_vs_ginipa_stats}, \ref{tab:ginipa_vs_combined_stats}).
 
 \paragraph{Baseline vs.\ GIN-IPA}
 \begin{itemize}
@@ -142,7 +140,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
       & \textbf{Total} & $49 \rightarrow 38$ & $0.6$ \\
     \bottomrule
   \end{tabular}
-  \caption{GIN-IPA vs.\ combined augmentation: mean performance variation and Cohen's |\textit{d}| across metrics and labels, from models trained on Kispi-irtk and inferring on dHCP. To enhance comprehensibility, the absolute value of VS is shown. The variation of HD95 in WM---marked by the asterisk---is the only one that is not statistically significant (\textit{p}-value $< 0.01$).}
+  \caption{Baseline vs.\ GIN-IPA: mean performance variation and Cohen's |\textit{d}| across metrics and labels, from models trained on Kispi-irtk and inferring on dHCP. To enhance comprehensibility, the absolute value of VS is shown. The variation of HD95 in WM---marked by the asterisk---is the only one that is not statistically significant (\textit{p}-value $< 0.01$).}
   \label{tab:1_irtk_dhcp_stats}
 \end{table}
 
@@ -185,10 +183,10 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   \label{fig:2_irtk_mial}
 \end{figure}
 
-\section{Performance by Pathology}
+\section{Performance by Pathology} \label{sec:PerformanceByPathology}
 Since dHCP only includes healthy scans, it can be interesting to investigate how the data augmentation methods behave when stratification on subject health is taken into account. Hence, the performance of the models was analyzed separately for healthy and pathological cases, in order to isolate the effect of brain abnormalities on segmentation accuracy.
 
-The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:pathology_summary_2}) are relative to models trained on dHCP and separately tested on healthy and pathological cases in Kispi-mial and Kispi-irtk. Metrics relative to the test set of dHCP are shown as a reference. The difference between neurotypical and pathological cases is evident but not dramatic for all metrics---volume similarity shows a delta which is especially small. Neither GIN-IPA nor the combined DA help at increasing any metric in neurotypical subjects. For the pathological cases, GIN-IPA produces a small improvement in all metrics with respect to the baseline model, while performs equivalent to the combined DA model. It is also interesting to notice that, despite the difference in image quality claimed in \cite{FeTA2021_review}, the performance of the model trained on dHCP is equivalent when inferring on healthy Kispi-mial and Kispi-irtk, suggesting that the low-quality images are mainly among the pathological cases.
+The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:pathology_summary_2}) are relative to models trained on dHCP and separately tested on healthy and pathological cases in Kispi-mial and Kispi-irtk. Metrics relative to the test set of dHCP are shown as a reference. The difference between neurotypical and pathological cases is evident but not dramatic for all metrics---volume similarity shows a delta which is especially small. Neither GIN-IPA nor the combined DA help at increasing any metric in neurotypical subjects. For the pathological cases, GIN-IPA produces a small improvement in all metrics with respect to the baseline model, while performs equivalent to the combined DA model. It is also interesting to notice that, despite the difference in image quality claimed in \cite{FeTA2021_review}, the performance of the model trained on dHCP is equivalent when inferring on healthy Kispi-mial and Kispi-irtk. On the other hand, a performance difference is observed when inferring on pathological Kispi-mial and Kispi-irtk cases. This suggests that the low-quality images are mainly among the pathological cases.
 
 \begin{figure}[htbp]
   \centering
@@ -197,7 +195,7 @@ The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:patholog
   \includegraphics[width=0.85\textwidth]{figures/1_pathology_VS.png} \\
   \vspace{10pt}
   \includegraphics[width=0.85\textwidth]{figures/1_pathology_HD.png}
-  \caption{Comparison of segmentation performance by pathology, between the baseline and the GIN-IPA augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile.}
+  \caption{Comparison of segmentation performance by pathology, between the baseline and the GIN-IPA augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
   \label{fig:pathology_summary_1}
 \end{figure}
 
@@ -208,6 +206,6 @@ The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:patholog
   \includegraphics[width=0.85\textwidth]{figures/2_pathology_VS.png} \\
   \vspace{10pt}
   \includegraphics[width=0.85\textwidth]{figures/2_pathology_HD.png}
-  \caption{Comparison of segmentation performance by pathology, between the GIN-IPA and the combined DA models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile.}
+  \caption{Comparison of segmentation performance by pathology, between the GIN-IPA and the combined DA models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
   \label{fig:pathology_summary_2}
 \end{figure}
