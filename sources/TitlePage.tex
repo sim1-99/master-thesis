@@ -1,79 +1,91 @@
 \documentclass[12pt,a4paper]{report}
+\usepackage[footskip=0.2cm]{geometry}
 \usepackage[english]{babel}
-\usepackage{newlfont}
+\usepackage[sfdefault,lf]{carlito}
 \usepackage{color}
 \usepackage{setspace}
-\textwidth=450pt\oddsidemargin=0pt
+\usepackage{float}
+\usepackage{graphicx} %insert figures
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
 
 \begin{document}
+% geometry settings for title page 
+    \newgeometry{left=20mm, top=25mm, right=15mm, bottom=35mm}
+% The title page settings can be changed in titlepage.tex document
 \begin{titlepage}
-%
-%
-% ONCE YOU ARE FINISHED WITH YOUR CHANGES MODIFY "RED" WITH "BLACK" IN ALL \textcolor COMMENTS
-%
-%
-\begin{center}
-{{\Large{\textsc{Alma Mater Studiorum $\cdot$ University of  Bologna}}}} 
-\rule[0.1cm]{15.8cm}{0.1mm}
-\rule[0.5cm]{15.8cm}{0.6mm}
-\\\vspace{3mm}
-{\small{\bfseries School of Science \\
-Department of Physics and Astronomy\\
-Master Degree in Physics}}
-\end{center}
+        \thispagestyle{fancy}
+    \begin{figure}[h]
+        \vspace{-0.5cm} % changes vertical spacing 
+        \centering
+        \includegraphics[scale=1.05]{logo_unibo.png}
+    \end{figure}
 
-\vspace{23mm}
+    \vspace{3mm}
 
-\begin{center}
-%
-% INSERT THE TITLE OF YOUR THESIS
-%
-\begin{spacing}{2}
-{\LARGE{\bfseries 3D U-NET DOMAIN GENERALIZATION IN FETAL BRAIN MRI SEGMENTATION}}\\
-\end{spacing}
-\end{center}
+    \begin{center}
+        \bf {DEPARTMENT OF PHYSICS AND ASTRONOMY ``A. RIGHI''}
+    \end{center}
 
-\vspace{35mm} \par \noindent
+    \begin{center}
+        \bf \large{SECOND CYCLE DEGREE}
 
-\begin{minipage}[t]{0.47\textwidth}
-%
-% INSERT THE NAME OF THE SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
-%
-{\large{\bfseries Supervisor: \vspace{2mm}\\{
-Prof.\,Daniel Remondini}\\\\
-%
-% INSERT THE NAME OF THE CO-SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
-%
-% IF THERE ARE NO CO-SUPERVISORS REMOVE THE FOLLOWING 5 LINES
-%
-\bfseries Co-supervisors:
-\vspace{2mm}\\
-Dr.\,Nico Curti\\
-Dr.\,Gerard Martí Juan\\\\}}
-\end{minipage}
-%
-\hfill
-%
-\begin{minipage}[t]{0.47\textwidth}\raggedleft \textcolor{black}{
-{\large{\bfseries Submitted by:
-\vspace{2mm}\\
-%
-% INSERT THE NAME OF THE GRADUAND
-%
-Simone Chiarella}}}
+        \bf \large{PHYSICS}
+    \end{center}
 
-\end{minipage}
+    \vspace{15mm}
 
-\vspace{20mm}
+    \begin{center}
+        %
+        % INSERT THE TITLE OF YOUR THESIS
+        %
+        {\huge{\bf 3D U-NET DOMAIN GENERALIZATION IN}}
+        \vspace{15pt}\\
+        {\huge{\bf FETAL BRAIN MRI SEGMENTATION}}
+    \end{center}
 
-\begin{center}
-%
-% INSERT THE ACADEMIC YEAR
-%
-Academic Year 2024/2025
-\end{center}
+    \vspace{50mm} \par \noindent
+
+    \begin{minipage}[t]{0.47\textwidth}
+        %
+        % INSERT THE NAME OF THE SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
+        %
+        \vspace*{-19pt}
+        {\large{\bf Supervisor
+        \vspace{2mm}\\
+        Prof.\ Daniel Remondini\\\\
+        %
+        % INSERT THE NAME OF THE CO-SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
+        %
+        % IF THERE ARE NO CO-SUPERVISORS REMOVE THE FOLLOWING 5 LINES
+        %
+        Co-supervisors
+        \vspace{2mm}\\
+        Dr.\ Nico Curti\\
+        Dr.\ Gerard Martí Juan\\\\}}
+    \end{minipage}
+    %
+    \hfill
+    %
+    \begin{minipage}[L]{0.23\textwidth} \textcolor{black}{
+        {\large{\bf  Defended by
+        \vspace{2mm}\\
+        \noindent{Simone Chiarella}}}
+        }
+    \end{minipage}
+    %
+    \cfoot[C]{
+        \\
+        \bf 18--19/12/2025\\
+        \vspace{3mm}
+        \bf Academic Year 2024/2025
+    }
 
 \end{titlepage}
+\restoregeometry
 
 \newpage\null\thispagestyle{empty}\newpage
 
