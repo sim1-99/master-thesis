@@ -5,12 +5,12 @@
 
 In this chapter are exposed the main results obtained from the experiments described in Chapter \ref{chap:Methods}. The analysis focuses on comparing the performance of the three investigated models, which differ in their data augmentation (DA) strategies: the nnU-Net default DA (baseline), the GIN-IPA augmentation, and a combination of both.
 
-First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a detailed pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. Finally, the robustness of the models is evaluated in a stratified analysis based on the presence of pathologies in the Kispi datasets.
+First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. Finally, the robustness of the models is evaluated in a pathology-stratified analysis in the Kispi datasets.
 
 \section{General Performance} \label{sec:GeneralPerformance}
 In the plots below is shown the Dice score (DSC) across datasets and labels for the three models. Each model inference is realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD). Given that the general performance of the models is well captured with the DSC, here only the plots related to this metric are shown. The plots of the volume similarity (VS) and the Hausdorff distance 95\th percentile (HD95) are in Appendix \hyperref[app:SupplementaryPlots]{A}.
 
-For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance between in-domain and OOD is clear in every case, except in the DSC of some labels (CSF, cGM, WM and cerebellum) for the model trained on Kispi-mial. The drop is especially evident for the models trained on the Kispi datasets when applied to dHCP. Ventricles are the most affected, but also dGM and WM. The change of domain does not have the same effect on the network trained on Kispi-mial as it has on the other two. This is partially due to the quality of the images in Kispi-mial, which is worse than the others\,\cite{FeTA2021_review}. It is expected that any model evaluated OOD on Kispi-mial will perform worse compared to the other datasets.
+For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance between in-domain and OOD is clear in every case, except in the DSC of some labels (CSF, cGM, WM and cerebellum) for the model trained on Kispi-mial. The drop is especially evident for the models trained on the Kispi datasets when applied to dHCP. Ventricles are the most affected, but also dGM and WM. However, the change of domain does not have the same effect on the network trained on Kispi-mial as it has on the other two: for example, we have unusual high DSC values OOD for cerebellum and BS, and even higher values OOD than ID, but limited to the inference on Kispi-irtk for CSF and cGM. This is probably due to the quality of the images in Kispi-mial, which is worse than the others\,\cite{FeTA2021_review}.
 
 \begin{figure}[htbp]
   \centering
@@ -195,7 +195,7 @@ The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:patholog
   \includegraphics[width=0.85\textwidth]{figures/1_pathology_VS.png} \\
   \vspace{10pt}
   \includegraphics[width=0.85\textwidth]{figures/1_pathology_HD.png}
-  \caption{Comparison of segmentation performance by pathology, between the baseline and the GIN-IPA augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
+  \caption{Comparison of the segmentation performance by pathology, between the baseline and the GIN-IPA augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
   \label{fig:pathology_summary_1}
 \end{figure}
 
@@ -206,6 +206,6 @@ The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:patholog
   \includegraphics[width=0.85\textwidth]{figures/2_pathology_VS.png} \\
   \vspace{10pt}
   \includegraphics[width=0.85\textwidth]{figures/2_pathology_HD.png}
-  \caption{Comparison of segmentation performance by pathology, between the GIN-IPA and the combined DA models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
+  \caption{Comparison of the segmentation performance by pathology, between the GIN-IPA and the combined augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
   \label{fig:pathology_summary_2}
 \end{figure}

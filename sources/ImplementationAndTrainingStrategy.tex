@@ -40,7 +40,7 @@ In addition to the default nnU-Net data augmentation (see Section \ref{sec:nnUNe
 Since the purpose of this work is to validate the effectiveness of GIN-IPA as an augmentation tool to improve model robustness against domain shifts in fetal MRI segmentation, the following three models were trained, in order to test their performance. \textit{p} represents the probability of application of a transformation to a volume; all of them were left to the default values defined in the nnU-Net framework.
 \begin{enumerate}
 
-    \item \textbf{Default nnU-Net DA}
+    \item \textbf{Default nnU-Net augmentation}
     \begin{itemize}
         \item \textbf{Flip:} independently for each axis, $p=0.5$.
         \item \textbf{Rotation:} from \qtyrange{-30}{30}{\degree} independently for each axis, $p=0.2$.
@@ -53,7 +53,7 @@ Since the purpose of this work is to validate the effectiveness of GIN-IPA as an
         \item \textbf{Gamma transform:} $\gamma \sim \mathcal{U}(0.7, 1.5)$, preserving global intensity mean and standard deviation, $p=0.3$.
     \end{itemize}
 
-    \item \textbf{GIN-IPA}
+    \item \textbf{GIN-IPA augmentation}
     \begin{itemize}
         \item \textbf{Flip:} independently for each axis, $p=0.5$.
         \item \textbf{Rotation:} from \qtyrange{-30}{30}{\degree} independently for each axis, $p=0.2$.
@@ -62,8 +62,8 @@ Since the purpose of this work is to validate the effectiveness of GIN-IPA as an
         \begin{itemize}
             \item \textbf{GIN:}
             \begin{itemize}[label=$\diamond$]
-                \item \textbf{Number of layers:} 2 (from hyperparameter tuning, Sec.\,\ref{sec:HyperparameterTuning}).
-                \item \textbf{Intermediate channels:} 4 (from hyperparameter tuning, Sec.\,\ref{sec:HyperparameterTuning}).
+                \item \textbf{Number of layers:} \num{2} (from hyperparameter tuning, Sec.\,\ref{sec:HyperparameterTuning}).
+                \item \textbf{Intermediate channels:} \num{4} (from hyperparameter tuning, Sec.\,\ref{sec:HyperparameterTuning}).
                 \item \textbf{Interpolation coefficient:} $\alpha \sim \mathcal{U}(0, 1)$.
             \end{itemize}
             \item \textbf{IPA:}
@@ -76,7 +76,7 @@ Since the purpose of this work is to validate the effectiveness of GIN-IPA as an
         \end{itemize}
     \end{itemize}
 
-    \item \textbf{Default nnU-Net DA + GIN-IPA}
+    \item \textbf{Default nnU-Net + GIN-IPA augmentations}
     \begin{itemize}
         \item Both methods applied with the same probabilities.
         \item Flip, rotation, and scaling applied once as first steps.
