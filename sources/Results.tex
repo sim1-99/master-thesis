@@ -57,7 +57,7 @@ In order to assess the relative contribution of the proposed augmentation strate
 \end{itemize}
 The distributions of each of the three evaluation metrics---DSC, VS, and HD95---were analyzed, at the level of individual tissues, and globally, involving all the labels.
 
-Kernel density estimation (KDE) plots were generated for each metric and label, separately for the two model pairs under comparison. Beyond visual inspection, statistical analyses were employed to quantify the significance and magnitude of the observed differences. The Wilcoxon signed-rank test was used to test the null hypothesis of equal paired performance between models. Corresponding \textit{p}-values were computed to assess whether the proposed augmentation strategy led to statistically significant improvements. Besides, Cohen's \textit{d} was computed to quantify the magnitude of the improvement. Following conventional thresholds, \numlist{0.2; 0.5; 0.8} correspond to small, medium, and large effects, respectively. See Section \ref{sec:StatisticalPerformanceAssessment} for more details about the aforementioned tools. Tables with the complete statistical results are reported in Appendix \hyperref[app:SupplementaryTables]{B} (Tabs.\,\ref{tab:baseline_vs_ginipa_stats}, \ref{tab:ginipa_vs_combined_stats}).
+Kernel density estimation (KDE) plots were generated for each metric and label, separately for the two model pairs under comparison. Beyond visual inspection, statistical analyses were employed to quantify the significance and magnitude of the observed differences. The Wilcoxon signed-rank test was used to test the null hypothesis of equal paired performance between models. Corresponding $p$-values were computed to assess whether the proposed augmentation strategy led to statistically significant improvements. Besides, Cohen's $d$ was computed to quantify the magnitude of the improvement. Following conventional thresholds, \numlist{0.2; 0.5; 0.8} correspond to small, medium, and large effects, respectively. See Section \ref{sec:StatisticalPerformanceAssessment} for more details about the aforementioned tools. Tables with the complete statistical results are reported in Appendix \hyperref[app:SupplementaryTables]{B} (Tabs.\,\ref{tab:baseline_vs_ginipa_stats}, \ref{tab:ginipa_vs_combined_stats}).
 
 \paragraph{Baseline vs.\ GIN-IPA}
 \begin{itemize}
@@ -107,7 +107,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   \centering
   \begin{tabular}{c|c|c|c}
     \toprule
-    \textbf{Metric} & \textbf{Label} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \textbf{Cohen's |\textit{d}|} \\
+    \textbf{Metric} & \textbf{Label} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \textbf{Cohen's $\abs{d}$} \\
     \midrule
     \multirow{8}{*}{\makecell{DSC \\ $(\times 10^{-2})$}}
       & CSF & $45 \rightarrow 56$ & $1.0$ \\
@@ -140,7 +140,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
       & \textbf{Total} & $49 \rightarrow 38$ & $0.6$ \\
     \bottomrule
   \end{tabular}
-  \caption{Baseline vs.\ GIN-IPA: mean performance variation and Cohen's |\textit{d}| across metrics and labels, from models trained on Kispi-irtk and inferring on dHCP. To enhance comprehensibility, the absolute value of VS is shown. The variation of HD95 in WM---marked by the asterisk---is the only one that is not statistically significant (\textit{p}-value $< 0.01$).}
+  \caption{Baseline vs.\ GIN-IPA: mean performance variation and Cohen's $\abs{d}$ across metrics and labels, from models trained on Kispi-irtk and inferring on dHCP. To enhance comprehensibility, the absolute value of VS is shown. The variation of HD95 in WM---marked by the asterisk---is the only one that is not statistically significant ($p$-value $< 0.01$).}
   \label{tab:1_irtk_dhcp_stats}
 \end{table}
 
