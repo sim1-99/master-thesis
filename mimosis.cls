@@ -170,6 +170,7 @@
 
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
+\RequirePackage{bm}
 \RequirePackage{dsfont}
 
 % Fix the spacing of \left and \right. Use these with the proper bracket
@@ -189,6 +190,8 @@
 
 % Proper differential operators
 \newcommand{\diff}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+
+\newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Penalties
