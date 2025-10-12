@@ -44,13 +44,63 @@ To perturb the equilibrium state and generate a measurable signal, a second osci
 \begin{equation}
     \alpha = \gamma B_1 t,
 \end{equation}
-where $t$ is the duration of the RF pulse. Typical pulses of $90$° or $180$° rotate the magnetization fully into the transverse plane or invert it, respectively.
+where $t$ is the duration of the RF pulse. Typical pulses of \qty{90}{\degree} or \qty{180}{\degree} rotate the magnetization fully into the transverse plane or invert it, respectively.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/larmor_precession.jpeg}
+    \includegraphics[width=0.45\textwidth]{figures/larmor_precession.png}
     \caption{Larmor precession of a nuclear spin in a magnetic field. © 2025 Science Info, from \cite{science_info}.}
     \label{fig:larmor_precession}
+\end{figure}
+
+\section{Relaxation and Signal Generation}
+Once that the RF pulse has ended, \vect{M} returns to the previous equilibrium state around \vect{B_0}; this induces a voltage in the receiver coil, which is the measurable NMR signal. The return to the equilibrium is not instantaneous, but it occurs through two distinct relaxation processes, characterized by different time constants and both governed by the Bloch equations. These processes are crucial for determining the contrast in MRI images, as they affect the temporal evolution of the magnetization components.
+
+\paragraph{Transverse Relaxation.}
+Also known as spin-spin relaxation or T2 relaxation, the transverse relaxation is an entropic process that denotes the progressive loss of phase coherence among spins. It manifests as an attenuation of the observable transverse magnetization. Following the excitation imparted with the RF field \vect{B_1}, the transverse component of the magnetization $M_{xy}$ decays because relative phases disperse over time, as illustrated in Fig.\,\ref{fig:transverse_relaxation}. Two principal mechanisms are implicated:
+\begin{description}
+  \item[Spin-spin interactions] Stochastic dipolar couplings and molecular motion induce local frequency perturbations that irreversibly randomize relative phases, giving rise to the intrinsic decay constant $T_2$.
+  \item[Static field inhomogeneities] Spatial variations in magnetic susceptibility within the specimen perturb the applied field \vect{B_0}. These distortions---whose magnitude depends on tissue composition and geometry---generate a rapid, position-dependent dephasing of nucleus spins. Refocusing methods---e.g., spin echoes---can largely reverse the effects of this dephasing factor.
+\end{description}
+Collectively, these effects produce a distribution of phases across groups of nuclei: individual spins may continue to precess near $\omega_0$, yet their vector sum---i.e., the measurable transverse magnetization---decays toward zero.
+
+The Bloch equation for the transverse magnetization component $M_{xy}$ is
+\begin{equation}
+  M_{xy}(t) = M_{xy}(0)\,\mathrm{e}^{-\frac{t}{T_2}},
+\end{equation}
+where $M_{xy}(0)$ is the transverse magnetization immediately after the end of the RF pulse. The time constant $T_2$ characterizes the rate of decay due to spin-spin interactions. Here the effects of static field inhomogeneities are not included; when they are, the effective decay constant is $T_2^*$, defined by
+\begin{equation}
+    \frac{1}{T_2^*} = \frac{1}{T_2} + \frac{1}{T_\text{inh}},
+\end{equation}
+where $T_\text{inh}$ accounts for the inhomogeneity effects.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/transverse_relaxation.png}
+    \caption{Transverse relaxation of nuclear spins. © 2025 Informa UK Limited, from \cite{Lanting2010}.}
+    \label{fig:transverse_relaxation}
+\end{figure}
+
+\paragraph{Longitudinal Relaxation.} Also known as spin-lattice relaxation or T1 relaxation, the longitudinal relaxation describes the recovery of the longitudinal magnetization component $M_z$ as energy is exchanged between the spin system and its surrounding molecular environment, that is, the lattice. Once that RF excitation ended, $M_z$ reappears, returning toward its thermal equilibrium value $M_0$. This process is governed by the Bloch equation for the longitudinal magnetization:
+\begin{equation}
+    M_z(t)=M_z(0)\,\mathrm{e}^{-\frac{t}{T_1}}+M_0 \left(1-\mathrm{e}^{-\frac{t}{T_1}} \right),
+\end{equation}
+where $M_z(0)$ is the longitudinal magnetization immediately after the end of the RF pulse. $T_1$ depends on field strength, viscosity and temperature, and typically satisfies $T_1>T_2$ in biological tissues.
+
+The relaxation times $T_1$ and $T_2$ vary significantly among different tissue types, providing the basis for image contrast in MRI (see Fig.\,\ref{fig:relaxation_plots}). By selecting appropriate timing parameters for the RF pulses and signal acquisition---e.g., the repetition time (TR) and echo time (TE)---the image contrast can be manipulated to highlight specific tissues. As a general rule, short TR and TE values yield T1-weighted images, emphasizing differences in longitudinal relaxation, while long TR and TE values produce T2-weighted images, dominated by transverse relaxation. When TR is long and TE is short, the resulting images are proton-density-weighted, reflecting variations in hydrogen concentration. The aforementioned weighting techniques are schematically illustrated in Fig.\,\ref{fig:weightings}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/relaxation_plots.jpeg}
+    \caption{Bloch equations for T1 (left) and T2 (right) relaxations in different biological tissues. © 2025 Heinrich-Heine-Universität Düsseldorf, from \cite{hhu}.}
+    \label{fig:relaxation_plots}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/weightings.jpeg}
+    \caption{Relationship between the timing parameters TR and TE, and the T1, T2, and proton density weightings. © 2025 AD Elster, from \cite{mri_questions}.}
+    \label{fig:weightings}
 \end{figure}
 
 \section{Spatial Encoding}
