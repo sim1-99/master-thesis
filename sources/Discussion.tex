@@ -30,7 +30,7 @@ The stratified analysis (Section \ref{sec:PerformanceByPathology}) indicates tha
 \section{General Outcomes}
 The evidence above supports three general conclusions:
 \begin{itemize}
-    \item \textbf{Data quality and scale prevail:} When training data are abundant and homogeneous (like in dHCP), the choice of an augmentation pipeline among those tested barely alters performance, because the performance is already high for every model---thanks to the inherent robustness of nnU-Net. The converse is also true: with smaller, noisier sources (such as Kispi), OOD degradation is pronounced.
+    \item \textbf{Data quality and scale prevail:} When training data are abundant and homogeneous (like in dHCP), the choice of an augmentation pipeline among those tested barely alters performance, because the performance is already high for every model (thanks to the inherent robustness of nnU-Net). The converse is also true: with smaller, noisier sources (such as Kispi), OOD degradation is pronounced.
     \item \textbf{GIN-IPA is conditionally beneficial:} Its gains are largest in the domain generalization scenario from Kispi-irtk to dHCP, where it closes a considerable part of the OOD gap. However, the effects shrink or vanish when the source dataset is large enough and of high quality to cover the target variability.
     \item \textbf{Stacking augmentations is not additive:} The combined strategy often overlaps with, and can even dilute, the benefits of GIN-IPA; it never consistently outperforms GIN-IPA in the examined cross-domain settings.
 \end{itemize}

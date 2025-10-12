@@ -28,11 +28,11 @@ Each value of $m$ corresponds to a specific energy level of the nucleus. When a 
 \end{equation}
 In case of $^1$H, which has $I = \frac{1}{2}$, the two possible values of the magnetic moment correspond to $m = +\frac{1}{2}$ and $m = -\frac{1}{2}$. This results, in turn, in two distinct energy states separated by $\Delta E = \gamma \hbar B_0$. The presence of discrete energy levels generates an observable quantity named magnetization \vect{M}, which is defined as
 \begin{equation}
-    \vect{M} = N \gamma \hbar (\langle I_x \rangle \vect{i} + \langle I_y \rangle \vect{j} + \langle I_z \rangle \vect{k}),
+    \vect{M} = N \gamma \hbar\,(\langle I_x \rangle \,\vect{i} + \langle I_y \rangle\,\vect{j} + \langle I_z \rangle\,\vect{k}),
 \end{equation}
 where $N$ is the number of nuclei with nonzero spin, and $\langle \cdot \rangle$ denotes the expectation values of the nuclear spin components along the axes. At relatively low temperature $T$ (even room temperature) and high magnetic field \vect{B_0}, the magnetization obeys Curie's law\,\cite{curie_law}:
 \begin{equation}
-    \vect{M} = N\frac{\gamma^2 \hbar^2 I(I+1)}{3\mathrm{k}_\mathrm{B} T} \vect{B_0},
+    \vect{M} = N\frac{\gamma^2 \hbar^2 I\,(I+1)}{3\mathrm{k}_\mathrm{B} T} \vect{B_0},
 \end{equation}
 where $\mathrm{k}_\mathrm{B}$ is the Boltzmann constant. It is important to notice that stronger magnetic fields or lower temperatures increase the detectable magnetization.
 
@@ -83,7 +83,7 @@ where $T_\text{inh}$ accounts for the inhomogeneity effects.
 
 \paragraph{Longitudinal Relaxation.} Also known as spin-lattice relaxation or T1 relaxation, the longitudinal relaxation describes the recovery of the longitudinal magnetization component $M_z$ as energy is exchanged between the spin system and its surrounding molecular environment, that is, the lattice. Once that RF excitation ended, $M_z$ reappears, returning toward its thermal equilibrium value $M_0$. This process is governed by the Bloch equation for the longitudinal magnetization:
 \begin{equation}
-    M_z(t)=M_z(0)\,\mathrm{e}^{-\frac{t}{T_1}}+M_0 \left(1-\mathrm{e}^{-\frac{t}{T_1}} \right),
+    M_z(t)=M_z(0)\,\mathrm{e}^{-\frac{t}{T_1}}+M_0\,\left(1-\mathrm{e}^{-\frac{t}{T_1}}\right),
 \end{equation}
 where $M_z(0)$ is the longitudinal magnetization immediately after the end of the RF pulse. $T_1$ depends on field strength, viscosity and temperature, and typically satisfies $T_1>T_2$ in biological tissues.
 
@@ -92,7 +92,7 @@ The relaxation times $T_1$ and $T_2$ vary significantly among different tissue t
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{figures/relaxation_plots.jpeg}
-    \caption{Bloch equations for T1 (left) and T2 (right) relaxations in different biological tissues. © 2025 Heinrich-Heine-Universität Düsseldorf, from \cite{hhu}.}
+    \caption{Bloch equations for the longitudinal (left) and the transverse (right) relaxations in different biological tissues. © 2025 Heinrich-Heine-Universität Düsseldorf, from \cite{hhu}.}
     \label{fig:relaxation_plots}
 \end{figure}
 
@@ -104,3 +104,42 @@ The relaxation times $T_1$ and $T_2$ vary significantly among different tissue t
 \end{figure}
 
 \section{Spatial Encoding}
+Spatial encoding assigns a unique phase-frequency signature to each spatial location by applying linear magnetic field gradients. Given the field \vect{B} directed along $z$:
+\begin{equation}
+    \vect{G} = \frac{\partial B_z}{\partial x}\,\vect{i} + \frac{\partial B_z}{\partial y}\,\vect{j} + \frac{\partial B_z}{\partial z}\,\vect{k} = G_x\,\vect{i}+G_y\,\vect{j}+G_z\,\vect{k},
+\end{equation}
+the angular Larmor frequency at position $\vect{r}$ is
+\begin{equation}
+    \omega(\vect{r})=\gamma\,\left(B_0+\vect{G}\cdot\vect{r}\right),
+\end{equation}
+and the accumulated phase becomes
+\begin{equation}
+    \phi(\vect{r},t)=\int_0^t \omega(\vect{r},\tau)\,\mathrm{d}\tau=\omega_0 t+\gamma\,\left(\vect{G}\cdot\vect{r}\right)\,t.
+\end{equation}
+Hence, the applied gradient encode spatial position as position-dependent phase, which is subsequently recovered by Fourier inversion. Similarly, frequency encoding can be achieved by applying a gradient during signal acquisition, causing spins at different locations to precess at different frequencies.
+
+In three-dimensional mapping, three orthogonal gradients are applied to uniquely identify each voxel: one for slice selection (e.g., along $z$), one for phase encoding and one for frequency encoding (respectively along $y$ and $x$). Each voxel $(x,y,z)$ is thus identified by a specific fingerprint made up of a combination of its frequency and phase information, and its position along the $z$-axis, as shown in Fig.\,\ref{fig:encoding}.
+
+Finally, to describe how the acquired signal is translated into image pixels, it is convenient to introduce the wavevector
+\begin{equation}
+  \vect{k} = \gamma\vect{G}t.
+\end{equation}
+Experimentally, to obtain a 2D mapping one varies $k_x=\gamma G_x t$ and $k_y=\gamma G_y t$, since the spatial distribution of image intensities is
+\begin{equation}
+  \rho(x,y) \approx \iint S(k_x,k_y)\,\mathrm{e}^{\,i(k_x x + k_y y)}\,\mathrm{d}k_x\,\mathrm{d}k_y,
+\end{equation}
+where $S(k_x,k_y)$ denotes the measured signal. Therefore, it is necessary to vary $k_x$ in $M$ distinct ways and $k_y$ in $N$ distinct ways, thereby sampling the $k$-space at $M\times N$ points. There are many ways to sample the $k$-space, but the simplest is to acquire a \enquote{square} line by line. Practically, for each setting of the gradient $G_y$, an entire line of $k$-space is acquired along the $x$-axis; after $N$ such acquisitions, each with a different $G_y$, the $k$-space is fully populated and the image is complete. The total acquisition time is $T_R \times N$. The inverse Fourier transformation then reconstructs the spatial image from the $k$-space data, as illustrated in Fig.\,\ref{fig:kspace}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/encoding.png}
+    \caption{Phase and frequency encoding on a brain MRI slice. © 2025 AD Elster, from \cite{mri_questions}.}
+    \label{fig:encoding}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/kspace.png}
+    \caption{$k$-space sampling and the corresponding image reconstruction.}
+    \label{fig:kspace}
+\end{figure}
