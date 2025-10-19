@@ -103,11 +103,3 @@
 }
 
 \end{document}
-
-%This work investigates domain generalization of a 3D U-Net (nnU-Net v2.4.1) for fetal brain MRI tissue segmentation. The central question was whether GIN-IPA, a promising though not broadly studied image augmentation method, would improve the network robustness across acquisition sites and super-resolution reconstruction (SRR) pipelines. Three datasets with distinct characteristics were employed: Kispi-mial (\textsc{mialsrtk} SRR; small size, both neurotypical and pathological cases; $1.5$/$3$\,T,), Kispi-irtk (\textsc{irtk} SRR; same features as Kispi-mial but higher quality), and dHCP (dedicated reconstruction; larger size, high quality, healthy-only atlas; 3\,T). Label sets were harmonized to a common 7-tissue scheme. ``In-domain'' (ID) denoted evaluation on the training dataset; ``out-of-domain'' (OOD) denoted evaluation on unseen datasets with different characteristics.
-
-%Three strategies were compared within the nnU-Net training loop: (i) default nnU-Net augmentation, comprising standard geometric and photometric transforms; (ii) GIN-IPA, an appearance perturbation realized via random convolutions to mimic acquisition shifts; and (iii) the combination of both. Models were trained separately on each dataset and assessed ID and OOD using Dice score, volume similarity, and Hausdorff distance.
-
-%Two conclusions were drawn. First, generalization was dominated by data quality and scale: when trained on dHCP, the most stable cross-domain performance was obtained, almost independent of the augmentation. Second, GIN-IPA was beneficial when training data were limited and differed from the target: with training on Kispi-irtk and inference on dHCP, significant improvements were observed, with respect to default nnU-Net augmentation. Instead, stacking the two augmentations was not additive and, at times, detrimental.
-
-%Limitations include the small size of public clinical datasets, the need for label-set harmonization, and hardware constraints that did not allow for a complete exploration of the GIN-IPA potential. The results suggest that multi-center, high-quality fetal MRI with standardized SRR should be prioritized. Within constrained single-source regimes, GIN-IPA may constitute a pragmatic option for domain generalization, despite the need for further validation.
