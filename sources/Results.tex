@@ -79,7 +79,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.45\textwidth]{figures/1_mial-irtk_DC_Ventr.png}\quad
+  \includegraphics[width=0.45\textwidth]{figures/1_mial-irtk_DC_Ventr.png}\hspace{9pt}
   \includegraphics[width=0.45\textwidth]{figures/1_mial-irtk_HD_Ventr.png}
   \caption{Baseline vs.\ GIN-IPA: KDE plots of DSC (left) and HD95 (right) in ventricles, from models trained on Kispi-mial and inferring on Kispi-irtk.}
   \label{fig:1_mial_irtk_ventr}
@@ -89,8 +89,8 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   \centering
   \includegraphics[width=0.45\textwidth]{figures/1_mial-dhcp_DC_cGM.png}\quad
   \includegraphics[width=0.46\textwidth]{figures/1_mial-dhcp_DC_dGM.png} \\
-  \vspace{10pt}
-  \includegraphics[width=0.45\textwidth]{figures/1_mial-dhcp_VS_cGM.png}\quad
+  \vspace{5pt}
+  \includegraphics[width=0.455\textwidth]{figures/1_mial-dhcp_VS_cGM.png}\quad
   \includegraphics[width=0.46\textwidth]{figures/1_mial-dhcp_VS_dGM.png}
   \caption{Baseline vs.\ GIN-IPA: KDE plots of DSC (top) and VS (bottom) in cortical gray matter and deep gray matter, from models trained on Kispi-mial and inferring on dHCP.}
   \label{fig:1_mial_dhcp_gm}
@@ -162,24 +162,14 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   No differences observed on any inference dataset, metric, or label.
 \end{itemize}
 
-\comment{
-\begin{figure}[p]
-  \centering
-  \includegraphics[width=0.445\textwidth]{figures/2_mial-dhcp_DC_Ventr.png}\quad
-  \includegraphics[width=0.45\textwidth]{figures/2_mial-dhcp_DC_dGM.png}
-  \caption{GIN-IPA vs.\ combined DA: KDE plots of DSC in ventricles and deep gray matter, from models trained on Kispi-mial and inferring on dHCP.}
-  \label{fig:2_mial_dhcp_DC}
-\end{figure}
-}
-
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.45\textwidth]{figures/2_irtk-mial_DC_cGM.png}\quad
-  \includegraphics[width=0.45\textwidth]{figures/2_irtk-mial_DC_Cereb.png} \\
+  \includegraphics[width=0.46\textwidth]{figures/2_irtk-mial_DC_Cereb.png} \\
   \vspace{10pt}
   \includegraphics[width=0.45\textwidth]{figures/2_irtk-mial_HD_cGM.png}\quad
-  \includegraphics[width=0.45\textwidth]{figures/2_irtk-mial_HD_Cereb.png}
-  \caption{GIN-IPA vs.\ combined DA: KDE plots of DSC (top) and HD (bottom) in cortical gray matter and cerebellum, from models trained on Kispi-irtk and inferring on Kispi-mial.}
+  \includegraphics[width=0.46\textwidth]{figures/2_irtk-mial_HD_Cereb.png}
+  \caption{GIN-IPA vs.\ combined DA: KDE plots of DSC (top) and HD95 (bottom) in cortical gray matter and cerebellum, from models trained on Kispi-irtk and inferring on Kispi-mial.}
   \label{fig:2_irtk_mial}
 \end{figure}
 
