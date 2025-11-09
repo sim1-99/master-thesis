@@ -212,9 +212,9 @@
 
 \frontmatter
 
-  %\begin{dedication}
-  %  A los cruces. // Agli incroci.
-  %\end{dedication}
+  \begin{dedication}
+    Agli incroci.
+  \end{dedication}
   \tableofcontents
   \listoffigures
   \listoftables
@@ -236,7 +236,11 @@
       \begin{singlespace*}
         \onehalfspacing
         %
-        Type here the introduction to the part.
+        \begin{description}
+          \item[Chapter 1.] Introduces the physical foundations of MRI, including nuclear spin dynamics, relaxation phenomena, and spatial encoding principles that underpin modern image formation.
+          \item[Chapter 2.] Describes the biological and technical aspects of fetal brain MRI, summarizing relevant anatomy, acquisition and parcellation protocols, super-resolution reconstruction methods, and the main challenges affecting image quality and segmentation.
+          \item[Chapter 3.] Reviews existing deep learning approaches to segmentation, emphasizing domain generalization strategies and summarizing insights from the FeTA Challenge as the field benchmark.
+        \end{description}
       \end{singlespace*}
     }
     \end{minipage}
@@ -261,7 +265,11 @@
       \begin{singlespace*}
         \onehalfspacing
         %
-        Type here the introduction to the part.
+        \begin{description}
+          \item[Chapter 4.] Details the datasets employed, highlighting their acquisition parameters, reconstruction pipelines, parcellation schemes, and differences in quality and pathology composition.
+          \item[Chapter 5.] Presents the methodological framework, describing the nnU-Net baseline, the GIN-IPA augmentation technique, and the quantitative metrics and statistical tools used for performance assessment.
+          \item[Chapter 6.] Explains the architecture, training configuration, and data augmentation setups of the compared models, outlining the experimental design, validation strategy, and hyperparameter optimization.
+        \end{description}
       \end{singlespace*}
     }
     \end{minipage}
@@ -286,7 +294,10 @@
       \begin{singlespace*}
         \onehalfspacing
         %
-        Type here the introduction to the part.
+        \begin{description}
+          \item[Chapter 7.] Reports quantitative outcomes across datasets and labels, comparing augmentation strategies through statistical analyses and evaluating model robustness with respect to data domain and pathology.
+          \item[Chapter 8.] Interprets the empirical results, emphasizing the predominant influence of data quality and scale over augmentation, the conditional benefits of GIN-IPA, and the limitations and implications for future research.
+        \end{description}
       \end{singlespace*}
     }
     \end{minipage}
