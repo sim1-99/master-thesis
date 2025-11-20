@@ -26,7 +26,7 @@ Each value of $m$ corresponds to a specific energy level of the nucleus. When a 
 \begin{equation}
     E_m = -\gamma \hbar m B_0.
 \end{equation}
-In case of $^1$H, which has $I = \frac{1}{2}$, the two possible values of the magnetic moment correspond to $m = +\frac{1}{2}$ and $m = -\frac{1}{2}$. This results, in turn, in two distinct energy states separated by $\Delta E = \gamma \hbar B_0$. The presence of discrete energy levels generates an observable quantity named magnetization \vect{M}, which is defined as
+In the case of $^1$H, which has $I = \frac{1}{2}$, the two possible values of the magnetic moment correspond to $m = +\frac{1}{2}$ and $m = -\frac{1}{2}$. This results, in turn, in two distinct energy states separated by $\Delta E = \gamma \hbar B_0$. The presence of discrete energy levels generates an observable quantity named magnetization \vect{M}, which is defined as
 \begin{equation}
     \vect{M} = N \gamma \hbar\,(\langle I_x \rangle \,\vect{i} + \langle I_y \rangle\,\vect{j} + \langle I_z \rangle\,\vect{k}),
 \end{equation}
@@ -54,7 +54,7 @@ where $t$ is the duration of the RF pulse. Typical pulses of \qty{90}{\degree} o
 \end{figure}
 
 \section{Relaxation and Signal Generation}
-Once that the RF pulse has ended, \vect{M} returns to the previous equilibrium state around \vect{B_0}; this induces a voltage in the receiver coil, which is the measurable NMR signal. The return to the equilibrium is not instantaneous, but it occurs through two distinct relaxation processes, characterized by different time constants and both governed by the Bloch equations. These processes are crucial for determining the contrast in MRI images, as they affect the temporal evolution of the magnetization components.
+Once the RF pulse has ended, \vect{M} returns to the previous equilibrium state around \vect{B_0}; this induces a voltage in the receiver coil, which is the measurable NMR signal. The return to the equilibrium is not instantaneous, but it occurs through two distinct relaxation processes, characterized by different time constants and both governed by the Bloch equations. These processes are crucial for determining the contrast in MRI images, as they affect the temporal evolution of the magnetization components.
 
 \paragraph{Transverse Relaxation.}
 Also known as spin-spin relaxation or T2 relaxation, the transverse relaxation is an entropic process that denotes the progressive loss of phase coherence among spins. It manifests as an attenuation of the observable transverse magnetization. Following the excitation imparted with the RF field \vect{B_1}, the transverse component of the magnetization $M_{xy}$ decays because relative phases disperse over time, as illustrated in Fig.\,\ref{fig:transverse_relaxation}. Two principal mechanisms are implicated:
@@ -81,7 +81,7 @@ where $T_\text{inh}$ accounts for the inhomogeneity effects.
     \label{fig:transverse_relaxation}
 \end{figure}
 
-\paragraph{Longitudinal Relaxation.} Also known as spin-lattice relaxation or T1 relaxation, the longitudinal relaxation describes the recovery of the longitudinal magnetization component $M_z$ as energy is exchanged between the spin system and its surrounding molecular environment, that is, the lattice. Once that RF excitation ended, $M_z$ reappears, returning toward its thermal equilibrium value $M_0$. This process is governed by the Bloch equation for the longitudinal magnetization:
+\paragraph{Longitudinal Relaxation.} Also known as spin-lattice relaxation or T1 relaxation, the longitudinal relaxation describes the recovery of the longitudinal magnetization component $M_z$ as energy is exchanged between the spin system and its surrounding molecular environment, that is, the lattice. Once RF excitation ended, $M_z$ reappears, returning toward its thermal equilibrium value $M_0$. This process is governed by the Bloch equation for the longitudinal magnetization:
 \begin{equation}
     M_z(t)=M_z(0)\,\mathrm{e}^{-\frac{t}{T_1}}+M_0\,\left(1-\mathrm{e}^{-\frac{t}{T_1}}\right),
 \end{equation}

@@ -5,7 +5,7 @@
 
 In this chapter are exposed the main results obtained from the experiments described in Chapter \ref{chap:Methods}. The analysis focuses on comparing the performance of the three investigated models, which differ in their data augmentation (DA) strategies: the nnU-Net default DA (baseline), the GIN-IPA augmentation, and a combination of both.
 
-First, is reported the overall performance of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. Finally, the robustness of the models is evaluated in a pathology-stratified analysis in the Kispi datasets.
+First, the overall performance is reported of the models across datasets---Kispi-mial, Kispi-irtk and dHCP---and labels---cerebrospinal fluid (CSF), cortical gray matter (cGM), white matter (WM), ventricles, cerebellum, deep gray matter (dGM) and brainstem (BS). Then, a pairwise comparison between models is presented, supported by statistical analyses to assess the significance and magnitude of performance differences. Finally, the robustness of the models is evaluated in a pathology-stratified analysis in the Kispi datasets.
 
 \section{General Performance} \label{sec:GeneralPerformance}
 In the plots below is shown the Dice score (DSC) across datasets and labels for the three models. Each model inference is realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD). Given that the general performance of the models is well captured with the DSC, here only the plots related to this metric are shown. The plots of the volume similarity (VS) and the Hausdorff distance 95\th percentile (HD95) are in Appendix \hyperref[app:SupplementaryPlots]{A}.
@@ -23,7 +23,7 @@ For the baseline model (see Fig.\,\ref{fig:default_DC}), the drop in performance
   \label{fig:default_DC}
 \end{figure}
 
-Although GIN-IPA (see Fig.\,\ref{fig:ginipa_DC}) does not cause an increment in DSC in the models trained on Kispi-mial and dHCP, it produces a significant improvement in the model trained on Kispi-irtk when predicting on dHCP. The raise is mainly located in dGM, ventricles and BS. The average Dice passes from \numrange[range-open-phrase=from\ ]{0.34}{0.54} (\qty{+58}{\percent}).
+Although GIN-IPA (see Fig.\,\ref{fig:ginipa_DC}) does not cause an increment in DSC in the models trained on Kispi-mial and dHCP, it produces a significant improvement in the model trained on Kispi-irtk when predicting on dHCP. The raise is mainly located in dGM, ventricles and BS. The average Dice passes \numrange[range-open-phrase=from\ ]{0.34}{0.54} (\qty{+58}{\percent}).
 
 \begin{figure}[htbp]
   \centering
