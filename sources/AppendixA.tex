@@ -11,6 +11,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
 
+\section{Low-Quality Kispi-mial Scans}
+In Fig.\,\ref{fig:low_quality_images} are shown some examples of especially low-quality Kispi-mial scans, which exhibit motion artefacts and low SNR. These characteristics make the segmentation task more challenging for the models trained on this dataset.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.33\textwidth]{figures/mial_ax_lq_1.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_sag_lq_1.png} \\
+    \vspace{10pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_ax_lq_2.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_sag_lq_2.png} \\
+    \vspace{10pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_ax_lq_3.png}
+    \hspace{5pt}
+    \includegraphics[width=0.33\textwidth]{figures/mial_sag_lq_3.png} \\
+    \caption{Example of low-quality Kispi-mial scans: axial (left) and sagittal (right) views. Material from: \cite{Payette2021, FeTA_MICCAI}.}
+    \label{fig:low_quality_images}
+\end{figure}
+
 \section{General Performance}
 In the plots below are shown the volume similarity (Figs.\,\ref{fig:default_VS}--\ref{fig:both_VS}) and Hausdorff distance 95\th percentile (Figs.\,\ref{fig:default_HD}--\ref{fig:both_HD}) across datasets and labels for the three models. The model predictions are realized on the test set of the same dataset the model was trained on (in-domain), and on the whole set (both train and test) of the other datasets (out-of-domain, OOD). The plots regarding the Dice score are in Section \ref{sec:GeneralPerformance}.
 

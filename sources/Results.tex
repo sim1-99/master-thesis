@@ -71,7 +71,7 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
   \begin{itemize}
     \item \textbf{Inference on Kispi-mial:} significant, moderate improvements across DSC, VS, and HD95 for dGM (DSC: \numrange[range-open-phrase=from\ ]{0.71}{0.78}; VS: \numrange[range-open-phrase=from\ ]{0.9}{0.7}) and ventricles (DSC: \numrange[range-open-phrase=from\ ]{0.36}{0.44}; VS: \numrange[range-open-phrase=from\ ]{-0.5}{-0.2}). Small improvement overall (DSC: \numrange[range-open-phrase=from\ ]{0.63}{0.68}).
     \item \textbf{Inference on Kispi-irtk:} no difference in performance.
-    \item \textbf{Inference on dHCP:} significant, strong improvements across all metrics and tissues. The mean DSC increases \numrange[range-open-phrase=from\ ]{0.34}{0.54} (see Tab.\,\ref{tab:1_irtk_dhcp_stats}). The KDE plots of DSC are in Fig.\,\ref{fig:1_irtk_dhcp_DC}, while the ones regarding VS and HD95 are reported in Appendix \hyperref[app:SupplementaryPlots]{A} (Figs.\,\ref{fig:1_irtk_dhcp_VS}, \ref{fig:1_irtk_dhcp_HD}).
+    \item \textbf{Inference on dHCP:} significant, strong improvements across all metrics and tissues. The mean DSC increases \numrange[range-open-phrase=from\ ]{0.34}{0.54} (see Tab.\,\ref{tab:1_irtk_dhcp_stats}). The KDE plots of DSC are in Fig.\,\ref{fig:1_irtk_dhcp_DC}, while the ones regarding VS and HD95 are reported in Appendix \hyperref[app:SupplementaryPlots]{A} (Figs.\,\ref{fig:1_irtk_dhcp_VS}--\ref{fig:1_irtk_dhcp_HD}).
   \end{itemize}
   \item \textbf{Train on dHCP}
   No differences observed on any inference dataset, metric, or label.
@@ -185,7 +185,7 @@ The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:patholog
   \includegraphics[width=0.85\textwidth]{figures/1_pathology_VS.png} \\
   \vspace{10pt}
   \includegraphics[width=0.85\textwidth]{figures/1_pathology_HD.png}
-  \caption{Comparison of the segmentation performance by pathology, between the baseline and the GIN-IPA augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
+  \caption{Comparison of the segmentation performance by pathology, between the baseline and the GIN-IPA augmentation models. From top to bottom: Dice score, volume similarity \big(cropped, full range is $[-2, 2]$\big), and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
   \label{fig:pathology_summary_1}
 \end{figure}
 
@@ -196,6 +196,6 @@ The plots below (Fig.\,\ref{fig:pathology_summary_1} and Fig.\,\ref{fig:patholog
   \includegraphics[width=0.85\textwidth]{figures/2_pathology_VS.png} \\
   \vspace{10pt}
   \includegraphics[width=0.85\textwidth]{figures/2_pathology_HD.png}
-  \caption{Comparison of the segmentation performance by pathology, between the GIN-IPA and the combined augmentation models. From top to bottom: Dice score, volume similarity, and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
+  \caption{Comparison of the segmentation performance by pathology, between the GIN-IPA and the combined augmentation models. From top to bottom: Dice score, volume similarity \big(cropped, full range is $[-2, 2]$\big), and Hausdorff distance 95\th percentile. Until the bars are brown, the metrics of the two models are equivalent.}
   \label{fig:pathology_summary_2}
 \end{figure}
