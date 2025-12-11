@@ -329,3 +329,21 @@ bindingoffset=10mm,
   \vspace{\stretch{3}} 
   \clearpage             % finish off the page
 }
+
+% Define headings for the second page of "Summary" and "Conclusions"
+\newcommand{\headingSummary}{\textit{Summary}}
+\newcommand{\headingConclusions}{\textit{Conclusions}}
+
+\lehead{%
+  \mbox{\hfil
+    \ifnum\value{page}=2
+      \headingSummary
+    \else
+      \ifnum\value{page}=72
+        \headingConclusions
+      \else
+        \headmark
+      \fi
+    \fi
+  \hfil}%
+}
