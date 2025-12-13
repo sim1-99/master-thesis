@@ -178,97 +178,97 @@ Kernel density estimation (KDE) plots were generated for each metric and label, 
 
 \comment{
 \begin{table}[htbp]
-    \centering
-    \begin{tabular}{c|c|l|c|c|c}
-        \toprule
-        \textbf{Train DS} & \makecell{\textbf{Inference DS} \\ \textbf{(n.\ of samples)}} & \multicolumn{1}{c|}{\textbf{Metric}} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \makecell{\textbf{$p$-value} \\ $\mathbf{(\times 10^{-1})}$} & \textbf{Cohen's $\abs{d}$} \\
-        \midrule
-        \multirow{9}{*}{Kispi-mial}
-            & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=8)$}} & DSC $(\times 10^{-2})$ & $83 \rightarrow 83$ & --- & --- \\
-            &  & VS $(\times 10^{-2})$ & $3.6 \rightarrow 3.6$ & --- & --- \\
-            &  & HD95 & $1.6 \rightarrow 1.6$ & --- & --- \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $75 \rightarrow 76$ & $9.4$ & $< 0.1$ \\
-            &  & VS $(\times 10^{-2})$ & $0.5 \rightarrow 2.7$ & --- & --- \\
-            &  & HD95 & $3.4 \rightarrow 2.6$ & $5.3$ & $0.2$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-2})$ & $40 \rightarrow 44$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-            &  & VS $(\times 10^{-2})$ & $9.7 \rightarrow 8.7$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-            &  & HD95 & $46 \rightarrow 45$ & $2.5$ & $< 0.1$ \\
-        \hline
-        \multirow{9}{*}{Kispi-irtk}
-            & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $63 \rightarrow 68$ & $\ll 0.1^\ddagger$ & $0.2$ \\
-            &  & VS $(\times 10^{-2})$ & $5.1 \rightarrow 3.1$ & $\ll 0.1^\ddagger$ & $0.1$ \\
-            &  & HD95 & $5.0 \rightarrow 4.4$ & $1.6$ & $0.1$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=8)$}} & DSC $(\times 10^{-2})$ & $89 \rightarrow 89$ & --- & --- \\
-            &  & VS $(\times 10^{-2})$ & $0.3 \rightarrow 0.1$ & $6.9$ & $< 0.1$ \\
-            &  & HD95 & $1.0 \rightarrow 1.0$ & --- & --- \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-2})$ & $34 \rightarrow 54$ & $\ll 0.1^\ddagger$ & $1.1^{***}$ \\
-            &  & VS $(\times 10^{-2})$ & $112 \rightarrow 71$ & $\ll 0.1^\ddagger$ & $0.8^{***}$ \\
-            &  & HD95 & $49 \rightarrow 38$ & $\ll 0.1^\ddagger$ & $0.6^{**}$ \\
-        \hline
-        \multirow{9}{*}{dHCP}
-            & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $67 \rightarrow 69$ & $\ll 0.1^\ddagger$ & $< 0.1$ \\
-            &  & VS $(\times 10^{-2})$ & $13 \rightarrow 6$ & $7.2$ & $0.1$ \\
-            & & HD95 & $3.6 \rightarrow 3.2$ & $0.01^\ddagger$ & $< 0.1$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $76 \rightarrow 77$ & $\ll 0.1^\ddagger$ & $0.1$ \\
-            &  & VS $(\times 10^{-2})$ & $7.7 \rightarrow 6.7$ & $\ll 0.1^\ddagger$ & $< 0.1$ \\
-            &  & HD95 & $2.7 \rightarrow 2.5$ & $< 0.1^\ddagger$ & $< 0.1$ \\
-        \hhline{~-----}
-            & \multirow{3}{*}{\makecell{dHCP \\ $(n=53)$}} & DSC $(\times 10^{-2})$ & $95 \rightarrow 95$ & --- & --- \\
-            &  & VS $(\times 10^{-2})$ & $0.2 \rightarrow 0.1$ & $0.2^\dagger$ & $< 0.1$ \\
-            &  & HD95 & $7.1 \rightarrow 7.0$ & $0.05^\ddagger$ & $< 0.1$ \\
-        \bottomrule
-    \end{tabular}
-    \caption{Baseline vs.\ GIN-IPA: mean performance variation, Wilcoxon $p$-value and Cohen's $\abs{d}$ across training/inference datasets and metrics. To improve comprehensibility, the absolute value of VS is shown. Where the $p$-value and the Cohen's $\abs{d}$ are missing, it is because the performance variation is either negative or negligible. ${ }^{\dagger}$: $p$-value $< 0.05$; ${ }^{\ddagger}$: $p$-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
-    %\label{tab:baseline_vs_ginipa_stats}
+  \centering
+  \begin{tabular}{c|c|l|c|c|c}
+    \toprule
+    \textbf{Train DS} & \makecell{\textbf{Inference DS} \\ \textbf{(n.\ of samples)}} & \multicolumn{1}{c|}{\textbf{Metric}} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \textbf{$p$-value} & \textbf{Cohen's $\abs{d}$} \\
+    \midrule
+    \multirow{9}{*}{Kispi-mial}
+      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=8)$}} & DSC $(\times 10^{-2})$ & $83 \rightarrow 83$ & --- & --- \\
+      &  & VS $(\times 10^{-2})$ & $3.6 \rightarrow 3.6$ & --- & --- \\
+      &  & HD95 & $1.6 \rightarrow 1.6$ & --- & --- \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $75 \rightarrow 76$ & $0.94$ & $< 0.1$ \\
+      &  & VS $(\times 10^{-2})$ & $0.5 \rightarrow 2.7$ & --- & --- \\
+      &  & HD95 & $3.4 \rightarrow 2.6$ & $0.53$ & $0.2$ \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-2})$ & $40 \rightarrow 44$ & $\ll 0.01^\ddagger$ & $0.2$ \\
+      &  & VS $(\times 10^{-2})$ & $9.7 \rightarrow 8.7$ & $\ll 0.01^\ddagger$ & $0.2$ \\
+      &  & HD95 & $46 \rightarrow 45$ & $0.25$ & $< 0.1$ \\
+    \hline
+    \multirow{9}{*}{Kispi-irtk}
+      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $63 \rightarrow 68$ & $\ll 0.01^\ddagger$ & $0.2$ \\
+      &  & VS $(\times 10^{-2})$ & $5.1 \rightarrow 3.1$ & $\ll 0.01^\ddagger$ & $0.01$ \\
+      &  & HD95 & $5.0 \rightarrow 4.4$ & $0.16$ & $0.1$ \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=8)$}} & DSC $(\times 10^{-2})$ & $89 \rightarrow 89$ & --- & --- \\
+      &  & VS $(\times 10^{-2})$ & $0.3 \rightarrow 0.1$ & $0.69$ & $< 0.1$ \\
+      &  & HD95 & $1.0 \rightarrow 1.0$ & --- & --- \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-2})$ & $34 \rightarrow 54$ & $\ll 0.01^\ddagger$ & $1.1^{***}$ \\
+      &  & VS $(\times 10^{-2})$ & $112 \rightarrow 71$ & $\ll 0.01^\ddagger$ & $0.8^{***}$ \\
+      &  & HD95 & $49 \rightarrow 38$ & $\ll 0.01^\ddagger$ & $0.6^{**}$ \\
+    \hline
+    \multirow{9}{*}{dHCP}
+      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $67 \rightarrow 69$ & $\ll 0.01^\ddagger$ & $< 0.1$ \\
+      &  & VS $(\times 10^{-2})$ & $13 \rightarrow 6$ & $0.72$ & $0.1$ \\
+      & & HD95 & $3.6 \rightarrow 3.2$ & $<0.01^\ddagger$ & $< 0.1$ \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $76 \rightarrow 77$ & $\ll 0.01^\ddagger$ & $0.1$ \\
+      &  & VS $(\times 10^{-2})$ & $7.7 \rightarrow 6.7$ & $\ll 0.01^\ddagger$ & $< 0.1$ \\
+      &  & HD95 & $2.7 \rightarrow 2.5$ & $< 0.01^\ddagger$ & $< 0.1$ \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{dHCP \\ $(n=53)$}} & DSC $(\times 10^{-2})$ & $95 \rightarrow 95$ & --- & --- \\
+      &  & VS $(\times 10^{-2})$ & $0.2 \rightarrow 0.1$ & $0.2^\dagger$ & $< 0.1$ \\
+      &  & HD95 & $7.1 \rightarrow 7.0$ & $< 0.01^\ddagger$ & $< 0.1$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Baseline vs.\ GIN-IPA: mean performance variation, Wilcoxon $p$-value and Cohen's $\abs{d}$ across training/inference datasets and metrics. To improve comprehensibility, the absolute value of VS is shown. Where the $p$-value and the Cohen's $\abs{d}$ are missing, it is because the performance variation is either negative or negligible. ${ }^{\dagger}$: $p$-value $< 0.05$; ${ }^{\ddagger}$: $p$-value $<0.01$. ${ }^{*}$: $\abs{d}>0.2$; ${ }^{**}$: $\abs{d}>0.5$; ${ }^{***}$: $\abs{d}>0.8$.}
+  %\label{tab:baseline_vs_ginipa_stats}
 \end{table}
 
 \begin{table}[htbp]
   \centering
   \begin{tabular}{c|c|l|c|c|c}
     \toprule
-    \textbf{Train DS} & \makecell{\textbf{Inference DS} \\ \textbf{(n.\ of samples)}} & \multicolumn{1}{c|}{\textbf{Metric}} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \makecell{\textbf{$p$-value} \\ $\mathbf{(\times 10^{-1})}$} & \textbf{Cohen's $\abs{d}$} \\
+    \textbf{Train DS} & \makecell{\textbf{Inference DS} \\ \textbf{(n.\ of samples)}} & \multicolumn{1}{c|}{\textbf{Metric}} & \makecell{\textbf{Mean perf.} \\ \textbf{variation}} & \textbf{$p$-value} & \textbf{Cohen's $\abs{d}$} \\
     \midrule
     \multirow{9}{*}{Kispi-mial}
-      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=8)$}} & DSC $(\times 10^{-1})$ & $8.3 \rightarrow 8.3$ & $1.0$ & $<0.1$ \\
-      &  & VS $(\times 10^{-2})$ & $3.6 \rightarrow 4.1$ & $9.4$ & $< 0.1$ \\
+      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=8)$}} & DSC $(\times 10^{-2})$ & $83 \rightarrow 83$ & --- & --- \\
+      &  & VS $(\times 10^{-2})$ & $3.6 \rightarrow 4.1$ & --- & --- \\
       &  & HD95 & $1.6 \rightarrow 1.6$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $7.6 \rightarrow 7.6$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $2.7 \rightarrow 2.6$ & $9.8$ & $< 0.1$ \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $76 \rightarrow 76$ & --- & --- \\
+      &  & VS $(\times 10^{-2})$ & $2.7 \rightarrow 2.6$ & --- & --- \\
       &  & HD95 & $2.6 \rightarrow 2.7$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-1})$ & $4.4 \rightarrow 4.4$ & --- & --- \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-2})$ & $44 \rightarrow 44$ & --- & --- \\
       &  & VS $(\times 10^{-2})$ & $87 \rightarrow 87$ & --- & --- \\
-      &  & HD95 & $45 \rightarrow 44$ & $0.092^\ddagger$ & $< 0.1$ \\
+      &  & HD95 & $45 \rightarrow 44$ & $< 0.01^\ddagger$ & $< 0.1$ \\
     \hline
     \multirow{9}{*}{Kispi-irtk}
-      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $6.8 \rightarrow 7.2$ & $\ll 0.1^\ddagger$ & $0.2$ \\
+      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $68 \rightarrow 72$ & $\ll 0.01^\ddagger$ & $0.2$ \\
       &  & VS $(\times 10^{-2})$ & $3.1 \rightarrow 6.9$ & --- & --- \\
-      &  & HD95 & $4.4 \rightarrow 3.3$ & $\ll 0.1^\ddagger$ & $0.2^*$ \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=8)$}} & DSC $(\times 10^{-1})$ & $8.9 \rightarrow 8.9$ & --- & --- \\
+      &  & HD95 & $4.4 \rightarrow 3.3$ & $\ll 0.01^\ddagger$ & $0.2^*$ \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=8)$}} & DSC $(\times 10^{-2})$ & $89 \rightarrow 89$ & --- & --- \\
       &  & VS $(\times 10^{-2})$ & $0.1 \rightarrow 0.1$ & --- & --- \\
       &  & HD95 & $1.0 \rightarrow 1.0$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-1})$ & $5.4 \rightarrow 5.1$ & --- & --- \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{dHCP \\ $(n=267)$}} & DSC $(\times 10^{-2})$ & $54 \rightarrow 51$ & --- & --- \\
       &  & VS $(\times 10^{-2})$ & $71 \rightarrow 80$ & --- & --- \\
       &  & HD95 & $38 \rightarrow 42$ & --- & --- \\
     \hline
     \multirow{9}{*}{dHCP}
-      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $6.9 \rightarrow 6.8$ & --- & --- \\
+      & \multirow{3}{*}{\makecell{Kispi-mial \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $69 \rightarrow 68$ & --- & --- \\
       &  & VS $(\times 10^{-2})$ & $5.8 \rightarrow 7.1$ & --- & --- \\
-      &  & HD95 & $3.2 \rightarrow 3.3$ & $7.2$ & $< 0.1$ \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-1})$ & $7.7 \rightarrow 7.7$ & --- & --- \\
-      &  & VS $(\times 10^{-2})$ & $6.7 \rightarrow 5.7$ & $\ll 0.1^\ddagger$ & $< 0.1$ \\
+      &  & HD95 & $3.2 \rightarrow 3.3$ & --- & --- \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{Kispi-irtk \\ $(n=40)$}} & DSC $(\times 10^{-2})$ & $77 \rightarrow 77$ & --- & --- \\
+      &  & VS $(\times 10^{-2})$ & $6.7 \rightarrow 5.7$ & $\ll 0.01^\ddagger$ & $< 0.1$ \\
       &  & HD95 & $2.4 \rightarrow 2.4$ & --- & --- \\
-    \hhline{~-----}
-      & \multirow{3}{*}{\makecell{dHCP \\ $(n=53)$}} & DSC $(\times 10^{-1})$ & $9.4 \rightarrow 9.4$ & --- & --- \\
+      \hhline{~-----}
+      & \multirow{3}{*}{\makecell{dHCP \\ $(n=53)$}} & DSC $(\times 10^{-2})$ & $94 \rightarrow 94$ & --- & --- \\
       &  & VS $(\times 10^{-2})$ & $0.1 \rightarrow 0.1$ & --- & --- \\
       &  & HD95 & $0.7 \rightarrow 0.7$ & --- & --- \\
     \bottomrule
